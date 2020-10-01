@@ -1,0 +1,13 @@
+[*.kt]
+indent_size = 2
+# noinspection EditorConfigKeyCorrectness
+continuation_indent_size = 4
+# true (recommended) / false
+insert_final_newline = true
+
+[*.kts]
+indent_size = 2
+# noinspection EditorConfigKeyCorrectness
+continuation_indent_size = 4
+# true (recommended) / false
+insert_final_newline = true

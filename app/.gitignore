@@ -1,0 +1,4 @@
+/build
+
+# Keystore files
+/keystore/upload.keystore
