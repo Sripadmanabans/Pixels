@@ -1,7 +1,8 @@
 rootProject.name = "Pixels"
 
 listOf(
-  ":app"
+  ":app",
+  ":timber"
 ).forEach { include(it) }
 
 enableFeaturePreview("GRADLE_METADATA")

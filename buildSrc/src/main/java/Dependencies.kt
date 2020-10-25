@@ -17,7 +17,7 @@ object Dependencies {
      * Has dependencies that are part of compose.
      */
     object Compose {
-      const val compiler = "androidx.compose:compose-compiler:${versions.androidX.compose}"
+      const val compiler = "androidx.compose.compiler:compiler:${versions.androidX.compose}"
 
       object Animation {
         const val animation = "androidx.compose.animation:animation:${versions.androidX.compose}"
