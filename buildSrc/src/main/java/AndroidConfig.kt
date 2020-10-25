@@ -9,7 +9,7 @@ object AndroidConfig {
    * Includes all the classpath's.
    */
   object Classpath {
-    const val android = "com.android.tools.build:gradle:4.2.0-alpha12"
+    const val android = "com.android.tools.build:gradle:4.2.0-alpha14"
     const val ben = "com.github.ben-manes:gradle-versions-plugin:${versions.ben}"
     const val detekt = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${versions.detekt}"
     const val hilt = "com.google.dagger:hilt-android-gradle-plugin:${versions.google.hilt}"

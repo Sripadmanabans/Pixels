@@ -9,11 +9,11 @@ object Versions {
   object AndroidX {
     const val activity = "1.2.0-alpha08"
     const val appcompat = "1.3.0-alpha02"
-    const val compose = "1.0.0-alpha03"
-    const val core = "1.5.0-alpha02"
+    const val compose = "1.0.0-alpha05"
+    const val core = "1.5.0-alpha04"
     const val hilt = "1.0.0-alpha02"
     const val fragment = "1.3.0-alpha06"
-    const val lifecycle = "2.3.0-alpha07"
+    const val lifecycle = "2.3.0-beta01"
     const val navigation = "2.3.0"
     const val room = "2.3.0-alpha01"
 
@@ -36,12 +36,12 @@ object Versions {
   const val ben = "0.33.0"
 
   object Chris {
-    const val coil = "0.2.2"
+    const val coil = "0.3.1"
   }
 
   val chris = Chris
 
-  const val detekt = "1.14.0"
+  const val detekt = "1.14.2"
 
   /**
    * Contains version info for google.
@@ -49,7 +49,7 @@ object Versions {
   object Google {
     const val dagger = "2.29.1"
     const val hilt = "${google.dagger}-alpha"
-    const val material = "1.3.0-alpha02"
+    const val material = "1.3.0-alpha03"
     const val truth = "1.0.1"
   }
 
@@ -60,7 +60,7 @@ object Versions {
    */
   object Jake {
     const val byteUnits = "0.9.1"
-    const val converter = "0.7.0"
+    const val converter = "0.8.0"
     const val timber = "5.0.0-SNAPSHOT"
   }
 
@@ -75,18 +75,18 @@ object Versions {
   object Kotlin {
     const val runtime = "1.4.10"
     const val coroutines = "1.3.9"
-    const val serialization = "1.0.0-RC2"
+    const val serialization = "1.0.0"
   }
 
   val kotlin = Kotlin
 
-  const val ktlint = "9.4.0"
+  const val ktlint = "9.4.1"
 
   /**
    * Contains version info for square.
    */
   object Square {
-    const val okhttp = "4.9.0"
+    const val okhttp = "4.10.0-RC1"
     const val retrofit = "2.9.0"
   }
 

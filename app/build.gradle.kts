@@ -79,6 +79,8 @@ android {
 
 dependencies {
 
+  implementation(project(":timber"))
+
   implementation(deps.kotlin.stdLib.jdk)
   implementation(deps.kotlin.serialization.core)
 
