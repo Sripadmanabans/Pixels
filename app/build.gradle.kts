@@ -79,6 +79,7 @@ android {
 
 dependencies {
 
+  implementation(project(":theme"))
   implementation(project(":timber"))
 
   implementation(deps.kotlin.stdLib.jdk)
