@@ -23,6 +23,10 @@ android {
   buildFeatures {
     buildConfig = false
   }
+
+  kotlinOptions {
+    freeCompilerArgs = freeCompilerArgs + "-Xexplicit-api=strict"
+  }
 }
 
 dependencies {

@@ -9,7 +9,7 @@ import java.util.regex.Pattern
 import javax.inject.Inject
 import kotlin.math.min
 
-class LoggingTree @Inject constructor() : Tree() {
+internal class LoggingTree @Inject constructor() : Tree() {
 
   override fun performLog(priority: Int, tag: String?, throwable: Throwable?, message: String?) {
     val tempMessage = if (message == null) {
