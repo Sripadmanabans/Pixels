@@ -5,7 +5,7 @@ import dagger.Module
 import timber.log.Tree
 
 @Module
-abstract class TimberModule {
+public abstract class TimberModule {
 
-  @Binds abstract fun tree(tree: LoggingTree): Tree
+  @Binds internal abstract fun tree(tree: LoggingTree): Tree
 }
