@@ -4,7 +4,7 @@ plugins {
   id("org.jetbrains.kotlin.kapt")
 }
 
-base.archivesBaseName = "timber"
+base.archivesBaseName = "theme"
 
 android {
   compileSdkVersion(androidConfig.compileSdk)
@@ -24,6 +24,12 @@ android {
 
   buildFeatures {
     buildConfig = false
+    compose = true
+  }
+
+  composeOptions {
+    kotlinCompilerVersion = versions.kotlin.runtime
+    kotlinCompilerExtensionVersion = versions.androidX.compose
   }
 
   kotlinOptions {
@@ -32,8 +38,13 @@ android {
 }
 
 dependencies {
-  implementation(deps.jake.timber.android)
+  implementation(deps.androidX.compose.foundation.foundation)
 
-  implementation(deps.google.dagger.runtime)
-  kapt(deps.google.dagger.compiler)
+  implementation(deps.androidX.compose.material.material)
+
+  implementation(deps.androidX.compose.runtime.runtime)
+
+  implementation(deps.androidX.compose.ui.text)
+  implementation(deps.androidX.compose.ui.ui)
+  implementation(deps.androidX.compose.ui.unit)
 }

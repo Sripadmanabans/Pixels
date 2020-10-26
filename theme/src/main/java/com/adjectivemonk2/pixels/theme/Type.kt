@@ -1,4 +1,4 @@
-package com.adjectivemonk2.pixels.ui
+package com.adjectivemonk2.pixels.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
@@ -7,7 +7,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 // Set of Material typography styles to start with
-val typography = Typography(
+public val typography: Typography = Typography(
   body1 = TextStyle(
     fontFamily = FontFamily.Default,
     fontWeight = FontWeight.Normal,

@@ -8,7 +8,7 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.setContent
 import androidx.ui.tooling.preview.Preview
-import com.adjectivemonk2.pixels.ui.PixelsTheme
+import com.adjectivemonk2.pixels.theme.PixelsTheme
 
 class MainActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
