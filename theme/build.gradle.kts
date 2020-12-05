@@ -29,7 +29,7 @@ android {
 
   composeOptions {
     kotlinCompilerVersion = versions.kotlin.runtime
-    kotlinCompilerExtensionVersion = versions.androidX.compose
+    kotlinCompilerExtensionVersion = versions.androidX.compose.core
   }
 
   kotlinOptions {

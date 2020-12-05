@@ -17,32 +17,34 @@ object Dependencies {
      * Has dependencies that are part of compose.
      */
     object Compose {
-      const val compiler = "androidx.compose.compiler:compiler:${versions.androidX.compose}"
+      const val compiler = "androidx.compose.compiler:compiler:${versions.androidX.compose.core}"
 
       object Animation {
-        const val animation = "androidx.compose.animation:animation:${versions.androidX.compose}"
-        const val core = "androidx.compose.animation:animation-core:${versions.androidX.compose}"
+        const val animation =
+          "androidx.compose.animation:animation:${versions.androidX.compose.core}"
+        const val core =
+          "androidx.compose.animation:animation-core:${versions.androidX.compose.core}"
       }
 
       val animation = Animation
 
       object Foundation {
-        const val foundation = "androidx.compose.foundation:foundation:${versions.androidX.compose}"
+        const val foundation =
+          "androidx.compose.foundation:foundation:${versions.androidX.compose.core}"
         const val layout =
-          "androidx.compose.foundation:foundation-layout:${versions.androidX.compose}"
-        const val text = "androidx.compose.foundation:foundation-text:${versions.androidX.compose}"
+          "androidx.compose.foundation:foundation-layout:${versions.androidX.compose.core}"
       }
 
       val foundation = Foundation
 
       object Material {
-        const val material = "androidx.compose.material:material:${versions.androidX.compose}"
+        const val material = "androidx.compose.material:material:${versions.androidX.compose.core}"
 
         object Icons {
           const val core =
-            "androidx.compose.material:material-icons-core:${versions.androidX.compose}"
+            "androidx.compose.material:material-icons-core:${versions.androidX.compose.core}"
           const val extended =
-            "androidx.compose.material:material-icons-extended:${versions.androidX.compose}"
+            "androidx.compose.material:material-icons-extended:${versions.androidX.compose.core}"
         }
 
         val icons = Icons
@@ -51,26 +53,34 @@ object Dependencies {
       val material = Material
 
       object Runtime {
-        const val runtime = "androidx.compose.runtime:runtime:${versions.androidX.compose}"
+        const val runtime = "androidx.compose.runtime:runtime:${versions.androidX.compose.core}"
         const val dispatch =
-          "androidx.compose.runtime:runtime-dispatch:${versions.androidX.compose}"
+          "androidx.compose.runtime:runtime-dispatch:${versions.androidX.compose.core}"
         const val livedata =
-          "androidx.compose.runtime:runtime-livedata:${versions.androidX.compose}"
+          "androidx.compose.runtime:runtime-livedata:${versions.androidX.compose.core}"
         const val savedInstanceState =
-          "androidx.compose.runtime:runtime-saved-instance-state:${versions.androidX.compose}"
+          "androidx.compose.runtime:runtime-saved-instance-state:${versions.androidX.compose.core}"
       }
 
       val runtime = Runtime
 
       object Ui {
-        const val ui = "androidx.compose.ui:ui:${versions.androidX.compose}"
-        const val geometry = "androidx.compose.ui:ui-geometry:${versions.androidX.compose}"
-        const val graphics = "androidx.compose.ui:ui-graphics:${versions.androidX.compose}"
-        const val text = "androidx.compose.ui:ui-text:${versions.androidX.compose}"
-        const val textAndroid = "androidx.compose.ui:ui-text-android:${versions.androidX.compose}"
-        const val unit = "androidx.compose.ui:ui-unit:${versions.androidX.compose}"
-        const val util = "androidx.compose.ui:ui-util:${versions.androidX.compose}"
-        const val viewbinding = "androidx.compose.ui:ui-viewbinding:${versions.androidX.compose}"
+        const val ui = "androidx.compose.ui:ui:${versions.androidX.compose.core}"
+        const val geometry = "androidx.compose.ui:ui-geometry:${versions.androidX.compose.core}"
+        const val graphics = "androidx.compose.ui:ui-graphics:${versions.androidX.compose.core}"
+        const val text = "androidx.compose.ui:ui-text:${versions.androidX.compose.core}"
+        const val tooling = "androidx.compose.ui:ui-tooling:${versions.androidX.compose.core}"
+        const val unit = "androidx.compose.ui:ui-unit:${versions.androidX.compose.core}"
+        const val util = "androidx.compose.ui:ui-util:${versions.androidX.compose.core}"
+        const val viewbinding =
+          "androidx.compose.ui:ui-viewbinding:${versions.androidX.compose.core}"
+
+        object Test {
+          const val core = "androidx.compose.ui:ui-test:${versions.androidX.compose.core}"
+          const val junit = "androidx.compose.ui:ui-test-junit4:${versions.androidX.compose.core}"
+        }
+
+        val test = Test
       }
 
       val ui = Ui
@@ -115,9 +125,8 @@ object Dependencies {
      * Has dependencies that are part of the androidx and navigation.
      */
     object Navigation {
-      const val fragment =
-        "androidx.navigation:navigation-fragment-ktx:${versions.androidX.navigation}"
-      const val ui = "androidx.navigation:navigation-ui-ktx:${versions.androidX.navigation}"
+      const val compose =
+        "androidx.navigation:navigation-compose:${versions.androidX.compose.navigation}"
     }
 
     val navigation = Navigation
@@ -154,12 +163,6 @@ object Dependencies {
     }
 
     val test = Test
-
-    object Ui {
-      const val tooling = "androidx.ui:ui-tooling:${versions.androidX.compose}"
-    }
-
-    val ui = Ui
   }
 
   val androidX = AndroidX
@@ -290,6 +293,8 @@ object Dependencies {
     }
 
     val test = Test
+
+    const val time = "org.jetbrains.kotlinx:kotlinx-datetime:${versions.kotlin.time}"
   }
 
   val kotlin = Kotlin

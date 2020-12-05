@@ -9,13 +9,18 @@ object Versions {
   object AndroidX {
     const val activity = "1.2.0-alpha08"
     const val appcompat = "1.3.0-alpha02"
-    const val compose = "1.0.0-alpha05"
-    const val core = "1.5.0-alpha04"
+    const val core = "1.5.0-alpha05"
     const val hilt = "1.0.0-alpha02"
     const val fragment = "1.3.0-alpha06"
     const val lifecycle = "2.3.0-beta01"
-    const val navigation = "2.3.0"
     const val room = "2.3.0-alpha01"
+
+    object Compose {
+      const val core = "1.0.0-alpha08"
+      const val navigation = "1.0.0-alpha03"
+    }
+
+    val compose = Compose
 
     /**
      * Contains version info for androidx's tests.
@@ -33,23 +38,23 @@ object Versions {
 
   val androidX = AndroidX
 
-  const val ben = "0.33.0"
+  const val ben = "0.36.0"
 
   object Chris {
-    const val coil = "0.3.1"
+    const val coil = "0.4.0"
   }
 
   val chris = Chris
 
-  const val detekt = "1.14.2"
+  const val detekt = "1.15.0-RC1"
 
   /**
    * Contains version info for google.
    */
   object Google {
-    const val dagger = "2.29.1"
+    const val dagger = "2.30.1"
     const val hilt = "${google.dagger}-alpha"
-    const val material = "1.3.0-alpha03"
+    const val material = "1.3.0-alpha04"
     const val truth = "1.0.1"
   }
 
@@ -73,9 +78,10 @@ object Versions {
    * Contains version info for kotlin.
    */
   object Kotlin {
-    const val runtime = "1.4.10"
-    const val coroutines = "1.3.9"
-    const val serialization = "1.0.0"
+    const val runtime = "1.4.20"
+    const val coroutines = "1.4.2"
+    const val serialization = "1.0.1"
+    const val time = "0.1.0"
   }
 
   val kotlin = Kotlin

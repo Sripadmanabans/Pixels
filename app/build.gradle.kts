@@ -69,7 +69,7 @@ android {
 
   composeOptions {
     kotlinCompilerVersion = versions.kotlin.runtime
-    kotlinCompilerExtensionVersion = versions.androidX.compose
+    kotlinCompilerExtensionVersion = versions.androidX.compose.core
   }
 
   lintOptions {
@@ -96,7 +96,6 @@ dependencies {
 
   implementation(deps.androidX.compose.foundation.foundation)
   implementation(deps.androidX.compose.foundation.layout)
-  implementation(deps.androidX.compose.foundation.text)
 
   implementation(deps.androidX.compose.material.material)
   implementation(deps.androidX.compose.material.icons.core)
@@ -111,11 +110,12 @@ dependencies {
   implementation(deps.androidX.compose.ui.geometry)
   implementation(deps.androidX.compose.ui.graphics)
   implementation(deps.androidX.compose.ui.text)
-  implementation(deps.androidX.compose.ui.textAndroid)
-  implementation(deps.androidX.ui.tooling)
+  implementation(deps.androidX.compose.ui.tooling)
   implementation(deps.androidX.compose.ui.unit)
   implementation(deps.androidX.compose.ui.util)
   implementation(deps.androidX.compose.ui.viewbinding)
+
+  implementation(deps.androidX.navigation.compose)
 
   implementation(deps.chris.coil)
 
