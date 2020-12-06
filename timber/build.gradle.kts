@@ -14,6 +14,8 @@ android {
     targetSdkVersion(androidConfig.targetSdk)
     versionCode = androidConfig.version.code
     versionName = androidConfig.version.fullName
+
+    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
 
   buildTypes {
@@ -29,6 +31,10 @@ android {
   kotlinOptions {
     freeCompilerArgs = freeCompilerArgs + "-Xexplicit-api=strict"
   }
+
+  testOptions {
+    animationsDisabled = true
+  }
 }
 
 dependencies {
@@ -36,4 +42,8 @@ dependencies {
 
   implementation(deps.google.dagger.runtime)
   kapt(deps.google.dagger.compiler)
+
+  androidTestImplementation(deps.androidX.test.espresso.core)
+  androidTestImplementation(deps.androidX.test.junit)
+  androidTestImplementation(deps.google.truth)
 }

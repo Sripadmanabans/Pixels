@@ -29,10 +29,10 @@ private val LightColorPalette = lightColors(
 
 @Composable
 public fun PixelsTheme(
-  darkTheme: Boolean = isSystemInDarkTheme(),
-  content: @Composable () -> Unit
+  isDarkTheme: Boolean = isSystemInDarkTheme(),
+  content: @Composable () -> Unit,
 ) {
-  val colors = if (darkTheme) {
+  val colors = if (isDarkTheme) {
     DarkColorPalette
   } else {
     LightColorPalette

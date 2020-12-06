@@ -14,7 +14,10 @@ android {
     targetSdkVersion(androidConfig.targetSdk)
     versionCode = androidConfig.version.code
     versionName = androidConfig.version.fullName
+
+    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
+
   signingConfigs {
 
     getByName("debug") {
@@ -69,11 +72,24 @@ android {
 
   composeOptions {
     kotlinCompilerVersion = versions.kotlin.runtime
-    kotlinCompilerExtensionVersion = versions.androidX.compose
+    kotlinCompilerExtensionVersion = versions.androidX.compose.core
   }
 
   lintOptions {
     disable.add("InvalidFragmentVersionForActivityResult")
+  }
+
+  packagingOptions {
+    resources {
+      excludes.apply {
+        add("META-INF/AL2.0")
+        add("META-INF/LGPL2.1")
+      }
+    }
+  }
+
+  testOptions {
+    animationsDisabled = true
   }
 }
 
@@ -96,7 +112,6 @@ dependencies {
 
   implementation(deps.androidX.compose.foundation.foundation)
   implementation(deps.androidX.compose.foundation.layout)
-  implementation(deps.androidX.compose.foundation.text)
 
   implementation(deps.androidX.compose.material.material)
   implementation(deps.androidX.compose.material.icons.core)
@@ -111,11 +126,12 @@ dependencies {
   implementation(deps.androidX.compose.ui.geometry)
   implementation(deps.androidX.compose.ui.graphics)
   implementation(deps.androidX.compose.ui.text)
-  implementation(deps.androidX.compose.ui.textAndroid)
-  implementation(deps.androidX.ui.tooling)
+  implementation(deps.androidX.compose.ui.tooling)
   implementation(deps.androidX.compose.ui.unit)
   implementation(deps.androidX.compose.ui.util)
   implementation(deps.androidX.compose.ui.viewbinding)
+
+  implementation(deps.androidX.navigation.compose)
 
   implementation(deps.chris.coil)
 
@@ -139,4 +155,9 @@ dependencies {
   implementation(deps.androidX.lifecycle.liveData)
   implementation(deps.androidX.lifecycle.runtime)
   implementation(deps.androidX.lifecycle.viewmodel)
+
+  androidTestImplementation(deps.androidX.compose.ui.test.core)
+  androidTestImplementation(deps.androidX.compose.ui.test.junit)
+  androidTestImplementation(deps.androidX.test.espresso.core)
+  androidTestImplementation(deps.androidX.test.junit)
 }
