@@ -14,6 +14,8 @@ android {
     targetSdkVersion(androidConfig.targetSdk)
     versionCode = androidConfig.version.code
     versionName = androidConfig.version.fullName
+
+    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
 
   buildTypes {
@@ -33,7 +35,23 @@ android {
   }
 
   kotlinOptions {
-    freeCompilerArgs = freeCompilerArgs + "-Xexplicit-api=strict"
+    freeCompilerArgs = freeCompilerArgs + listOf(
+      "-Xexplicit-api=strict",
+      "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
+    )
+  }
+
+  packagingOptions {
+    resources {
+      excludes.apply {
+        add("META-INF/AL2.0")
+        add("META-INF/LGPL2.1")
+      }
+    }
+  }
+
+  testOptions {
+    animationsDisabled = true
   }
 }
 
@@ -47,4 +65,9 @@ dependencies {
   implementation(deps.androidX.compose.ui.text)
   implementation(deps.androidX.compose.ui.ui)
   implementation(deps.androidX.compose.ui.unit)
+
+  androidTestImplementation(deps.androidX.compose.ui.test.core)
+  androidTestImplementation(deps.androidX.compose.ui.test.junit)
+  androidTestImplementation(deps.androidX.test.espresso.core)
+  androidTestImplementation(deps.androidX.test.junit)
 }

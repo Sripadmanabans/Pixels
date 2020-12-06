@@ -14,7 +14,10 @@ android {
     targetSdkVersion(androidConfig.targetSdk)
     versionCode = androidConfig.version.code
     versionName = androidConfig.version.fullName
+
+    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
+
   signingConfigs {
 
     getByName("debug") {
@@ -74,6 +77,19 @@ android {
 
   lintOptions {
     disable.add("InvalidFragmentVersionForActivityResult")
+  }
+
+  packagingOptions {
+    resources {
+      excludes.apply {
+        add("META-INF/AL2.0")
+        add("META-INF/LGPL2.1")
+      }
+    }
+  }
+
+  testOptions {
+    animationsDisabled = true
   }
 }
 
@@ -139,4 +155,9 @@ dependencies {
   implementation(deps.androidX.lifecycle.liveData)
   implementation(deps.androidX.lifecycle.runtime)
   implementation(deps.androidX.lifecycle.viewmodel)
+
+  androidTestImplementation(deps.androidX.compose.ui.test.core)
+  androidTestImplementation(deps.androidX.compose.ui.test.junit)
+  androidTestImplementation(deps.androidX.test.espresso.core)
+  androidTestImplementation(deps.androidX.test.junit)
 }
