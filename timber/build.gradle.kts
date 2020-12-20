@@ -16,6 +16,7 @@ android {
     versionName = androidConfig.version.fullName
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    testInstrumentationRunnerArguments["clearPackageData"] = "true"
   }
 
   buildTypes {
@@ -34,6 +35,7 @@ android {
 
   testOptions {
     animationsDisabled = true
+    execution = "ANDROIDX_TEST_ORCHESTRATOR"
   }
 }
 
@@ -45,5 +47,9 @@ dependencies {
 
   androidTestImplementation(deps.androidX.test.espresso.core)
   androidTestImplementation(deps.androidX.test.junit)
-  androidTestImplementation(deps.google.truth)
+  androidTestImplementation(deps.androidX.test.truth)
+  androidTestImplementation(deps.androidX.test.rules)
+  androidTestImplementation(deps.androidX.test.runner)
+
+  androidTestUtil(deps.androidX.test.orchestrator)
 }
