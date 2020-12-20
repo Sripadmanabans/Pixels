@@ -131,6 +131,12 @@ object Dependencies {
 
     val navigation = Navigation
 
+    object Paging {
+      const val compose = "androidx.paging:paging-compose:${versions.androidX.compose.paging}"
+    }
+
+    val paging = Paging
+
     /**
      * Has dependencies that are part of androidx and room
      */
@@ -156,10 +162,11 @@ object Dependencies {
 
       val espresso = Espresso
 
-      const val junit = "androidx.test.ext:junit:${versions.androidX.test.junit}"
+      const val junit = "androidx.test.ext:junit-ktx:${versions.androidX.test.junit}"
       const val orchestrator = "androidx.test:orchestrator:${versions.androidX.test.orchestrator}"
       const val rules = "androidx.test:rules:${versions.androidX.test.rules}"
       const val runner = "androidx.test:runner:${versions.androidX.test.runner}"
+      const val truth = "androidx.test.ext:truth:${versions.androidX.test.truth}"
     }
 
     val test = Test

@@ -12,12 +12,13 @@ object Versions {
     const val core = "1.5.0-alpha05"
     const val hilt = "1.0.0-alpha02"
     const val fragment = "1.3.0-alpha06"
-    const val lifecycle = "2.3.0-beta01"
+    const val lifecycle = "2.3.0-rc01"
     const val room = "2.3.0-alpha01"
 
     object Compose {
-      const val core = "1.0.0-alpha08"
-      const val navigation = "1.0.0-alpha03"
+      const val core = "1.0.0-alpha09"
+      const val navigation = "1.0.0-alpha04"
+      const val paging = "1.0.0-alpha04"
     }
 
     val compose = Compose
@@ -26,11 +27,12 @@ object Versions {
      * Contains version info for androidx's tests.
      */
     object Test {
-      const val espresso = "3.3.0-rc01"
-      const val junit = "1.1.2-rc01"
-      const val orchestrator = "1.3.0-beta01"
-      const val rules = "1.3.0-rc01"
-      const val runner = "1.3.0-rc01"
+      const val espresso = "3.4.0-alpha02"
+      const val junit = "1.1.3-alpha02"
+      const val orchestrator = "1.3.1-alpha02"
+      const val rules = "1.3.1-alpha02"
+      const val runner = "1.3.1-alpha02"
+      const val truth = "1.3.1-alpha02"
     }
 
     val test = Test
@@ -41,12 +43,12 @@ object Versions {
   const val ben = "0.36.0"
 
   object Chris {
-    const val coil = "0.4.0"
+    const val coil = "0.4.1"
   }
 
   val chris = Chris
 
-  const val detekt = "1.15.0-RC1"
+  const val detekt = "1.15.0"
 
   /**
    * Contains version info for google.
@@ -54,8 +56,8 @@ object Versions {
   object Google {
     const val dagger = "2.30.1"
     const val hilt = "${google.dagger}-alpha"
-    const val material = "1.3.0-alpha04"
-    const val truth = "1.0.1"
+    const val material = "1.3.0-beta01"
+    const val truth = "1.1"
   }
 
   val google = Google
@@ -78,7 +80,7 @@ object Versions {
    * Contains version info for kotlin.
    */
   object Kotlin {
-    const val runtime = "1.4.20"
+    const val runtime = "1.4.21"
     const val coroutines = "1.4.2"
     const val serialization = "1.0.1"
     const val time = "0.1.0"
