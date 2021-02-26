@@ -55,7 +55,7 @@ jobs:
 
       ## Actual task
       - name: Assemble with gradle
-        run: ./gradlew assemble --build-cache --no-daemon --stacktrace --gradle-user-home "$GRADLE_HOME"
+        run: ./gradlew assemble --build-cache --no-daemon --stacktrace --gradle-user-home "$GRADLE_HOME" -Dorg.gradle.unsafe.configuration-cache=false
 
   # Runs all check tasks in parallel.
   check:
@@ -91,7 +91,7 @@ jobs:
 
       ## Actual task
       - name: Check with Gradle
-        run: ./gradlew ${{ matrix.gradle-task }} --build-cache --no-daemon --stacktrace --gradle-user-home "$GRADLE_HOME"
+        run: ./gradlew ${{ matrix.gradle-task }} --build-cache --no-daemon --stacktrace --gradle-user-home "$GRADLE_HOME" -Dorg.gradle.unsafe.configuration-cache=false
 
   instrumentation-tests:
     name: Instrumentation tests
@@ -127,7 +127,7 @@ jobs:
           api-level: ${{ matrix.api-level }}
           arch: x86_64
           # Make sure to have android test in all android libraries or connectedCheck will fail.
-          script: ./gradlew connectedCheck --build-cache --no-daemon --stacktrace --gradle-user-home "$GRADLE_HOME"
+          script: ./gradlew connectedCheck --build-cache --no-daemon --stacktrace --gradle-user-home "$GRADLE_HOME" -Dorg.gradle.unsafe.configuration-cache=false
       - name: Upload results
         uses: actions/upload-artifact@v2
         with:

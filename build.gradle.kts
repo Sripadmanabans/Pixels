@@ -1,4 +1,3 @@
-import com.android.build.gradle.internal.plugins.BasePlugin
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -17,17 +16,19 @@ buildscript {
     mavenCentralRepositories()
     kotlinXRepositories()
     springPluginsRepositories()
+    snapShotRepositories()
     gradlePluginPortal()
   }
 
   dependencies {
     classpath(androidConfig.classPath.android)
     classpath(androidConfig.classPath.ben)
-    classpath(androidConfig.classPath.hilt)
     classpath(androidConfig.classPath.kotlin.gradle)
     classpath(androidConfig.classPath.kotlin.serialization)
     classpath(androidConfig.classPath.detekt)
     classpath(androidConfig.classPath.ktlint)
+    classpath(androidConfig.classPath.square.anvil)
+    classpath(androidConfig.classPath.square.sqlDelight)
   }
 }
 
@@ -49,6 +50,9 @@ subprojects {
         if (requested.group == "org.jetbrains.kotlin" && requested.name.startsWith("kotlin-stdlib")) {
           useVersion(versions.kotlin.runtime)
         }
+        if (requested.group == "androidx.test.ext" && requested.name.startsWith("junit-ktx")) {
+          useVersion(versions.androidX.test.junit)
+        }
       }
     }
   }
@@ -60,33 +64,16 @@ subprojects {
     tasks.findByName("check")?.dependsOn("detekt")
   }
 
-  plugins.withType<BasePlugin<*, *, *>>().configureEach {
-    extension.compileOptions {
-      sourceCompatibility = JavaVersion.VERSION_1_8
-      targetCompatibility = JavaVersion.VERSION_1_8
-    }
-  }
-
-  tasks.withType<JavaCompile>().configureEach {
-    sourceCompatibility = JavaVersion.VERSION_1_8.toString()
-    targetCompatibility = JavaVersion.VERSION_1_8.toString()
-  }
-
   tasks.withType<KotlinCompile>().configureEach {
     kotlinOptions {
-      // Allow warnings when running from IDE, makes it easier to experiment.
       allWarningsAsErrors = true
 
       freeCompilerArgs = freeCompilerArgs + listOf(
         "-XXLanguage:+NewInference",
-        "-progressive",
-        "-Xopt-in=kotlin.Experimental",
-        "-Xopt-in=kotlin.RequiresOptIn",
-        "-Xopt-in=kotlin.time.ExperimentalTime",
-        "-Xallow-jvm-ir-dependencies"
+        "-progressive"
       )
 
-      jvmTarget = JavaVersion.VERSION_1_8.toString()
+      jvmTarget = "1.8"
     }
   }
 
@@ -98,7 +85,7 @@ subprojects {
 
   // Configuration documentation: https://github.com/JLLeitschuh/ktlint-gradle#configuration
   configure<KtlintExtension> {
-    version.set("0.38.1")
+    version.set("0.40.0")
     // Prints the name of failed rules.
     verbose.set(true)
     reporters {
@@ -113,6 +100,12 @@ subprojects {
         "import-ordering"
       )
     )
+
+    filter {
+      exclude { element -> element.file.path.contains("generated/") }
+      exclude("**/generated/**")
+      include("**/kotlin/**")
+    }
   }
 
   configure<DetektExtension> {
@@ -120,4 +113,7 @@ subprojects {
     // Treat config file as an override for the default config.
     buildUponDefaultConfig = true
   }
+
+  // FIXME: Check https://github.com/gradle/gradle/issues/4823
+  parent!!.path.takeIf { it != rootProject.path }?.let { evaluationDependsOn(it) }
 }
