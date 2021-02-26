@@ -1,0 +1,10 @@
+import kotlin.time.Duration;
+
+CREATE TABLE version (
+    versionCode INTEGER NOT NULL PRIMARY KEY,
+    versionName TEXT NOT NULL
+);
+
+insert:
+INSERT INTO version (versionCode, versionName)
+VALUES (?, ?);

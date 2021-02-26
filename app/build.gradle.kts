@@ -2,8 +2,19 @@ plugins {
   id("com.android.application")
   id("org.jetbrains.kotlin.android")
   id("org.jetbrains.kotlin.kapt")
-  id("org.jetbrains.kotlin.plugin.serialization")
-  id("dagger.hilt.android.plugin")
+  id("com.squareup.anvil")
+  id("com.squareup.sqldelight")
+}
+
+kotlin {
+  sourceSets {
+    all {
+      languageSettings.useExperimentalAnnotation("kotlin.time.ExperimentalTime")
+      languageSettings.useExperimentalAnnotation("kotlinx.coroutines.FlowPreview")
+      languageSettings.useExperimentalAnnotation("kotlinx.serialization.ExperimentalSerializationApi")
+      languageSettings.useExperimentalAnnotation("kotlinx.coroutines.ExperimentalCoroutinesApi")
+    }
+  }
 }
 
 android {
@@ -61,10 +72,13 @@ android {
   }
 
   kotlinOptions {
-    freeCompilerArgs = freeCompilerArgs + listOf(
-      "-Xopt-in=kotlinx.serialization.ExperimentalSerializationApi",
-      "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
-    )
+    jvmTarget = "1.8"
+    useIR = true
+  }
+
+  compileOptions {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
   }
 
   buildFeatures {
@@ -72,12 +86,7 @@ android {
   }
 
   composeOptions {
-    kotlinCompilerVersion = versions.kotlin.runtime
     kotlinCompilerExtensionVersion = versions.androidX.compose.core
-  }
-
-  lintOptions {
-    disable.add("InvalidFragmentVersionForActivityResult")
   }
 
   packagingOptions {
@@ -97,15 +106,18 @@ android {
 
 dependencies {
 
-  implementation(project(":theme"))
-  implementation(project(":timber"))
+  implementation(project(":theme:public"))
+  implementation(project(":timber:impl-wiring"))
+  implementation(project(":database:session:impl-wiring"))
+  implementation(project(":scopes"))
 
   implementation(deps.kotlin.stdLib.jdk)
-  implementation(deps.kotlin.serialization.core)
 
-  implementation(deps.androidX.core)
+  implementation(deps.androidX.activity)
   implementation(deps.androidX.appcompat)
-  implementation(deps.google.material)
+  implementation(deps.androidX.core)
+
+  implementation(deps.androidX.compose.activity)
 
   implementation(deps.androidX.compose.compiler)
 
@@ -120,9 +132,8 @@ dependencies {
   implementation(deps.androidX.compose.material.icons.extended)
 
   implementation(deps.androidX.compose.runtime.runtime)
-  implementation(deps.androidX.compose.runtime.dispatch)
   implementation(deps.androidX.compose.runtime.livedata)
-  implementation(deps.androidX.compose.runtime.savedInstanceState)
+  implementation(deps.androidX.compose.runtime.saveable)
 
   implementation(deps.androidX.compose.ui.ui)
   implementation(deps.androidX.compose.ui.geometry)
@@ -133,30 +144,28 @@ dependencies {
   implementation(deps.androidX.compose.ui.util)
   implementation(deps.androidX.compose.ui.viewbinding)
 
+  implementation(deps.androidX.lifecycle.liveData)
+  implementation(deps.androidX.lifecycle.runtime)
+  implementation(deps.androidX.lifecycle.viewmodel)
+
   implementation(deps.androidX.navigation.compose)
 
   implementation(deps.chris.coil)
 
-  implementation(deps.jake.timber.android)
+  implementation(deps.google.dagger.runtime)
+  kapt(deps.google.dagger.compiler)
 
-  implementation(deps.google.hilt.runtime)
-  kapt(deps.google.hilt.compiler)
-
-  implementation(deps.androidX.hilt.common)
-  implementation(deps.androidX.hilt.viewModel)
-  kapt(deps.androidX.hilt.compiler)
+  implementation(deps.google.material)
 
   implementation(deps.square.okhttp.client)
   implementation(deps.square.okhttp.logging)
 
+  implementation(deps.square.sqlDelight.android)
+
   implementation(deps.square.retrofit.client)
+
   implementation(deps.jake.converter)
-
   implementation(deps.jake.byteunits)
-
-  implementation(deps.androidX.lifecycle.liveData)
-  implementation(deps.androidX.lifecycle.runtime)
-  implementation(deps.androidX.lifecycle.viewmodel)
 
   androidTestImplementation(deps.androidX.compose.ui.test.core)
   androidTestImplementation(deps.androidX.compose.ui.test.junit)
@@ -167,4 +176,17 @@ dependencies {
   androidTestImplementation(deps.androidX.test.runner)
 
   androidTestUtil(deps.androidX.test.orchestrator)
+}
+
+sqldelight {
+  database("PixelsDb") {
+    packageName = "com.adjectivemonk2.pixels.database"
+    sourceFolders = listOf("database")
+    schemaOutputDirectory = file("build/database")
+    dependency(project(":database:session:impl"))
+  }
+}
+
+kapt {
+  correctErrorTypes = true
 }
