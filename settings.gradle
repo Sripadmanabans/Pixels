@@ -1,0 +1,16 @@
+rootProject.name = "Pixels"
+
+include ":app"
+include ":database:session:impl"
+include ":database:session:impl-wiring"
+include ":database:session:public"
+include ":scopes"
+include ":theme:public"
+include ":timber:impl"
+include ":timber:impl-wiring"
+include ":timber:public"
+
+// Has info on preview features
+// https://docs.gradle.org/7.0/release-notes.html
+enableFeaturePreview("VERSION_CATALOGS")
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")

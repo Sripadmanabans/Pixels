@@ -1,0 +1,11 @@
+apply plugin: "org.jetbrains.kotlin.jvm"
+
+archivesBaseName = "scopes"
+
+kotlin {
+  explicitApi()
+}
+
+dependencies {
+  implementation libs.dagger.runtime
+}

@@ -1,0 +1,137 @@
+import com.android.build.gradle.BaseExtension
+
+buildscript {
+
+  ext.buildConfig = [
+      'compileSdk': 30,
+      'minSdk'    : 29,
+      'targetSdk' : 30,
+
+      'version'   : [
+          'major': 1,
+          'minor': 4,
+          'patch': 1,
+          'build': 0,
+      ],
+  ]
+  ext.buildConfig.version['name'] = "${buildConfig.version.major}.${buildConfig.version.minor}.${buildConfig.version.patch}"
+  ext.buildConfig.version['fullName'] = "${buildConfig.version.name}.${buildConfig.version.build}"
+  ext.buildConfig.version['code'] = buildConfig.version.major * 1000000 + buildConfig.version.minor * 10000 + buildConfig.version.patch * 100 + buildConfig.version.build
+
+  repositories {
+    google()
+    mavenCentral()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+  }
+
+  dependencies {
+    classpath(libs.android.gradlePlugin)
+    classpath(libs.ben.gradlePlugin)
+    classpath(libs.kotlin.gradlePlugin)
+    classpath(libs.kotlin.serialization.gradlePlugin)
+    classpath(libs.detekt)
+    classpath(libs.ktlint)
+    classpath(libs.anvil)
+    classpath(libs.sqlDelight.gradlePlugin)
+  }
+}
+
+plugins {
+  id "com.github.ben-manes.versions" version "0.39.0"
+}
+
+allprojects {
+  repositories {
+    google()
+    mavenCentral()
+    // Used for Accompanist snapshots
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+  }
+}
+
+subprojects {
+  configurations.configureEach {
+    // We forcefully exclude AppCompat + MDC from any transitive dependencies.
+    // This is a Compose app, so there's no need for these.
+    exclude group: 'androidx.appcompat'
+    exclude group: 'com.google.android.material', module: 'material'
+
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+      if (details.requested.group == 'org.jetbrains.kotlinx'
+          && details.requested.module.name == 'kotlinx-collections-immutable-jvm') {
+        // kotlinx-collections-immutable-jvm 0.3.4+ is available on Maven Central
+        details.useVersion '0.3.4'
+      }
+    }
+  }
+
+  apply plugin: "org.jlleitschuh.gradle.ktlint"
+  apply plugin: "io.gitlab.arturbosch.detekt"
+
+  tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions {
+      allWarningsAsErrors = true
+
+      freeCompilerArgs += "-XXLanguage:+NewInference"
+      freeCompilerArgs += "-progressive"
+
+      jvmTarget = "11"
+    }
+  }
+
+  plugins.withType(com.android.build.gradle.BasePlugin).configureEach { plugin ->
+    def extension = project.extensions.getByName("android") as BaseExtension
+    extension.compileOptions {
+      sourceCompatibility = JavaVersion.VERSION_11
+      targetCompatibility = JavaVersion.VERSION_11
+    }
+  }
+
+  tasks.withType(JavaCompile).configureEach { task ->
+    task.sourceCompatibility = JavaVersion.VERSION_11
+    task.targetCompatibility = JavaVersion.VERSION_11
+  }
+
+  tasks.withType(Test) {
+    testLogging {
+      events "skipped", "failed", "passed"
+    }
+  }
+  // TODO same thing for instrumentation tests: https://issuetracker.google.com/issues/37056080
+  //tasks.withType(AndroidTestTask) {
+  //  testLogging {
+  //    events "skipped", "failed", "passed"
+  //  }
+  //}
+
+  // Configuration documentation: https://github.com/JLLeitschuh/ktlint-gradle#configuration
+  ktlint {
+    version = "0.41.0"
+    // Prints the name of failed rules.
+    verbose = true
+    reporters {
+      // Default "plain" reporter is actually harder to read.
+      reporter "json"
+    }
+
+    // IntelliJ refuses to sort imports correctly.
+    // This is a known issue: https://github.com/pinterest/ktlint/issues/527
+    disabledRules = ["import-ordering"]
+
+    filter {
+      exclude("**/generated/**")
+      include("**/kotlin/**")
+    }
+  }
+
+  detekt {
+    config = files("${rootDir}/detekt.yml")
+    // Treat config file as an override for the default config.
+    buildUponDefaultConfig = true
+  }
+}
+
+@SuppressWarnings('unused')
+def propOrEmpty(String name) {
+  return hasProperty(name) ? getProperty(name) : ''
+}
