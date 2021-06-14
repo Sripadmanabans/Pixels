@@ -1,0 +1,21 @@
+apply plugin: "org.jetbrains.kotlin.jvm"
+apply plugin: "com.squareup.anvil"
+
+archivesBaseName = "database-session-impl-wiring"
+
+kotlin {
+  explicitApi()
+}
+
+dependencies {
+  api project(":database:session:public")
+  api project(":database:session:impl")
+
+  implementation project(":scopes")
+
+  implementation libs.dagger.runtime
+}
+
+anvil {
+  generateDaggerFactories = true
+}

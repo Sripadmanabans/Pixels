@@ -1,0 +1,35 @@
+apply plugin: "com.android.library"
+apply plugin: "org.jetbrains.kotlin.android"
+apply plugin: "com.squareup.anvil"
+
+archivesBaseName = "timber-impl-wiring"
+
+android {
+  compileSdkVersion buildConfig.compileSdk
+
+  defaultConfig {
+    minSdkVersion buildConfig.minSdk
+    targetSdkVersion buildConfig.targetSdk
+  }
+
+  buildFeatures {
+    buildConfig false
+  }
+
+  kotlinOptions {
+    freeCompilerArgs += "-Xexplicit-api=strict"
+  }
+}
+
+dependencies {
+  api project(":timber:public")
+  api project(":timber:impl")
+
+  implementation project(":scopes")
+
+  implementation libs.dagger.runtime
+}
+
+anvil {
+  generateDaggerFactories = true
+}

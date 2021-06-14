@@ -102,6 +102,7 @@ jobs:
       # Allow tests to continue on other devices if they fail on one device.
       fail-fast: false
       matrix:
+        target: [ google_apis ]
         api-level:
           - 29
     steps:
@@ -122,9 +123,10 @@ jobs:
 
       ## Actual task
       - name: Instrumentation Tests
-        uses: reactivecircus/android-emulator-runner@v2
+        uses: reactivecircus/android-emulator-runner@v2.17.0
         with:
           api-level: ${{ matrix.api-level }}
+          target: ${{ matrix.target }}
           arch: x86_64
           # Make sure to have android test in all android libraries or connectedCheck will fail.
           script: ./gradlew connectedCheck --build-cache --no-daemon --stacktrace --gradle-user-home "$GRADLE_HOME" -Dorg.gradle.unsafe.configuration-cache=false
