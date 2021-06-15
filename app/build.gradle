@@ -1,8 +1,8 @@
 apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "org.jetbrains.kotlin.kapt"
-apply plugin: "com.squareup.anvil"
 apply plugin: "com.squareup.sqldelight"
+apply plugin: "dagger.hilt.android.plugin"
 
 android {
   compileSdkVersion buildConfig.compileSdk
@@ -92,10 +92,9 @@ kotlin {
 
 dependencies {
 
-  implementation project(":theme:public")
-  implementation project(":timber:impl-wiring")
-  implementation project(":database:session:impl-wiring")
-  implementation project(":scopes")
+  implementation projects.theme.public
+  implementation projects.timber.implWiring
+  implementation projects.database.session.implWiring
 
   implementation libs.kotlin.stdlib.common
 
@@ -129,8 +128,8 @@ dependencies {
 
   implementation libs.coil.coil
 
-  implementation libs.dagger.runtime
-  kapt libs.dagger.compiler
+  implementation libs.dagger.hilt.runtime
+  kapt libs.dagger.hilt.compiler
 
   implementation libs.okhttp.client
   implementation libs.okhttp.loggingInterceptor
@@ -140,6 +139,10 @@ dependencies {
   implementation libs.retrofit.client
 
   implementation libs.byteunits
+
+  testImplementation libs.junit.jupiter.runtime
+  testRuntimeOnly libs.junit.jupiter.engine
+  testImplementation libs.truth
 
   androidTestImplementation libs.compose.ui.test.core
   androidTestImplementation libs.compose.ui.test.junit

@@ -2,7 +2,6 @@
 accompanist = "0.8.1"
 androidxactivity = "1.3.0-beta01"
 androidxfragment = "1.4.0-alpha02"
-androidxhilt = "1.0.0-beta01"
 androidxlifecycle = "2.4.0-alpha01"
 androidxnavigation = "2.4.0-alpha02"
 androidxtest = "1.4.0-beta02"
@@ -10,8 +9,8 @@ coil = "1.2.2"
 compose = "1.0.0-beta08"
 coroutines = "1.5.0"
 dagger = "2.37"
-hilt = "2.37"
-junit5 = "5.7.0"
+hilt = "1.0.0"
+junit5 = "5.8.0-M1"
 kotlin = "1.5.10"
 okhttp = "5.0.0-alpha.2"
 retrofit = "2.9.0"
@@ -33,9 +32,9 @@ androidx-core = "androidx.core:core-ktx:1.6.0-beta02"
 androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "androidxfragment" }
 androidx-fragment-testing = { module = "androidx.fragment:fragment-testing", version.ref = "androidxfragment" }
 
-androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "androidxhilt" }
-androidx-hilt-compose = "androidx.hilt:hilt-navigation-compose:1.0.0-alpha01"
-androidx-hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "androidxhilt" }
+androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hilt" }
+androidx-hilt-compose = "androidx.hilt:hilt-navigation-compose:1.0.0-alpha02"
+androidx-hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "hilt" }
 
 androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidxlifecycle" }
 androidx-lifecycle-viewmodel-compose = "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha06"
@@ -51,8 +50,6 @@ androidx-test-junit = "androidx.test.ext:junit-ktx:1.1.3-beta02"
 androidx-test-orchestrator = { module = "androidx.test:orchestrator", version.ref = "androidxtest" }
 androidx-test-rules = { module = "androidx.test:rules", version.ref = "androidxtest" }
 androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidxtest" }
-
-anvil = "com.squareup.anvil:gradle-plugin:2.3.1"
 
 ben-gradlePlugin = "com.github.ben-manes:gradle-versions-plugin:0.39.0"
 byteunits = "com.jakewharton.byteunits:byteunits:0.9.1"
@@ -77,14 +74,13 @@ compose-ui-util = { module = "androidx.compose.ui:ui-util", version.ref = "compo
 compose-ui-viewbinding = { module = "androidx.compose.ui:ui-viewbinding", version.ref = "compose" }
 
 dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
+dagger-hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "dagger" }
+dagger-hilt-gradlePlugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "dagger" }
+dagger-hilt-runtime = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
+dagger-hilt-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "dagger" }
 dagger-runtime = { module = "com.google.dagger:dagger", version.ref = "dagger" }
 
 detekt = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.17.1"
-
-hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
-hilt-gradlePlugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
-hilt-library = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
-hilt-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
 
 junit-junit = "junit:junit:4.13"
 junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit5" }

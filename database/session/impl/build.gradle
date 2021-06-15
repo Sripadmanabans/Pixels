@@ -1,6 +1,6 @@
 apply plugin: "org.jetbrains.kotlin.jvm"
+apply plugin: "org.jetbrains.kotlin.kapt"
 apply plugin: "com.squareup.sqldelight"
-apply plugin: "com.squareup.anvil"
 
 archivesBaseName = "database-session-impl"
 
@@ -16,11 +16,10 @@ kotlin {
 }
 
 dependencies {
-  api project(":database:session:public")
-
-  implementation project(":scopes")
+  api projects.database.session.public
 
   implementation libs.dagger.runtime
+  kapt libs.dagger.compiler
 
   implementation libs.kotlin.coroutines.core
   implementation libs.kotlin.time
@@ -35,8 +34,4 @@ sqldelight {
     sourceFolders = ["database"]
     schemaOutputDirectory = file(" build/database")
   }
-}
-
-anvil {
-  generateDaggerFactories = true
 }

@@ -27,11 +27,11 @@ buildscript {
   dependencies {
     classpath(libs.android.gradlePlugin)
     classpath(libs.ben.gradlePlugin)
+    classpath(libs.detekt)
+    classpath(libs.dagger.hilt.gradlePlugin)
     classpath(libs.kotlin.gradlePlugin)
     classpath(libs.kotlin.serialization.gradlePlugin)
-    classpath(libs.detekt)
     classpath(libs.ktlint)
-    classpath(libs.anvil)
     classpath(libs.sqlDelight.gradlePlugin)
   }
 }
