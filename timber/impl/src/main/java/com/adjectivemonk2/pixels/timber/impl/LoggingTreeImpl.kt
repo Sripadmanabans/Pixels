@@ -1,19 +1,16 @@
 package com.adjectivemonk2.pixels.timber.impl
 
 import android.util.Log
-import com.adjectivemonk2.pixels.dagger.scope.AppScope
-import com.adjectivemonk2.pixels.dagger.scope.SingleIn
 import com.adjectivemonk2.pixels.timber.LoggingTree
-import com.squareup.anvil.annotations.ContributesBinding
 import java.io.PrintWriter
 import java.io.StringWriter
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.math.min
 
-@SingleIn(AppScope::class)
-@ContributesBinding(scope = AppScope::class, boundType = LoggingTree::class)
+@Singleton
 public class LoggingTreeImpl @Inject constructor() : LoggingTree() {
 
   override fun performLog(priority: Int, tag: String?, throwable: Throwable?, message: String?) {

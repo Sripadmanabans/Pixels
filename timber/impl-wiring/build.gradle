@@ -1,6 +1,6 @@
 apply plugin: "com.android.library"
 apply plugin: "org.jetbrains.kotlin.android"
-apply plugin: "com.squareup.anvil"
+apply plugin: "org.jetbrains.kotlin.kapt"
 
 archivesBaseName = "timber-impl-wiring"
 
@@ -22,14 +22,9 @@ android {
 }
 
 dependencies {
-  api project(":timber:public")
-  api project(":timber:impl")
+  api projects.timber.public
+  api projects.timber.impl
 
-  implementation project(":scopes")
-
-  implementation libs.dagger.runtime
-}
-
-anvil {
-  generateDaggerFactories = true
+  implementation libs.dagger.hilt.runtime
+  kapt libs.dagger.hilt.compiler
 }

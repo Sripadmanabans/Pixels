@@ -6,7 +6,7 @@ import kotlin.time.Duration
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
-public class DataColumnAdapter @Inject constructor() : ColumnAdapter<Duration, Long> {
+public class DurationColumnAdapter @Inject constructor() : ColumnAdapter<Duration, Long> {
   override fun decode(databaseValue: Long): Duration {
     return databaseValue.toDuration(DurationUnit.SECONDS)
   }

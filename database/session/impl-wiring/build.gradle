@@ -1,21 +1,30 @@
-apply plugin: "org.jetbrains.kotlin.jvm"
-apply plugin: "com.squareup.anvil"
+apply plugin: "com.android.library"
+apply plugin: "org.jetbrains.kotlin.android"
+apply plugin: "org.jetbrains.kotlin.kapt"
 
 archivesBaseName = "database-session-impl-wiring"
 
-kotlin {
-  explicitApi()
+android {
+  compileSdkVersion buildConfig.compileSdk
+
+  defaultConfig {
+    minSdkVersion buildConfig.minSdk
+    targetSdkVersion buildConfig.targetSdk
+  }
+
+  buildFeatures {
+    buildConfig false
+  }
+
+  kotlinOptions {
+    freeCompilerArgs += "-Xexplicit-api=strict"
+  }
 }
 
 dependencies {
-  api project(":database:session:public")
-  api project(":database:session:impl")
+  api projects.database.session.public
+  api projects.database.session.impl
 
-  implementation project(":scopes")
-
-  implementation libs.dagger.runtime
-}
-
-anvil {
-  generateDaggerFactories = true
+  implementation libs.dagger.hilt.runtime
+  kapt libs.dagger.hilt.compiler
 }
