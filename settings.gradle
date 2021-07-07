@@ -1,12 +1,23 @@
 rootProject.name = "Pixels"
 
 include ":app"
+
 include ":database:session:impl"
 include ":database:session:impl-wiring"
 include ":database:session:public"
+
+include ':network:core:impl'
+include ':network:core:impl-wiring'
+include ':network:core:public'
+
+include ':network:gallery:impl'
+include ':network:gallery:impl-wiring'
+include ':network:gallery:public'
+
 include ":theme:public"
 include ":timber:impl"
 include ":timber:impl-wiring"
+
 include ":timber:public"
 
 // Has info on preview features

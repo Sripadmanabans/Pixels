@@ -95,6 +95,8 @@ dependencies {
   implementation projects.theme.public
   implementation projects.timber.implWiring
   implementation projects.database.session.implWiring
+  implementation projects.network.core.implWiring
+  implementation projects.network.gallery.implWiring
 
   implementation libs.kotlin.stdlib.common
 
@@ -128,17 +130,11 @@ dependencies {
 
   implementation libs.coil.coil
 
+  implementation libs.androidx.hilt.compose
   implementation libs.dagger.hilt.runtime
   kapt libs.dagger.hilt.compiler
 
-  implementation libs.okhttp.client
-  implementation libs.okhttp.loggingInterceptor
-
   implementation libs.sqlDelight.android
-
-  implementation libs.retrofit.client
-
-  implementation libs.byteunits
 
   testImplementation libs.junit.jupiter.runtime
   testRuntimeOnly libs.junit.jupiter.engine

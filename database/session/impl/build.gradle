@@ -32,6 +32,6 @@ sqldelight {
   PixelsDb {
     packageName = "com.adjectivemonk2.pixels.database.session"
     sourceFolders = ["database"]
-    schemaOutputDirectory = file(" build/database")
+    schemaOutputDirectory = file("build/database")
   }
 }
