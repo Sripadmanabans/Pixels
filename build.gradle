@@ -31,7 +31,7 @@ buildscript {
     classpath(libs.dagger.hilt.gradlePlugin)
     classpath(libs.kotlin.gradlePlugin)
     classpath(libs.kotlin.serialization.gradlePlugin)
-    classpath(libs.ktlint)
+    classpath(libs.spotless)
     classpath(libs.sqlDelight.gradlePlugin)
   }
 }
@@ -65,7 +65,7 @@ subprojects {
     }
   }
 
-  apply plugin: "org.jlleitschuh.gradle.ktlint"
+  apply plugin: "com.diffplug.spotless"
   apply plugin: "io.gitlab.arturbosch.detekt"
 
   tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
@@ -104,23 +104,15 @@ subprojects {
   //  }
   //}
 
-  // Configuration documentation: https://github.com/JLLeitschuh/ktlint-gradle#configuration
-  ktlint {
-    version = "0.41.0"
-    // Prints the name of failed rules.
-    verbose = true
-    reporters {
-      // Default "plain" reporter is actually harder to read.
-      reporter "json"
-    }
-
-    // IntelliJ refuses to sort imports correctly.
-    // This is a known issue: https://github.com/pinterest/ktlint/issues/527
-    disabledRules = ["import-ordering"]
-
-    filter {
-      exclude("**/generated/**")
-      include("**/kotlin/**")
+  spotless {
+    kotlin {
+      target "src/**/*.kt"
+      def userData = [
+          "indent_size"             : "2",
+          "continuation_indent_size": "4",
+          "insert_final_newline"    : "true",
+      ]
+      ktlint("0.41.0").userData(userData)
     }
   }
 

@@ -1,0 +1,43 @@
+apply plugin: "com.android.library"
+apply plugin: "org.jetbrains.kotlin.android"
+apply plugin: "org.jetbrains.kotlin.kapt"
+
+archivesBaseName = "network-core-impl"
+
+android {
+  compileSdkVersion buildConfig.compileSdk
+
+  defaultConfig {
+    minSdkVersion buildConfig.minSdk
+    targetSdkVersion buildConfig.targetSdk
+
+    buildConfigField 'String', 'PIXELS_CLIENT_ID', "\"${propOrEmpty('PIXELS_CLIENT_ID')}\""
+  }
+
+  buildFeatures {
+    buildConfig true
+  }
+
+  kotlinOptions {
+    freeCompilerArgs += "-Xexplicit-api=strict"
+  }
+}
+
+kotlin {
+  sourceSets.all {
+    languageSettings {
+      useExperimentalAnnotation("kotlinx.serialization.ExperimentalSerializationApi")
+    }
+  }
+}
+
+dependencies {
+  api projects.network.core.public
+
+  implementation libs.kotlin.serialization.json
+  implementation libs.okhttp.client
+  implementation libs.retrofit.client
+
+  implementation libs.dagger.runtime
+  kapt libs.dagger.compiler
+}

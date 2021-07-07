@@ -1,0 +1,11 @@
+apply plugin: "org.jetbrains.kotlin.jvm"
+
+archivesBaseName = "network-core-public"
+
+kotlin {
+  explicitApi()
+}
+
+dependencies {
+  implementation libs.dagger.runtime
+}

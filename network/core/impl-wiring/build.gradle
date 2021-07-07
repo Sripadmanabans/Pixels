@@ -1,0 +1,48 @@
+apply plugin: "com.android.library"
+apply plugin: "org.jetbrains.kotlin.android"
+apply plugin: "org.jetbrains.kotlin.kapt"
+
+archivesBaseName = "network-core-impl-wiring"
+
+android {
+  compileSdkVersion buildConfig.compileSdk
+
+  defaultConfig {
+    minSdkVersion buildConfig.minSdk
+    targetSdkVersion buildConfig.targetSdk
+  }
+
+  buildFeatures {
+    buildConfig false
+  }
+
+  kotlinOptions {
+    freeCompilerArgs += "-Xexplicit-api=strict"
+  }
+}
+
+kotlin {
+  sourceSets.all {
+    languageSettings {
+      useExperimentalAnnotation("kotlinx.serialization.ExperimentalSerializationApi")
+    }
+  }
+}
+
+dependencies {
+  api projects.network.core.public
+  api projects.network.core.impl
+
+  api libs.okhttp.client
+  api libs.okhttp.loggingInterceptor
+  api libs.retrofit.client
+  api libs.kotlin.serialization.json
+
+  implementation libs.byteUnits
+
+
+  implementation libs.timber.android
+
+  implementation libs.dagger.hilt.runtime
+  kapt libs.dagger.hilt.compiler
+}

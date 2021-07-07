@@ -1,0 +1,18 @@
+apply plugin: "org.jetbrains.kotlin.jvm"
+apply plugin: "org.jetbrains.kotlin.kapt"
+
+archivesBaseName = "network-gallery-impl"
+
+kotlin {
+  explicitApi()
+}
+
+dependencies {
+  api projects.network.gallery.public
+
+  implementation libs.kotlin.coroutines.core
+  implementation libs.retrofit.client
+
+  implementation libs.dagger.runtime
+  kapt libs.dagger.compiler
+}

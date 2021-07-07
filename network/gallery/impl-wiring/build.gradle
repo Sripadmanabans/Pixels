@@ -1,0 +1,33 @@
+apply plugin: "com.android.library"
+apply plugin: "org.jetbrains.kotlin.android"
+apply plugin: "org.jetbrains.kotlin.kapt"
+
+archivesBaseName = "network-core-impl-wiring"
+
+android {
+  compileSdkVersion buildConfig.compileSdk
+
+  defaultConfig {
+    minSdkVersion buildConfig.minSdk
+    targetSdkVersion buildConfig.targetSdk
+  }
+
+  buildFeatures {
+    buildConfig false
+  }
+
+  kotlinOptions {
+    freeCompilerArgs += "-Xexplicit-api=strict"
+  }
+}
+
+dependencies {
+  api projects.network.gallery.public
+  api projects.network.gallery.impl
+
+  implementation projects.network.core.public
+  implementation libs.retrofit.client
+
+  implementation libs.dagger.hilt.runtime
+  kapt libs.dagger.hilt.compiler
+}
