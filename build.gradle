@@ -26,9 +26,9 @@ buildscript {
 
   dependencies {
     classpath(libs.android.gradlePlugin)
+    classpath(libs.anvil)
     classpath(libs.ben.gradlePlugin)
     classpath(libs.detekt)
-    classpath(libs.dagger.hilt.gradlePlugin)
     classpath(libs.kotlin.gradlePlugin)
     classpath(libs.kotlin.serialization.gradlePlugin)
     classpath(libs.spotless)

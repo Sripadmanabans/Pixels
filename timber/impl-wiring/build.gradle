@@ -1,6 +1,5 @@
 apply plugin: "com.android.library"
 apply plugin: "org.jetbrains.kotlin.android"
-apply plugin: "org.jetbrains.kotlin.kapt"
 
 archivesBaseName = "timber-impl-wiring"
 
@@ -24,7 +23,4 @@ android {
 dependencies {
   api projects.timber.public
   api projects.timber.impl
-
-  implementation libs.dagger.hilt.runtime
-  kapt libs.dagger.hilt.compiler
 }

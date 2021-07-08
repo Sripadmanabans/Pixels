@@ -1,6 +1,6 @@
 apply plugin: "com.android.library"
 apply plugin: "org.jetbrains.kotlin.android"
-apply plugin: "org.jetbrains.kotlin.kapt"
+apply plugin: "com.squareup.anvil"
 
 archivesBaseName = "database-session-impl-wiring"
 
@@ -25,6 +25,5 @@ dependencies {
   api projects.database.session.public
   api projects.database.session.impl
 
-  implementation libs.dagger.hilt.runtime
-  kapt libs.dagger.hilt.compiler
+  implementation libs.dagger.runtime
 }

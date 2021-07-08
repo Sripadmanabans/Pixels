@@ -2,7 +2,7 @@ apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "org.jetbrains.kotlin.kapt"
 apply plugin: "com.squareup.sqldelight"
-apply plugin: "dagger.hilt.android.plugin"
+apply plugin: "com.squareup.anvil"
 
 android {
   compileSdkVersion buildConfig.compileSdk
@@ -92,6 +92,7 @@ kotlin {
 
 dependencies {
 
+  implementation projects.scope.public
   implementation projects.theme.public
   implementation projects.timber.implWiring
   implementation projects.database.session.implWiring
@@ -130,9 +131,8 @@ dependencies {
 
   implementation libs.coil.coil
 
-  implementation libs.androidx.hilt.compose
-  implementation libs.dagger.hilt.runtime
-  kapt libs.dagger.hilt.compiler
+  implementation libs.dagger.runtime
+  kapt libs.dagger.compiler
 
   implementation libs.sqlDelight.android
 

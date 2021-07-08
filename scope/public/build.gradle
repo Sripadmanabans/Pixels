@@ -1,0 +1,12 @@
+apply plugin: "org.jetbrains.kotlin.jvm"
+apply plugin: 'com.squareup.anvil'
+
+archivesBaseName = "scope-public"
+
+kotlin {
+  explicitApi()
+}
+
+dependencies {
+  implementation libs.dagger.runtime
+}

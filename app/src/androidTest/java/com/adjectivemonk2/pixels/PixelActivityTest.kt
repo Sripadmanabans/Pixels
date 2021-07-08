@@ -9,9 +9,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-internal class MainActivityTest {
+internal class PixelActivityTest {
 
-  @Rule @JvmField val composeTestRule = createAndroidComposeRule<MainActivity>()
+  @Rule @JvmField val composeTestRule = createAndroidComposeRule<PixelActivity>()
 
   @Test fun simpleTest() {
     composeTestRule.setContent {

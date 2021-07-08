@@ -1,3 +1,7 @@
+naming:
+  FunctionNaming:
+    active: true
+    ignoreAnnotated: [ 'Composable' ]
 # This is a bug with detekt https://github.com/detekt/detekt/pull/3719
 style:
   ModifierOrder:
