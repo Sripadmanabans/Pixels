@@ -1,6 +1,6 @@
 apply plugin: "com.android.library"
 apply plugin: "org.jetbrains.kotlin.android"
-apply plugin: "org.jetbrains.kotlin.kapt"
+apply plugin: "com.squareup.anvil"
 
 archivesBaseName = "network-core-impl"
 
@@ -33,11 +33,15 @@ kotlin {
 
 dependencies {
   api projects.network.core.public
+  api projects.scope.public
 
   implementation libs.kotlin.serialization.json
   implementation libs.okhttp.client
   implementation libs.retrofit.client
 
   implementation libs.dagger.runtime
-  kapt libs.dagger.compiler
+}
+
+anvil {
+  generateDaggerFactories = true
 }

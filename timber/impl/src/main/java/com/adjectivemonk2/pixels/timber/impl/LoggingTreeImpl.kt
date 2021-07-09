@@ -2,15 +2,16 @@ package com.adjectivemonk2.pixels.timber.impl
 
 import android.util.Log
 import com.adjectivemonk2.pixels.timber.LoggingTree
+import com.adjectivemonk2.scope.AppScope
+import com.squareup.anvil.annotations.ContributesBinding
 import java.io.PrintWriter
 import java.io.StringWriter
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 import javax.inject.Inject
-import javax.inject.Singleton
 import kotlin.math.min
 
-@Singleton
+@ContributesBinding(scope = AppScope::class, boundType = LoggingTree::class)
 public class LoggingTreeImpl @Inject constructor() : LoggingTree() {
 
   override fun performLog(priority: Int, tag: String?, throwable: Throwable?, message: String?) {
@@ -32,7 +33,7 @@ public class LoggingTreeImpl @Inject constructor() : LoggingTree() {
 
     // DO NOT switch this to Thread.getCurrentThread().getStackTrace(). The test will pass
     // because Robolectric runs them on the JVM but on Android the elements are different.
-    val stackTrace = Throwable().stackTrace
+    val stackTrace = Throwable("Creating tag").stackTrace
     check(stackTrace.size > CALL_STACK_INDEX) {
       "Synthetic stacktrace didn't have enough elements: are you using proguard?"
     }
@@ -62,6 +63,7 @@ public class LoggingTreeImpl @Inject constructor() : LoggingTree() {
         }
         i = end
       } while (i < newline)
+      i++
     }
   }
 

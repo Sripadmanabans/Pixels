@@ -1,6 +1,6 @@
 apply plugin: "com.android.library"
 apply plugin: "org.jetbrains.kotlin.android"
-apply plugin: "org.jetbrains.kotlin.kapt"
+apply plugin: "com.squareup.anvil"
 
 archivesBaseName = "network-core-impl-wiring"
 
@@ -24,10 +24,14 @@ android {
 dependencies {
   api projects.network.gallery.public
   api projects.network.gallery.impl
+  api projects.scope.public
 
   implementation projects.network.core.public
   implementation libs.retrofit.client
 
-  implementation libs.dagger.hilt.runtime
-  kapt libs.dagger.hilt.compiler
+  implementation libs.dagger.runtime
+}
+
+anvil {
+  generateDaggerFactories = true
 }

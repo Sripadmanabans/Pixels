@@ -19,7 +19,6 @@ import androidx.navigation.compose.rememberNavController
 import coil.network.HttpException
 import com.adjectivemonk2.network.gallery.GalleryRepository
 import com.adjectivemonk2.pixels.theme.PixelsTheme
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import timber.log.debug
@@ -27,12 +26,12 @@ import timber.log.error
 import java.io.IOException
 import javax.inject.Inject
 
-@AndroidEntryPoint
-class MainActivity : FragmentActivity() {
+class PixelActivity : FragmentActivity() {
 
   @Inject internal lateinit var repository: GalleryRepository
 
   override fun onCreate(savedInstanceState: Bundle?) {
+    appComponent.activityComponent().injectInTo(this)
     super.onCreate(savedInstanceState)
     setContent {
       PixelsTheme {

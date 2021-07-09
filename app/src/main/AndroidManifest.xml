@@ -16,7 +16,7 @@
         android:theme="@style/Theme.Pixels"
         tools:ignore="AllowBackup">
         <activity
-            android:name=".MainActivity"
+            android:name=".PixelActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Pixels.NoActionBar">
