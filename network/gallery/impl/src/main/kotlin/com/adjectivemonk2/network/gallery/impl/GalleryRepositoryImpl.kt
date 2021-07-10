@@ -7,6 +7,8 @@ import com.adjectivemonk2.network.gallery.Window
 import com.adjectivemonk2.scope.AppScope
 import com.adjectivemonk2.scope.SingleIn
 import com.squareup.anvil.annotations.ContributesBinding
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 @SingleIn(AppScope::class)
@@ -14,12 +16,14 @@ import javax.inject.Inject
 public class GalleryRepositoryImpl @Inject constructor(
   private val galleryService: GalleryService
 ) : GalleryRepository {
-  override suspend fun getGallery(
+  override fun getGallery(
     section: Section,
     sort: Sort,
     window: Window,
     page: Int
-  ) {
-    galleryService.getGallery(section.param, sort.param, window.param, page)
+  ): Flow<Unit> {
+    return flow {
+      emit(galleryService.getGallery(section.param, sort.param, window.param, page))
+    }
   }
 }

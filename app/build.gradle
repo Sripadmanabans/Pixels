@@ -92,12 +92,14 @@ kotlin {
 
 dependencies {
 
+  implementation projects.database.session.implWiring
+  implementation projects.lifecycle.implWiring
+  implementation projects.network.core.implWiring
+  implementation projects.network.gallery.implWiring
   implementation projects.scope.public
   implementation projects.theme.public
   implementation projects.timber.implWiring
-  implementation projects.database.session.implWiring
-  implementation projects.network.core.implWiring
-  implementation projects.network.gallery.implWiring
+  implementation projects.ui.gallery.implWiring
 
   implementation libs.kotlin.stdlib.common
 
