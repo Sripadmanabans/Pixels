@@ -7,13 +7,13 @@ androidxnavigation = "2.4.0-alpha04"
 androidxtest = "1.4.0"
 coil = "1.2.2"
 compose = "1.0.0-rc01"
-coroutines = "1.5.0"
+coroutines = "1.5.1"
 dagger = "2.37"
 junit5 = "5.8.0-M1"
 kotlin = "1.5.10"
 okhttp = "5.0.0-alpha.2"
 retrofit = "2.9.0"
-serialization = "1.2.1"
+serialization = "1.2.2"
 sqldelight = "1.5.0"
 timber = "5.0.0-SNAPSHOT"
 
@@ -23,7 +23,7 @@ accompanist-flowlayout = { module = "com.google.accompanist:accompanist-flowlayo
 accompanist-insets = { module = "com.google.accompanist:accompanist-insets", version.ref = "accompanist" }
 accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanist" }
 
-android-gradlePlugin = "com.android.tools.build:gradle:7.1.0-alpha02"
+android-gradlePlugin = "com.android.tools.build:gradle:7.1.0-alpha03"
 
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidxactivity" }
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "androidxactivity" }
@@ -31,9 +31,11 @@ androidx-core = "androidx.core:core-ktx:1.7.0-alpha01"
 androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "androidxfragment" }
 androidx-fragment-testing = { module = "androidx.fragment:fragment-testing", version.ref = "androidxfragment" }
 
+androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "androidxlifecycle" }
 androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidxlifecycle" }
 androidx-lifecycle-viewmodel-compose = "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07"
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidxlifecycle" }
+androidx-lifecycle-viewmodel-savedstate = { module = "androidx.lifecycle:lifecycle-viewmodel-savedstate", version.ref = "androidxlifecycle" }
 
 androidx-navigation-compose = {module = "androidx.navigation:navigation-compose", version.ref = "androidxnavigation" }
 

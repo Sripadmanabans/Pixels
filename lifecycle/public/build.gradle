@@ -1,8 +1,7 @@
 apply plugin: "com.android.library"
 apply plugin: "org.jetbrains.kotlin.android"
-apply plugin: "com.squareup.anvil"
 
-archivesBaseName = "network-gallery-impl-wiring"
+archivesBaseName = "lifecycle-public"
 
 android {
   compileSdkVersion buildConfig.compileSdk
@@ -14,6 +13,11 @@ android {
 
   buildFeatures {
     buildConfig false
+    compose true
+  }
+
+  composeOptions {
+    kotlinCompilerExtensionVersion libs.versions.compose.get()
   }
 
   kotlinOptions {
@@ -22,16 +26,11 @@ android {
 }
 
 dependencies {
-  api projects.network.gallery.public
-  api projects.network.gallery.impl
-  api projects.scope.public
+  api libs.androidx.lifecycle.viewmodel.compose
+  api libs.androidx.lifecycle.viewmodel.ktx
+  api libs.androidx.lifecycle.viewmodel.savedstate
 
-  implementation projects.network.core.public
-  implementation libs.retrofit.client
+  implementation libs.androidx.navigation.compose
 
   implementation libs.dagger.runtime
-}
-
-anvil {
-  generateDaggerFactories = true
 }
