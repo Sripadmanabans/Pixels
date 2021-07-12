@@ -3,8 +3,8 @@ package com.adjectivemonk2.pixels.database.session.impl
 import com.adjectivemonk2.pixels.database.session.PixelsDb
 import com.adjectivemonk2.pixels.database.session.SessionLocalDataSource
 import com.adjectivemonk2.pixels.database.session.model.SessionInfo
-import com.adjectivemonk2.scope.AppScope
-import com.adjectivemonk2.scope.SingleIn
+import com.adjectivemonk2.pixels.scope.AppScope
+import com.adjectivemonk2.pixels.scope.SingleIn
 import com.squareup.anvil.annotations.ContributesBinding
 import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.squareup.sqldelight.runtime.coroutines.mapToList

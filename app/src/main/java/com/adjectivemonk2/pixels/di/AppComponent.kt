@@ -1,9 +1,9 @@
 package com.adjectivemonk2.pixels.di
 
-import com.adjectivemonk2.inject.Injector
 import com.adjectivemonk2.pixels.PixelApplication
-import com.adjectivemonk2.scope.AppScope
-import com.adjectivemonk2.scope.SingleIn
+import com.adjectivemonk2.pixels.inject.Injector
+import com.adjectivemonk2.pixels.scope.AppScope
+import com.adjectivemonk2.pixels.scope.SingleIn
 import com.squareup.anvil.annotations.MergeComponent
 import dagger.BindsInstance
 import dagger.Component

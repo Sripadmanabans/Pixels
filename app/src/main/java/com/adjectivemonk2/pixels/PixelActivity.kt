@@ -7,10 +7,10 @@ import androidx.fragment.app.FragmentActivity
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.adjectivemonk2.lifecycle.LocalViewModelFactoryProvider
-import com.adjectivemonk2.lifecycle.ViewModelFactoryProvider
+import com.adjectivemonk2.pixels.lifecycle.LocalViewModelFactoryProvider
+import com.adjectivemonk2.pixels.lifecycle.ViewModelFactoryProvider
 import com.adjectivemonk2.pixels.theme.PixelsTheme
-import com.adjectivemonk2.ui.gallery.GalleryScreenProvider
+import com.adjectivemonk2.pixels.ui.gallery.GalleryScreenProvider
 import javax.inject.Inject
 
 class PixelActivity : FragmentActivity() {

@@ -75,11 +75,6 @@ android {
     animationsDisabled true
     execution "ANDROIDX_TEST_ORCHESTRATOR"
   }
-
-  // Lint crash fix in fragment 1.4.0-alpha03 https://issuetracker.google.com/issues/189967522
-  lintOptions {
-    disable "DialogFragmentCallbacksDetector"
-  }
 }
 
 kotlin {
