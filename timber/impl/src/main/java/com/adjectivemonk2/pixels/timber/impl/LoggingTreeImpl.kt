@@ -1,8 +1,8 @@
 package com.adjectivemonk2.pixels.timber.impl
 
 import android.util.Log
+import com.adjectivemonk2.pixels.scope.AppScope
 import com.adjectivemonk2.pixels.timber.LoggingTree
-import com.adjectivemonk2.scope.AppScope
 import com.squareup.anvil.annotations.ContributesBinding
 import java.io.PrintWriter
 import java.io.StringWriter
