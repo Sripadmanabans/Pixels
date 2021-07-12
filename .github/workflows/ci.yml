@@ -23,13 +23,14 @@ jobs:
       - uses: actions/checkout@v2
       - uses: gradle/wrapper-validation-action@v1
       - name: set up JDK 11
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2
         with:
+          distribution: 'adopt'
           java-version: 11
 
       ## Caching
       - name: Cache gradle dependencies
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ${{ env.GRADLE_HOME }}/caches
           # Include the SHA in the hash so this step always adds a cache entry. If we didn't use the SHA, the artifacts
@@ -76,13 +77,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: set up JDK 11
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2
         with:
+          distribution: 'adopt'
           java-version: 11
 
       ## Caching
       - name: Cache build artifacts
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ${{ env.GRADLE_HOME }}/caches
           # Don't set restore-keys so cache is always only valid for the current build config.
@@ -103,30 +105,56 @@ jobs:
       fail-fast: false
       matrix:
         target: [ google_apis ]
-        api-level:
-          - 30
+        api-level: [ 30 ]
     steps:
       - uses: actions/checkout@v2
       - name: set up JDK 11
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2
         with:
+          distribution: 'adopt'
           java-version: 11
 
       ## Caching
       - name: Cache build artifacts
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ${{ env.GRADLE_HOME }}/caches
           # Don't set restore-keys so cache is always only valid for the current build config.
           # Also don't use ${{ runner.os }} in the key so we don't re-assemble for UI tests.
           key: gradle-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/buildSrc/**') }}-${{ github.sha }}
 
-      ## Actual task
-      - name: Instrumentation Tests
-        uses: reactivecircus/android-emulator-runner@v2.17.0
+      # AVD Caching
+      - name: AVD Cache
+        uses: actions/cache@v2
+        id: avd-cache
+        with:
+          path: |
+            ~/.android/avd/*
+            ~/.android/adb*
+          key: avd-${{ matrix.api-level }}
+
+      # Creating cache when necessary
+      - name: create AVD and generate snapshot for caching
+        if: steps.avd-cache.outputs.cache-hit != 'true'
+        uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: ${{ matrix.api-level }}
           target: ${{ matrix.target }}
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
+          arch: x86_64
+          script: echo "Generated AVD snapshot for caching."
+
+      ## Actual task
+      - name: Instrumentation Tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ matrix.api-level }}
+          target: ${{ matrix.target }}
+          force-avd-creation: false
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
           arch: x86_64
           # Make sure to have android test in all android libraries or connectedCheck will fail.
           script: ./gradlew connectedCheck --build-cache --no-daemon --stacktrace --gradle-user-home "$GRADLE_HOME" -Dorg.gradle.unsafe.configuration-cache=false
