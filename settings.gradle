@@ -1,3 +1,10 @@
+pluginManagement {
+  repositories {
+    gradlePluginPortal()
+    google()
+  }
+}
+
 rootProject.name = "Pixels"
 
 include ":app"
@@ -9,6 +16,9 @@ include ":database:session:public"
 include ':lifecycle:impl'
 include ':lifecycle:impl-wiring'
 include ':lifecycle:public'
+
+include ':model:core:public'
+include ':model:gallery:public'
 
 include ':network:core:impl'
 include ':network:core:impl-wiring'

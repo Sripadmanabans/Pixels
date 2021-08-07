@@ -6,6 +6,9 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,7 +30,7 @@ public class GalleryScreenProviderImpl @Inject constructor() : GalleryScreenProv
 }
 
 @Composable
-internal fun Start(state: String) {
+internal fun Start(state: State<String>) {
   Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
     Surface(
       modifier = Modifier.align(Alignment.Center),
@@ -39,14 +42,14 @@ internal fun Start(state: String) {
 }
 
 @Composable
-internal fun Greeting(name: String) {
-  Text(text = "Hello $name!")
+internal fun Greeting(name: State<String>) {
+  Text(text = "Hello ${name.value}!")
 }
 
 @Preview(showBackground = true)
 @Composable
 internal fun DefaultPreview() {
   PixelsTheme {
-    Start("Android")
+    Start(remember { mutableStateOf("Android") })
   }
 }

@@ -1,8 +1,7 @@
 package com.adjectivemonk2.pixels.ui.gallery.impl
 
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -26,25 +25,25 @@ public class GalleryViewModel @AssistedInject constructor(
   @Assisted private val handle: SavedStateHandle,
 ) : ViewModel() {
 
-  private var _state by mutableStateOf(handle.get<String>(SAVED_STATE_KEY).orEmpty())
-  public var state: String
-    get() = _state
-    private set(value) {
-      _state = value
-      handle[SAVED_STATE_KEY] = value
-    }
+  private val _state = mutableStateOf(handle.get<String>(SAVED_STATE_KEY).orEmpty())
+  public val state: State<String> = _state
 
   init {
     repository.getGallery()
       .onEach {
-        Timber.debug { "Api response: $it" }
-        state = "Success"
+        Timber.debug { "Api response: ${it.size}" }
+        updateState("Success")
       }
       .catch {
         Timber.error(it) { "Api failed" }
-        state = "Failure"
+        updateState("Failure")
       }
       .launchIn(viewModelScope)
+  }
+
+  private fun updateState(value: String) {
+    _state.value = value
+    handle[SAVED_STATE_KEY] = value
   }
 
   @AssistedFactory

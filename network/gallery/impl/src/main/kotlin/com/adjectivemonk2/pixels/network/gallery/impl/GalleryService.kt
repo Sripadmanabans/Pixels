@@ -1,5 +1,6 @@
 package com.adjectivemonk2.pixels.network.gallery.impl
 
+import com.adjectivemonk2.pixels.model.gallery.Gallery
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -11,5 +12,5 @@ public interface GalleryService {
     @Path("sort") sort: String,
     @Path("window") window: String,
     @Path("page") page: Int,
-  )
+  ): List<Gallery>
 }

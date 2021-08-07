@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavBackStackEntry
+import androidx.savedstate.SavedStateRegistryOwner
 
 public val LocalViewModelFactoryProvider: ProvidableCompositionLocal<ViewModelFactoryProvider?> =
   staticCompositionLocalOf { null }
@@ -19,10 +20,14 @@ public inline fun <reified VM : ViewModel> injectedViewModel(
   },
   viewModelFactoryProvider: ViewModelFactoryProvider? = LocalViewModelFactoryProvider.current
 ): VM {
-  val factory = if (viewModelStoreOwner is NavBackStackEntry) {
-    viewModelFactoryProvider?.create(viewModelStoreOwner, viewModelStoreOwner.arguments)
-  } else {
-    null
+  val factory = when (viewModelStoreOwner) {
+    is NavBackStackEntry -> {
+      viewModelFactoryProvider?.create(viewModelStoreOwner, viewModelStoreOwner.arguments)
+    }
+    is SavedStateRegistryOwner -> {
+      viewModelFactoryProvider?.create(viewModelStoreOwner, null)
+    }
+    else -> null
   }
   return viewModel(viewModelStoreOwner, factory = factory)
 }

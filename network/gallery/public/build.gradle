@@ -7,5 +7,8 @@ kotlin {
 }
 
 dependencies {
+  api projects.model.core.public
+  api projects.model.gallery.public
+
   implementation libs.kotlin.coroutines.core
 }

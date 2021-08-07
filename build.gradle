@@ -25,19 +25,19 @@ buildscript {
   }
 
   dependencies {
-    classpath(libs.android.gradlePlugin)
-    classpath(libs.anvil)
-    classpath(libs.ben.gradlePlugin)
-    classpath(libs.detekt)
-    classpath(libs.kotlin.gradlePlugin)
-    classpath(libs.kotlin.serialization.gradlePlugin)
-    classpath(libs.spotless)
-    classpath(libs.sqlDelight.gradlePlugin)
+    classpath(libs.android.classpath)
+    classpath(libs.anvil.classpath)
+    classpath(libs.ben.classpath)
+    classpath(libs.detekt.classpath)
+    classpath(libs.kotlin.classpath)
+    classpath(libs.spotless.classpath)
+    classpath(libs.sqlDelight.classpath)
   }
 }
 
 plugins {
   id "com.github.ben-manes.versions" version "0.39.0"
+  id "com.google.devtools.ksp" version "1.5.21-1.0.0-beta06"
 }
 
 allprojects {
@@ -46,6 +46,10 @@ allprojects {
     mavenCentral()
     // Used for Accompanist snapshots
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+    def composeSnapshot = libs.versions.composesnapshot.get()
+    if (composeSnapshot.length() > 1) {
+      maven { url "https://androidx.dev/snapshots/builds/$composeSnapshot/artifacts/repository/" }
+    }
   }
 }
 
@@ -61,6 +65,15 @@ subprojects {
           && details.requested.module.name == 'kotlinx-collections-immutable-jvm') {
         // kotlinx-collections-immutable-jvm 0.3.4+ is available on Maven Central
         details.useVersion '0.3.4'
+      }
+      // Can be removed when SQL Delight upgrades kotlin version.
+      if (details.requested.group == 'org.jetbrains.kotlin'
+          && details.requested.module.name.startsWith("kotlin-stdlib")) {
+        details.useVersion libs.versions.kotlin.get()
+      }
+      // Forcing compose to one version.
+      if (details.requested.group.startsWith("androidx.compose")) {
+        details.useVersion libs.versions.compose.get()
       }
     }
   }

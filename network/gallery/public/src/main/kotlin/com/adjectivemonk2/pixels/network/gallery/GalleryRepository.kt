@@ -1,5 +1,6 @@
 package com.adjectivemonk2.pixels.network.gallery
 
+import com.adjectivemonk2.pixels.model.gallery.Gallery
 import kotlinx.coroutines.flow.Flow
 
 public interface GalleryRepository {
@@ -8,5 +9,5 @@ public interface GalleryRepository {
     sort: Sort = Sort.VIRAL,
     window: Window = Window.DAY,
     page: Int = 0,
-  ): Flow<Unit>
+  ): Flow<List<Gallery>>
 }
