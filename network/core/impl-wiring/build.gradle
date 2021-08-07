@@ -21,29 +21,23 @@ android {
   }
 }
 
-kotlin {
-  sourceSets.all {
-    languageSettings {
-      useExperimentalAnnotation("kotlinx.serialization.ExperimentalSerializationApi")
-    }
-  }
-}
-
 dependencies {
   api projects.network.core.public
   api projects.network.core.impl
 
   api libs.okhttp.client
+  api libs.moshi
   api libs.okhttp.loggingInterceptor
   api libs.retrofit.client
-  api libs.kotlin.serialization.json
 
   implementation libs.byteUnits
-
-
+  implementation libs.dagger.runtime
+  implementation libs.retrofit.converter
   implementation libs.timber.android
 
-  implementation libs.dagger.runtime
+  testImplementation libs.junit.jupiter.runtime
+  testRuntimeOnly libs.junit.jupiter.engine
+  testImplementation libs.truth
 }
 
 anvil {

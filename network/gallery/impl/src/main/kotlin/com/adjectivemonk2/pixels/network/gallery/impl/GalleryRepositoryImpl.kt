@@ -1,5 +1,6 @@
 package com.adjectivemonk2.pixels.network.gallery.impl
 
+import com.adjectivemonk2.pixels.model.gallery.Gallery
 import com.adjectivemonk2.pixels.network.gallery.GalleryRepository
 import com.adjectivemonk2.pixels.network.gallery.Section
 import com.adjectivemonk2.pixels.network.gallery.Sort
@@ -21,7 +22,7 @@ public class GalleryRepositoryImpl @Inject constructor(
     sort: Sort,
     window: Window,
     page: Int
-  ): Flow<Unit> {
+  ): Flow<List<Gallery>> {
     return flow {
       emit(galleryService.getGallery(section.param, sort.param, window.param, page))
     }

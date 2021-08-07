@@ -23,19 +23,12 @@ android {
   }
 }
 
-kotlin {
-  sourceSets.all {
-    languageSettings {
-      useExperimentalAnnotation("kotlinx.serialization.ExperimentalSerializationApi")
-    }
-  }
-}
-
 dependencies {
   api projects.network.core.public
   api projects.scope.public
+  api projects.model.core.public
 
-  implementation libs.kotlin.serialization.json
+  implementation libs.moshi
   implementation libs.okhttp.client
   implementation libs.retrofit.client
 
