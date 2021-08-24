@@ -28,7 +28,7 @@ dependencies {
   api projects.scope.public
   api projects.model.core.public
 
-  implementation libs.moshi
+  implementation libs.moshi.client
   implementation libs.okhttp.client
   implementation libs.retrofit.client
 

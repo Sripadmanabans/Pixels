@@ -3,9 +3,9 @@ import com.android.build.gradle.BaseExtension
 buildscript {
 
   ext.buildConfig = [
-      'compileSdk': 30,
+      'compileSdk': 31,
       'minSdk'    : 29,
-      'targetSdk' : 30,
+      'targetSdk' : 31,
 
       'version'   : [
           'major': 1,
@@ -37,7 +37,7 @@ buildscript {
 
 plugins {
   id "com.github.ben-manes.versions" version "0.39.0"
-  id "com.google.devtools.ksp" version "1.5.21-1.0.0-beta06"
+  id "com.google.devtools.ksp" version "1.5.21-1.0.0-beta07"
 }
 
 allprojects {

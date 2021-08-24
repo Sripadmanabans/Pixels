@@ -3,9 +3,7 @@ package com.adjectivemonk2.pixels
 import android.app.Activity
 import android.app.Application
 import com.adjectivemonk2.pixels.di.AppComponent
-import com.adjectivemonk2.pixels.timber.LoggingTree
 import timber.log.Timber
-import timber.log.verbose
 import javax.inject.Inject
 
 class PixelApplication : Application() {
@@ -14,14 +12,14 @@ class PixelApplication : Application() {
     AppComponent.builder().application(this).build()
   }
 
-  @Inject internal lateinit var tree: LoggingTree
+  @Inject internal lateinit var tree: Timber.Tree
 
   override fun onCreate() {
     appComponent.injectInTo(this)
     super.onCreate()
     Timber.plant(tree)
 
-    Timber.verbose { "onCreate" }
+    Timber.v("onCreate")
   }
 }
 

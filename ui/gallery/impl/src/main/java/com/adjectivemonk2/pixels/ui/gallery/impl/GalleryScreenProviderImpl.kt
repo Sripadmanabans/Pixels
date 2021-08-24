@@ -6,13 +6,11 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.adjectivemonk2.pixels.lifecycle.injectedViewModel
+import com.adjectivemonk2.pixels.model.gallery.Gallery
 import com.adjectivemonk2.pixels.scope.ActivityScope
 import com.adjectivemonk2.pixels.theme.PixelsTheme
 import com.adjectivemonk2.pixels.ui.gallery.GalleryScreenProvider
@@ -30,26 +28,26 @@ public class GalleryScreenProviderImpl @Inject constructor() : GalleryScreenProv
 }
 
 @Composable
-internal fun Start(state: State<String>) {
+internal fun Start(state: List<Gallery>) {
   Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
     Surface(
       modifier = Modifier.align(Alignment.Center),
       color = MaterialTheme.colors.background,
     ) {
-      Greeting(state)
+      Greeting("Android, ${state.size}")
     }
   }
 }
 
 @Composable
-internal fun Greeting(name: State<String>) {
-  Text(text = "Hello ${name.value}!")
+internal fun Greeting(name: String) {
+  Text(text = "Hello $name!")
 }
 
 @Preview(showBackground = true)
 @Composable
 internal fun DefaultPreview() {
   PixelsTheme {
-    Start(remember { mutableStateOf("Android") })
+    Start(emptyList())
   }
 }

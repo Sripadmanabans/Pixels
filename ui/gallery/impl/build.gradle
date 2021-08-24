@@ -45,6 +45,14 @@ android {
   }
 }
 
+kotlin {
+  sourceSets.all {
+    languageSettings {
+      useExperimentalAnnotation("kotlinx.coroutines.ExperimentalCoroutinesApi")
+    }
+  }
+}
+
 dependencies {
   implementation projects.lifecycle.public
   implementation projects.network.gallery.public
