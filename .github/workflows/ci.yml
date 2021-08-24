@@ -105,7 +105,7 @@ jobs:
       fail-fast: false
       matrix:
         target: [ google_apis ]
-        api-level: [ 30 ]
+        api-level: [ 29 ]
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 11
