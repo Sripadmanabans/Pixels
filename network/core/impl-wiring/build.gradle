@@ -26,14 +26,14 @@ dependencies {
   api projects.network.core.impl
 
   api libs.okhttp.client
-  api libs.moshi
+  api libs.moshi.client
   api libs.okhttp.loggingInterceptor
   api libs.retrofit.client
 
   implementation libs.byteUnits
   implementation libs.dagger.runtime
   implementation libs.retrofit.converter
-  implementation libs.timber.android
+  implementation libs.timber
 
   testImplementation libs.junit.jupiter.runtime
   testRuntimeOnly libs.junit.jupiter.engine

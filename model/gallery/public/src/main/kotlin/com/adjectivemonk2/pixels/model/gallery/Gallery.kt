@@ -36,4 +36,5 @@ public data class Gallery(
   @Json(name = "tags") val tags: List<Tag>,
   @Json(name = "in_most_viral") val inMostViral: Boolean,
   @Json(name = "include_album_ads") val includeAlbumAds: Boolean?,
+  @Json(name = "images") val media: List<Media>?,
 )

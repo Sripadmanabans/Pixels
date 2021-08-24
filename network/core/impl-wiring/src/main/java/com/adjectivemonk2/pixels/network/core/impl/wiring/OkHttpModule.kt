@@ -12,7 +12,6 @@ import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import timber.log.Timber
-import timber.log.debug
 import java.io.File
 
 @Module
@@ -28,8 +27,8 @@ public object OkHttpModule {
   }
 
   @Provides public fun loggingInterceptor(): HttpLoggingInterceptor {
-    val logger = Timber.tagged("http")
-    return HttpLoggingInterceptor { logger.debug { it } }
+    val logger = Timber.tag("http")
+    return HttpLoggingInterceptor { logger.d(it) }
       .apply { level = HttpLoggingInterceptor.Level.BASIC }
   }
 
