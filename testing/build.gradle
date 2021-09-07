@@ -1,0 +1,24 @@
+apply plugin: "org.jetbrains.kotlin.jvm"
+
+archivesBaseName = "testing"
+
+kotlin {
+  explicitApi()
+
+  sourceSets.all {
+    languageSettings {
+      optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
+    }
+  }
+}
+
+dependencies {
+  implementation libs.kotlin.coroutines.test
+
+  implementation libs.junit.jupiter.runtime
+  runtimeOnly libs.junit.jupiter.engine
+}
+
+test {
+  useJUnitPlatform()
+}

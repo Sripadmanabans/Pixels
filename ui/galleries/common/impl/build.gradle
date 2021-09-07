@@ -1,0 +1,44 @@
+apply plugin: "org.jetbrains.kotlin.jvm"
+apply plugin: "com.squareup.anvil"
+
+archivesBaseName = "ui-galleries-common-impl"
+
+kotlin {
+  explicitApi()
+
+  sourceSets.all {
+    languageSettings {
+      optIn("com.squareup.workflow1.ui.WorkflowUiExperimentalApi")
+      optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
+    }
+  }
+}
+
+dependencies {
+  api projects.ui.galleries.common.public
+
+  implementation projects.network.gallery.public
+  implementation projects.scope.public
+
+  implementation libs.dagger.runtime
+
+  implementation libs.workflow.ui.core.common
+
+  testImplementation projects.network.gallery.fake
+
+  testImplementation libs.kotlin.coroutines.test
+  testImplementation libs.workflow.test
+
+  testImplementation libs.junit.jupiter.runtime
+  testRuntimeOnly libs.junit.jupiter.engine
+  testImplementation libs.truth
+  testImplementation projects.testing
+}
+
+anvil {
+  generateDaggerFactories = true
+}
+
+test {
+  useJUnitPlatform()
+}

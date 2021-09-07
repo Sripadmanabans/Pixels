@@ -1,0 +1,12 @@
+apply plugin: "org.jetbrains.kotlin.jvm"
+
+archivesBaseName = "ui-galleries-common-public"
+
+kotlin {
+  explicitApi()
+}
+
+dependencies {
+  api projects.model.gallery.public
+  api libs.workflow.core
+}

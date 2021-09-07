@@ -18,7 +18,7 @@ android {
     // The following argument makes the Android Test Orchestrator run its
     // "pm clear" command after each test invocation. This command ensures
     // that the app's state is completely cleared between tests.
-    testInstrumentationRunnerArguments clearPackageData: 'true'
+    testInstrumentationRunnerArguments clearPackageData: "true"
   }
 
   signingConfigs {
@@ -41,7 +41,7 @@ android {
 
   buildTypes {
     debug {
-      applicationIdSuffix '.debug'
+      applicationIdSuffix ".debug"
       signingConfig signingConfigs.debug
     }
     release {
@@ -80,7 +80,8 @@ android {
 kotlin {
   sourceSets.all {
     languageSettings {
-      useExperimentalAnnotation("kotlin.time.ExperimentalTime")
+      optIn("kotlin.time.ExperimentalTime")
+      optIn("com.squareup.workflow1.ui.WorkflowUiExperimentalApi")
     }
   }
 }
@@ -88,13 +89,18 @@ kotlin {
 dependencies {
 
   implementation projects.database.session.implWiring
-  implementation projects.lifecycle.implWiring
+
   implementation projects.network.core.implWiring
   implementation projects.network.gallery.implWiring
+
   implementation projects.scope.public
+
   implementation projects.theme.public
-  implementation projects.timber.implWiring
-  implementation projects.ui.gallery.implWiring
+
+  implementation projects.logger.implWiring
+
+  implementation projects.ui.galleries.android.implWiring
+  implementation projects.ui.galleries.common.implWiring
 
   implementation libs.kotlin.stdlib.common
 
@@ -120,18 +126,14 @@ dependencies {
   implementation libs.compose.ui.util
   implementation libs.compose.ui.viewbinding
 
-  implementation libs.androidx.lifecycle.runtime
-  implementation libs.androidx.lifecycle.viewmodel.compose
-  implementation libs.androidx.lifecycle.viewmodel.ktx
-
-  implementation libs.androidx.navigation.compose
-
   implementation libs.coil.coil
 
   implementation libs.dagger.runtime
   kapt libs.dagger.compiler
 
   implementation libs.sqlDelight.android
+
+  debugImplementation libs.leakCanary
 
   testImplementation libs.junit.jupiter.runtime
   testRuntimeOnly libs.junit.jupiter.engine

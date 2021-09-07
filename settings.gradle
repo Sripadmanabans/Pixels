@@ -13,32 +13,35 @@ include ":database:session:impl"
 include ":database:session:impl-wiring"
 include ":database:session:public"
 
-include ':lifecycle:impl'
-include ':lifecycle:impl-wiring'
-include ':lifecycle:public'
+include ":model:core:public"
+include ":model:gallery:public"
 
-include ':model:core:public'
-include ':model:gallery:public'
+include ":network:core:impl"
+include ":network:core:impl-wiring"
+include ":network:core:public"
 
-include ':network:core:impl'
-include ':network:core:impl-wiring'
-include ':network:core:public'
+include ":network:gallery:fake"
+include ":network:gallery:impl"
+include ":network:gallery:impl-wiring"
+include ":network:gallery:public"
 
-include ':network:gallery:impl'
-include ':network:gallery:impl-wiring'
-include ':network:gallery:public'
-
-include ':scope:public'
+include ":scope:public"
 
 include ":theme:public"
-include ":timber:impl"
-include ":timber:impl-wiring"
 
-include ":timber:public"
+include ":logger:impl"
+include ":logger:impl-wiring"
+include ":logger:public"
 
-include ':ui:gallery:impl'
-include ':ui:gallery:impl-wiring'
-include ':ui:gallery:public'
+include ':testing'
+
+include ":ui:galleries:android:public"
+include ":ui:galleries:android:impl"
+include ":ui:galleries:android:impl-wiring"
+
+include ":ui:galleries:common:public"
+include ":ui:galleries:common:impl"
+include ":ui:galleries:common:impl-wiring"
 
 // Has info on preview features
 // https://docs.gradle.org/7.0/release-notes.html

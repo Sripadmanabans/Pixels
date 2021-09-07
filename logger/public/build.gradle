@@ -1,0 +1,26 @@
+apply plugin: "com.android.library"
+apply plugin: "org.jetbrains.kotlin.android"
+
+archivesBaseName = "logger-public"
+
+android {
+  compileSdkVersion buildConfig.compileSdk
+
+  defaultConfig {
+    minSdkVersion buildConfig.minSdk
+    targetSdkVersion buildConfig.targetSdk
+  }
+
+  buildFeatures {
+    buildConfig false
+  }
+
+  kotlinOptions {
+    freeCompilerArgs += "-Xexplicit-api=strict"
+  }
+}
+
+dependencies {
+  api libs.timber
+  api libs.workflow.runtime
+}
