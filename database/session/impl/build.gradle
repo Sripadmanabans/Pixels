@@ -9,8 +9,8 @@ kotlin {
 
   sourceSets.all {
     languageSettings {
-      useExperimentalAnnotation("kotlin.time.ExperimentalTime")
-      useExperimentalAnnotation("kotlinx.coroutines.FlowPreview")
+      optIn("kotlin.time.ExperimentalTime")
+      optIn("kotlinx.coroutines.FlowPreview")
     }
   }
 }

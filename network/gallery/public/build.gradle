@@ -9,6 +9,7 @@ kotlin {
 dependencies {
   api projects.model.core.public
   api projects.model.gallery.public
+  api projects.network.core.public
 
   implementation libs.kotlin.coroutines.core
 }

@@ -1,0 +1,18 @@
+apply plugin: "org.jetbrains.kotlin.jvm"
+
+archivesBaseName = "ui-galleries-common-impl-wiring"
+
+kotlin {
+  explicitApi()
+
+  sourceSets.all {
+    languageSettings {
+      optIn("com.squareup.workflow1.ui.WorkflowUiExperimentalApi")
+    }
+  }
+}
+
+dependencies {
+  api projects.ui.galleries.common.public
+  api projects.ui.galleries.common.impl
+}

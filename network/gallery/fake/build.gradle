@@ -1,0 +1,29 @@
+apply plugin: "org.jetbrains.kotlin.jvm"
+apply plugin: "com.squareup.anvil"
+
+archivesBaseName = "network-gallery-impl"
+
+kotlin {
+  explicitApi()
+
+  sourceSets.all {
+    languageSettings {
+      optIn("kotlin.time.ExperimentalTime")
+    }
+  }
+}
+
+dependencies {
+  api projects.network.gallery.public
+  api projects.scope.public
+
+  implementation libs.kotlin.coroutines.core
+  implementation libs.kotlin.time
+  implementation libs.retrofit.client
+
+  implementation libs.dagger.runtime
+}
+
+anvil {
+  generateDaggerFactories = true
+}

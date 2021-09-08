@@ -1,0 +1,35 @@
+apply plugin: "com.android.library"
+apply plugin: "org.jetbrains.kotlin.android"
+apply plugin: "com.squareup.anvil"
+
+archivesBaseName = "logger-impl-wiring"
+
+android {
+  compileSdkVersion buildConfig.compileSdk
+
+  defaultConfig {
+    minSdkVersion buildConfig.minSdk
+    targetSdkVersion buildConfig.targetSdk
+  }
+
+  buildFeatures {
+    buildConfig false
+  }
+
+  kotlinOptions {
+    freeCompilerArgs += "-Xexplicit-api=strict"
+  }
+}
+
+dependencies {
+  api projects.logger.public
+  api projects.logger.impl
+
+  api projects.scope.public
+
+  implementation libs.dagger.runtime
+}
+
+anvil {
+  generateDaggerFactories = true
+}

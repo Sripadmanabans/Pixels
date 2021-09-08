@@ -1,5 +1,5 @@
 apply plugin: "org.jetbrains.kotlin.jvm"
-apply plugin: 'com.squareup.anvil'
+apply plugin: "com.squareup.anvil"
 
 archivesBaseName = "scope-public"
 

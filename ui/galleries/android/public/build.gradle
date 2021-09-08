@@ -1,0 +1,42 @@
+apply plugin: "com.android.library"
+apply plugin: "org.jetbrains.kotlin.android"
+
+archivesBaseName = "ui-galleries-android-public"
+
+android {
+  compileSdkVersion buildConfig.compileSdk
+
+  defaultConfig {
+    minSdkVersion buildConfig.minSdk
+    targetSdkVersion buildConfig.targetSdk
+  }
+
+  buildFeatures {
+    buildConfig false
+    compose true
+  }
+
+  composeOptions {
+    kotlinCompilerExtensionVersion libs.versions.compose.get()
+  }
+
+  kotlinOptions {
+    freeCompilerArgs += "-Xexplicit-api=strict"
+  }
+}
+
+kotlin {
+  sourceSets.all {
+    languageSettings {
+      optIn("com.squareup.workflow1.ui.WorkflowUiExperimentalApi")
+    }
+  }
+}
+
+dependencies {
+  api projects.ui.galleries.common.public
+
+  api libs.compose.runtime.runtime
+
+  api libs.workflow.ui.compose.core
+}

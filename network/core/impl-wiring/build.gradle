@@ -28,7 +28,6 @@ dependencies {
   api libs.okhttp.client
   api libs.moshi.client
   api libs.okhttp.loggingInterceptor
-  api libs.retrofit.client
 
   implementation libs.byteUnits
   implementation libs.dagger.runtime

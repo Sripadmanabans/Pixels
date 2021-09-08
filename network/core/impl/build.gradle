@@ -11,7 +11,7 @@ android {
     minSdkVersion buildConfig.minSdk
     targetSdkVersion buildConfig.targetSdk
 
-    buildConfigField 'String', 'PIXELS_CLIENT_ID', "\"${propOrEmpty('PIXELS_CLIENT_ID')}\""
+    buildConfigField "String", "PIXELS_CLIENT_ID", "\"${propOrEmpty("PIXELS_CLIENT_ID")}\""
   }
 
   buildFeatures {
@@ -30,7 +30,6 @@ dependencies {
 
   implementation libs.moshi.client
   implementation libs.okhttp.client
-  implementation libs.retrofit.client
 
   implementation libs.dagger.runtime
 }
