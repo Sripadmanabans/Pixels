@@ -2,13 +2,13 @@ apply plugin: "org.jetbrains.kotlin.jvm"
 
 archivesBaseName = "network-core-public"
 
-kotlin {
-  explicitApi()
-}
-
 dependencies {
   api libs.retrofit.client
 
   implementation libs.dagger.runtime
   implementation libs.kotlin.coroutines.core
+}
+
+kotlin {
+  explicitApi()
 }

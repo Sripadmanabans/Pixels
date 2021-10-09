@@ -1,16 +1,25 @@
-apply plugin: "org.jetbrains.kotlin.jvm"
+apply plugin: "com.android.library"
+apply plugin: "org.jetbrains.kotlin.android"
 
-archivesBaseName = "ui-galleries-common-impl-wiring"
+android {
+  buildFeatures {
+    buildConfig false
+    resValues false
+  }
 
-kotlin {
-  explicitApi()
+  compileSdkVersion buildConfig.compileSdk
 
-  sourceSets.all {
-    languageSettings {
-      optIn("com.squareup.workflow1.ui.WorkflowUiExperimentalApi")
-    }
+  defaultConfig {
+    minSdkVersion buildConfig.minSdk
+    targetSdkVersion buildConfig.targetSdk
+  }
+
+  kotlinOptions {
+    freeCompilerArgs += "-Xexplicit-api=strict"
   }
 }
+
+archivesBaseName = "ui-galleries-common-impl-wiring"
 
 dependencies {
   api projects.ui.galleries.common.public

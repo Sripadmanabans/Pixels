@@ -2,6 +2,11 @@ apply plugin: "org.jetbrains.kotlin.jvm"
 
 archivesBaseName = "database-session-public"
 
+dependencies {
+  implementation libs.kotlin.coroutines.core
+  implementation libs.kotlin.time
+}
+
 kotlin {
   explicitApi()
 
@@ -10,9 +15,4 @@ kotlin {
       optIn("kotlin.time.ExperimentalTime")
     }
   }
-}
-
-dependencies {
-  implementation libs.kotlin.coroutines.core
-  implementation libs.kotlin.time
 }

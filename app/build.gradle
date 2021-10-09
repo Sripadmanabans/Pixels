@@ -5,7 +5,32 @@ apply plugin: "com.squareup.sqldelight"
 apply plugin: "com.squareup.anvil"
 
 android {
+  buildFeatures {
+    compose true
+  }
+
+  buildTypes {
+    debug {
+      applicationIdSuffix ".debug"
+      signingConfig signingConfigs.debug
+    }
+    release {
+      if (file("keystore/upload.keystore").exists()) {
+        signingConfig signingConfigs.upload
+      } else {
+        signingConfig signingConfigs.debug
+      }
+
+      minifyEnabled true
+      shrinkResources true
+    }
+  }
+
   compileSdkVersion buildConfig.compileSdk
+
+  composeOptions {
+    kotlinCompilerExtensionVersion libs.versions.compose.get()
+  }
 
   defaultConfig {
     minSdkVersion buildConfig.minSdk
@@ -19,6 +44,13 @@ android {
     // "pm clear" command after each test invocation. This command ensures
     // that the app's state is completely cleared between tests.
     testInstrumentationRunnerArguments clearPackageData: "true"
+  }
+
+  packagingOptions {
+    resources {
+      exclude "META-INF/AL2.0"
+      exclude "META-INF/LGPL2.1"
+    }
   }
 
   signingConfigs {
@@ -39,50 +71,9 @@ android {
     }
   }
 
-  buildTypes {
-    debug {
-      applicationIdSuffix ".debug"
-      signingConfig signingConfigs.debug
-    }
-    release {
-      if (file("keystore/upload.keystore").exists()) {
-        signingConfig signingConfigs.upload
-      } else {
-        signingConfig signingConfigs.debug
-      }
-
-      minifyEnabled true
-      shrinkResources true
-    }
-  }
-
-  buildFeatures {
-    compose true
-  }
-
-  composeOptions {
-    kotlinCompilerExtensionVersion libs.versions.compose.get()
-  }
-
-  packagingOptions {
-    resources {
-      exclude "META-INF/AL2.0"
-      exclude "META-INF/LGPL2.1"
-    }
-  }
-
   testOptions {
     animationsDisabled true
     execution "ANDROIDX_TEST_ORCHESTRATOR"
-  }
-}
-
-kotlin {
-  sourceSets.all {
-    languageSettings {
-      optIn("kotlin.time.ExperimentalTime")
-      optIn("com.squareup.workflow1.ui.WorkflowUiExperimentalApi")
-    }
   }
 }
 
@@ -135,8 +126,8 @@ dependencies {
 
   debugImplementation libs.leakCanary
 
-  testImplementation libs.junit.jupiter.runtime
-  testRuntimeOnly libs.junit.jupiter.engine
+  testImplementation libs.junit5.jupiter.api
+  testRuntimeOnly libs.junit5.jupiter.runtime
   testImplementation libs.truth
 
   androidTestImplementation libs.compose.ui.test.core
@@ -145,9 +136,22 @@ dependencies {
   androidTestImplementation libs.androidx.test.espresso.core
   androidTestImplementation libs.androidx.test.junit
   androidTestImplementation libs.androidx.test.rules
-  androidTestImplementation libs.androidx.test.runner
+  androidTestRuntimeOnly libs.androidx.test.runner
 
   androidTestUtil libs.androidx.test.orchestrator
+}
+
+kapt {
+  correctErrorTypes true
+}
+
+kotlin {
+  sourceSets.all {
+    languageSettings {
+      optIn("kotlin.time.ExperimentalTime")
+      optIn("com.squareup.workflow1.ui.WorkflowUiExperimentalApi")
+    }
+  }
 }
 
 sqldelight {
@@ -157,8 +161,4 @@ sqldelight {
     schemaOutputDirectory = file("build/database")
     dependency project(":database:session:impl")
   }
-}
-
-kapt {
-  correctErrorTypes true
 }

@@ -14,9 +14,14 @@ import kotlin.time.Duration
 public class FakeGalleryRepository : GalleryRepository {
 
   private var exceptionType = ExceptionType.None
+  private var galleryList: List<Gallery> = emptyList()
 
   public fun setExceptionType(type: ExceptionType) {
     exceptionType = type
+  }
+
+  public fun setGalleryList(galleries: List<Gallery>) {
+    galleryList = galleries
   }
 
   override fun getGallery(
@@ -30,7 +35,7 @@ public class FakeGalleryRepository : GalleryRepository {
       when (exceptionType) {
         ExceptionType.IO -> throw IOException("IO Exception")
         ExceptionType.Runtime -> throw TestRuntimeException("Runtime exception")
-        ExceptionType.None -> emit(emptyList())
+        ExceptionType.None -> emit(galleryList)
       }
     }
   }

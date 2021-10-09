@@ -1,10 +1,19 @@
 apply plugin: "com.android.library"
+apply plugin: "de.mannodermaus.android-junit5"
 apply plugin: "org.jetbrains.kotlin.android"
 
-archivesBaseName = "theme-public"
-
 android {
+  buildFeatures {
+    buildConfig false
+    compose true
+    resValues false
+  }
+
   compileSdkVersion buildConfig.compileSdk
+
+  composeOptions {
+    kotlinCompilerExtensionVersion libs.versions.compose.get()
+  }
 
   defaultConfig {
     minSdkVersion buildConfig.minSdk
@@ -15,16 +24,9 @@ android {
     // The following argument makes the Android Test Orchestrator run its
     // "pm clear" command after each test invocation. This command ensures
     // that the app's state is completely cleared between tests.
-    testInstrumentationRunnerArguments clearPackageData: 'true'
-  }
-
-  buildFeatures {
-    buildConfig false
-    compose true
-  }
-
-  composeOptions {
-    kotlinCompilerExtensionVersion libs.versions.compose.get()
+    testInstrumentationRunnerArguments clearPackageData: "true"
+    // Connect JUnit 5 to the runner
+    testInstrumentationRunnerArguments runnerBuilder: "de.mannodermaus.junit5.AndroidJUnit5Builder"
   }
 
   kotlinOptions {
@@ -44,6 +46,8 @@ android {
   }
 }
 
+archivesBaseName = "theme-public"
+
 dependencies {
   implementation libs.compose.foundation.foundation
 
@@ -60,9 +64,14 @@ dependencies {
   androidTestImplementation libs.compose.ui.test.manifest
 
   androidTestImplementation libs.androidx.test.espresso.core
-  androidTestImplementation libs.androidx.test.junit
-  androidTestImplementation libs.androidx.test.rules
-  androidTestImplementation libs.androidx.test.runner
+  androidTestRuntimeOnly libs.androidx.test.runner
+
+  androidTestImplementation libs.junit5.android.compose
+  androidTestImplementation libs.junit5.android.core
+  androidTestRuntimeOnly libs.junit5.android.runner
+
+  androidTestImplementation libs.junit5.jupiter.api
+  androidTestRuntimeOnly libs.junit5.jupiter.runtime
 
   androidTestUtil libs.androidx.test.orchestrator
 }

@@ -1,18 +1,43 @@
-apply plugin: "org.jetbrains.kotlin.jvm"
+apply plugin: "com.android.library"
+apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.squareup.anvil"
 
-archivesBaseName = "ui-galleries-common-impl"
+android {
+  buildFeatures {
+    buildConfig false
+    compose true
+    resValues false
+  }
 
-kotlin {
-  explicitApi()
+  compileSdkVersion buildConfig.compileSdk
 
-  sourceSets.all {
-    languageSettings {
-      optIn("com.squareup.workflow1.ui.WorkflowUiExperimentalApi")
-      optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
+  composeOptions {
+    kotlinCompilerExtensionVersion libs.versions.compose.get()
+  }
+
+  defaultConfig {
+    minSdkVersion buildConfig.minSdk
+    targetSdkVersion buildConfig.targetSdk
+  }
+
+  kotlinOptions {
+    freeCompilerArgs += "-Xexplicit-api=strict"
+  }
+
+  testOptions {
+    unitTests {
+      all {
+        useJUnitPlatform()
+      }
     }
   }
 }
+
+anvil {
+  generateDaggerFactories = true
+}
+
+archivesBaseName = "ui-galleries-common-impl"
 
 dependencies {
   api projects.ui.galleries.common.public
@@ -25,20 +50,21 @@ dependencies {
   implementation libs.workflow.ui.core.common
 
   testImplementation projects.network.gallery.fake
+  testImplementation projects.testing
 
   testImplementation libs.kotlin.coroutines.test
   testImplementation libs.workflow.test
 
-  testImplementation libs.junit.jupiter.runtime
-  testRuntimeOnly libs.junit.jupiter.engine
+  testImplementation libs.junit5.jupiter.api
+  testRuntimeOnly libs.junit5.jupiter.runtime
   testImplementation libs.truth
-  testImplementation projects.testing
 }
 
-anvil {
-  generateDaggerFactories = true
-}
-
-test {
-  useJUnitPlatform()
+kotlin {
+  sourceSets.all {
+    languageSettings {
+      optIn("com.squareup.workflow1.ui.WorkflowUiExperimentalApi")
+      optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
+    }
+  }
 }

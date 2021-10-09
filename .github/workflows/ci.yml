@@ -6,6 +6,10 @@ on:
       - develop
   pull_request:
 
+concurrency:
+  group: ${{ github.head_ref }}
+  cancel-in-progress: true
+
 env:
   GRADLE_HOME: ${{ github.workspace }}/gradle-home
   ORG_GRADLE_PROJECT_PIXELS_KEY_ALIAS: ${{ secrets.ORG_GRADLE_PROJECT_PIXELS_KEY_ALIAS }}
@@ -150,13 +154,13 @@ jobs:
       - name: Instrumentation Tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
+          profile: Galaxy Nexus
           api-level: ${{ matrix.api-level }}
           target: ${{ matrix.target }}
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           arch: x86_64
-          # Make sure to have android test in all android libraries or connectedCheck will fail.
           script: ./gradlew connectedCheck --build-cache --no-daemon --stacktrace --gradle-user-home "$GRADLE_HOME" -Dorg.gradle.unsafe.configuration-cache=false
       - name: Upload results
         uses: actions/upload-artifact@v2
