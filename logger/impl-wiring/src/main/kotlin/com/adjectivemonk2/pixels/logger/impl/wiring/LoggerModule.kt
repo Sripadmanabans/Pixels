@@ -6,6 +6,7 @@ import com.squareup.anvil.annotations.ContributesTo
 import com.squareup.workflow1.WorkflowInterceptor
 import dagger.Module
 import dagger.Provides
+import logcat.AndroidLogcatLogger
 
 @ContributesTo(AppScope::class)
 @Module
@@ -16,4 +17,6 @@ public class LoggerModule {
   ): List<WorkflowInterceptor> {
     return listOf(loggingWorkflowInterceptor)
   }
+
+  @Provides public fun androidLogcatLogger(): AndroidLogcatLogger = AndroidLogcatLogger()
 }

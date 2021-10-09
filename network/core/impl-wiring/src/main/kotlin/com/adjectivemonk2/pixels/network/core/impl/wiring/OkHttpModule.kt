@@ -8,10 +8,10 @@ import com.jakewharton.byteunits.BinaryByteUnit
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
+import logcat.logcat
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import timber.log.Timber
 import java.io.File
 
 @Module
@@ -19,7 +19,7 @@ import java.io.File
 public object OkHttpModule {
 
   @Provides @SingleIn(AppScope::class) public fun cacheDir(application: Application): File {
-    return File(application.cacheDir, "http")
+    return File(application.cacheDir, HTTP)
   }
 
   @Provides public fun cache(cacheDir: File): Cache {
@@ -27,7 +27,7 @@ public object OkHttpModule {
   }
 
   @Provides public fun loggingInterceptor(): HttpLoggingInterceptor {
-    return HttpLoggingInterceptor { Timber.tag("http").d(it) }
+    return HttpLoggingInterceptor { logcat(HTTP) { it } }
       .apply { level = HttpLoggingInterceptor.Level.BASIC }
   }
 
@@ -45,4 +45,5 @@ public object OkHttpModule {
   }
 
   private const val CACHE_SIZE_MB = 10L
+  private const val HTTP = "http"
 }

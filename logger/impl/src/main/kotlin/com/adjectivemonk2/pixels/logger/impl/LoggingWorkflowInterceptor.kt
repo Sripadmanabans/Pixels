@@ -1,16 +1,22 @@
 package com.adjectivemonk2.pixels.logger.impl
 
 import com.squareup.workflow1.SimpleLoggingWorkflowInterceptor
-import timber.log.Timber
+import logcat.LogPriority.ERROR
+import logcat.LogPriority.VERBOSE
+import logcat.logcat
 import javax.inject.Inject
 
 public class LoggingWorkflowInterceptor @Inject constructor() : SimpleLoggingWorkflowInterceptor() {
 
   public override fun log(text: String) {
-    Timber.tag("Workflow").v(text)
+    logcat(tag = TAG, priority = VERBOSE) { text }
   }
 
   public override fun logError(text: String) {
-    Timber.tag("Workflow").e(text)
+    logcat(tag = TAG, priority = ERROR) { text }
+  }
+
+  private companion object {
+    private const val TAG = "Workflow"
   }
 }
