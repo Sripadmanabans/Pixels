@@ -3,10 +3,10 @@ apply plugin: "com.squareup.anvil"
 
 archivesBaseName = "scope-public"
 
-kotlin {
-  explicitApi()
-}
-
 dependencies {
   implementation libs.dagger.runtime
+}
+
+kotlin {
+  explicitApi()
 }

@@ -3,13 +3,13 @@ apply plugin: "com.google.devtools.ksp"
 
 archivesBaseName = "model-core-public"
 
-kotlin {
-  explicitApi()
-}
-
 dependencies {
   implementation libs.kotlin.stdlib.common
 
   implementation libs.moshi.client
   ksp libs.moshix.ksp
+}
+
+kotlin {
+  explicitApi()
 }

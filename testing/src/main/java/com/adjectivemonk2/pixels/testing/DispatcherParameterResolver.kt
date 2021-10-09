@@ -26,17 +26,14 @@ public class DispatcherParameterResolver :
     parameterContext: ParameterContext?,
     extensionContext: ExtensionContext?
   ): Any {
-    println("ResolveParameter: ${dispatcher!!.hashCode()}")
     return dispatcher!!
   }
 
   override fun beforeEach(context: ExtensionContext?) {
     dispatcher = TestCoroutineDispatcher()
-    println("beforeEach: ${dispatcher!!.hashCode()}")
   }
 
   override fun afterEach(context: ExtensionContext?) {
-    println("afterEach: ${dispatcher!!.hashCode()}")
     dispatcher!!.cancel()
     dispatcher = null
   }

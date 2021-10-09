@@ -2,18 +2,11 @@ apply plugin: "org.jetbrains.kotlin.jvm"
 apply plugin: "com.squareup.sqldelight"
 apply plugin: "com.squareup.anvil"
 
-archivesBaseName = "database-session-impl"
-
-kotlin {
-  explicitApi()
-
-  sourceSets.all {
-    languageSettings {
-      optIn("kotlin.time.ExperimentalTime")
-      optIn("kotlinx.coroutines.FlowPreview")
-    }
-  }
+anvil {
+  generateDaggerFactories = true
 }
+
+archivesBaseName = "database-session-impl"
 
 dependencies {
   api projects.database.session.public
@@ -28,14 +21,21 @@ dependencies {
   implementation libs.sqlDelight.coroutines
 }
 
+kotlin {
+  explicitApi()
+
+  sourceSets.all {
+    languageSettings {
+      optIn("kotlin.time.ExperimentalTime")
+      optIn("kotlinx.coroutines.FlowPreview")
+    }
+  }
+}
+
 sqldelight {
   PixelsDb {
     packageName = "com.adjectivemonk2.pixels.database.session"
     sourceFolders = ["database"]
     schemaOutputDirectory = file("build/database")
   }
-}
-
-anvil {
-  generateDaggerFactories = true
 }

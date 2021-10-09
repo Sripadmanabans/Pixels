@@ -2,23 +2,22 @@ apply plugin: "com.android.library"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.squareup.anvil"
 
-archivesBaseName = "ui-galleries-android-impl-wiring"
-
 android {
+  buildFeatures {
+    buildConfig false
+    compose true
+    resValues false
+  }
+
   compileSdkVersion buildConfig.compileSdk
+
+  composeOptions {
+    kotlinCompilerExtensionVersion libs.versions.compose.get()
+  }
 
   defaultConfig {
     minSdkVersion buildConfig.minSdk
     targetSdkVersion buildConfig.targetSdk
-  }
-
-  buildFeatures {
-    buildConfig false
-    compose true
-  }
-
-  composeOptions {
-    kotlinCompilerExtensionVersion libs.versions.compose.get()
   }
 
   kotlinOptions {
@@ -26,13 +25,11 @@ android {
   }
 }
 
-kotlin {
-  sourceSets.all {
-    languageSettings {
-      optIn("com.squareup.workflow1.ui.WorkflowUiExperimentalApi")
-    }
-  }
+anvil {
+  generateDaggerFactories = true
 }
+
+archivesBaseName = "ui-galleries-android-impl-wiring"
 
 dependencies {
   api projects.ui.galleries.android.public
@@ -45,6 +42,10 @@ dependencies {
   implementation libs.workflow.ui.core.android
 }
 
-anvil {
-  generateDaggerFactories = true
+kotlin {
+  sourceSets.all {
+    languageSettings {
+      optIn("com.squareup.workflow1.ui.WorkflowUiExperimentalApi")
+    }
+  }
 }

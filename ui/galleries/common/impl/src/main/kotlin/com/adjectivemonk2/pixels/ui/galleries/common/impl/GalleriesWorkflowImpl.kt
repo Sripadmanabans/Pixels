@@ -6,6 +6,7 @@ import com.adjectivemonk2.pixels.network.gallery.GalleryRepository
 import com.adjectivemonk2.pixels.scope.ActivityScope
 import com.adjectivemonk2.pixels.ui.galleries.common.GalleriesScreen
 import com.adjectivemonk2.pixels.ui.galleries.common.GalleriesWorkflow
+import com.adjectivemonk2.pixels.ui.galleries.common.GalleryConverter
 import com.squareup.anvil.annotations.ContributesBinding
 import com.squareup.workflow1.Snapshot
 import com.squareup.workflow1.StatefulWorkflow
@@ -21,9 +22,8 @@ import javax.inject.Inject
 )
 public class GalleriesWorkflowImpl @Inject constructor(
   private val repository: GalleryRepository,
-) :
-  GalleriesWorkflow,
-  StatefulWorkflow<Unit, GalleriesState, Unit, GalleriesScreen>() {
+  private val galleryConverter: GalleryConverter,
+) : GalleriesWorkflow, StatefulWorkflow<Unit, GalleriesState, Unit, GalleriesScreen>() {
 
   override fun initialState(props: Unit, snapshot: Snapshot?): GalleriesState {
     return GalleriesState.Loading
@@ -35,7 +35,15 @@ public class GalleriesWorkflowImpl @Inject constructor(
     context: RenderContext
   ): GalleriesScreen {
     return when (renderState) {
-      is GalleriesState.Data -> GalleriesScreen.Info(renderState.data)
+      is GalleriesState.Data -> {
+        val galleries = renderState.data
+        val galleryItems = galleries.mapNotNull { galleryConverter.toGalleryListItem(it) }
+        if (galleryItems.isNotEmpty()) {
+          GalleriesScreen.Info(galleryItems)
+        } else {
+          GalleriesScreen.Empty
+        }
+      }
       is GalleriesState.Error -> GalleriesScreen.Error(renderState.throwable?.message ?: "Error")
       GalleriesState.Loading -> {
         val gallery = repository.getGallery()

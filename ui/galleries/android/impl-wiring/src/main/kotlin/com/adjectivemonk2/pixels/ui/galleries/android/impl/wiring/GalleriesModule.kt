@@ -1,6 +1,7 @@
 package com.adjectivemonk2.pixels.ui.galleries.android.impl.wiring
 
 import com.adjectivemonk2.pixels.scope.ActivityScope
+import com.adjectivemonk2.pixels.ui.galleries.android.GalleriesEmptyViewFactory
 import com.adjectivemonk2.pixels.ui.galleries.android.GalleriesErrorViewFactory
 import com.adjectivemonk2.pixels.ui.galleries.android.GalleriesInfoViewFactory
 import com.adjectivemonk2.pixels.ui.galleries.android.GalleriesLoadingViewFactory
@@ -17,8 +18,9 @@ public object GalleriesModule {
   @Provides @IntoSet public fun viewFactories(
     loading: GalleriesLoadingViewFactory,
     success: GalleriesInfoViewFactory,
+    empty: GalleriesEmptyViewFactory,
     error: GalleriesErrorViewFactory,
   ): ViewRegistry {
-    return ViewRegistry(loading, success, error)
+    return ViewRegistry(loading, success, empty, error)
   }
 }

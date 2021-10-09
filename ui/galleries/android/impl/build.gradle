@@ -1,43 +1,59 @@
 apply plugin: "com.android.library"
+apply plugin: "de.mannodermaus.android-junit5"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.squareup.anvil"
 
-archivesBaseName = "ui-galleries-android-impl"
-
 android {
-  compileSdkVersion buildConfig.compileSdk
-
-  defaultConfig {
-    minSdkVersion buildConfig.minSdk
-    targetSdkVersion buildConfig.targetSdk
-  }
-
   buildFeatures {
     buildConfig false
     compose true
   }
 
+  compileSdkVersion buildConfig.compileSdk
+
   composeOptions {
     kotlinCompilerExtensionVersion libs.versions.compose.get()
+  }
+
+  defaultConfig {
+    minSdkVersion buildConfig.minSdk
+    targetSdkVersion buildConfig.targetSdk
+
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    // The following argument makes the Android Test Orchestrator run its
+    // "pm clear" command after each test invocation. This command ensures
+    // that the app's state is completely cleared between tests.
+    testInstrumentationRunnerArguments clearPackageData: "true"
+    // Connect JUnit 5 to the runner
+    testInstrumentationRunnerArguments runnerBuilder: "de.mannodermaus.junit5.AndroidJUnit5Builder"
   }
 
   kotlinOptions {
     freeCompilerArgs += "-Xexplicit-api=strict"
   }
-}
 
-kotlin {
-  sourceSets.all {
-    languageSettings {
-      optIn("com.squareup.workflow1.ui.WorkflowUiExperimentalApi")
+  packagingOptions {
+    resources {
+      exclude "META-INF/AL2.0"
+      exclude "META-INF/LGPL2.1"
     }
   }
 }
+
+anvil {
+  generateDaggerFactories = true
+}
+
+archivesBaseName = "ui-galleries-android-impl"
 
 dependencies {
   api projects.ui.galleries.android.public
 
   implementation projects.scope.public
+  implementation projects.theme.public
+
+  implementation libs.coil.compose
 
   implementation libs.compose.material.material
   implementation libs.compose.ui.ui
@@ -49,8 +65,30 @@ dependencies {
 
   // Need to make compose tooling to work ¯\_(ツ)_/¯
   implementation libs.androidx.lifecycle.viewmodel.savedstate
+
+  androidTestImplementation libs.compose.ui.test.core
+  androidTestImplementation libs.compose.ui.test.junit
+  androidTestImplementation libs.compose.ui.test.manifest
+
+  androidTestImplementation libs.androidx.test.espresso.core
+  androidTestRuntimeOnly libs.androidx.test.runner
+
+  androidTestImplementation libs.junit5.android.compose
+  androidTestImplementation libs.junit5.android.core
+  androidTestRuntimeOnly libs.junit5.android.runner
+
+  androidTestImplementation libs.junit5.jupiter.api
+  androidTestRuntimeOnly libs.junit5.jupiter.runtime
+
+  androidTestUtil libs.androidx.test.orchestrator
 }
 
-anvil {
-  generateDaggerFactories = true
+kotlin {
+  sourceSets.all {
+    languageSettings {
+      optIn("com.squareup.workflow1.ui.WorkflowUiExperimentalApi")
+      optIn("coil.annotation.ExperimentalCoilApi")
+      optIn("kotlin.time.ExperimentalTime")
+    }
+  }
 }

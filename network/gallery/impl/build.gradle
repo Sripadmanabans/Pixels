@@ -1,11 +1,11 @@
 apply plugin: "org.jetbrains.kotlin.jvm"
 apply plugin: "com.squareup.anvil"
 
-archivesBaseName = "network-gallery-impl"
-
-kotlin {
-  explicitApi()
+anvil {
+  generateDaggerFactories = true
 }
+
+archivesBaseName = "network-gallery-impl"
 
 dependencies {
   api projects.network.gallery.public
@@ -17,6 +17,6 @@ dependencies {
   implementation libs.dagger.runtime
 }
 
-anvil {
-  generateDaggerFactories = true
+kotlin {
+  explicitApi()
 }

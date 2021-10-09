@@ -2,14 +2,14 @@ apply plugin: "org.jetbrains.kotlin.jvm"
 
 archivesBaseName = "network-gallery-public"
 
-kotlin {
-  explicitApi()
-}
-
 dependencies {
   api projects.model.core.public
   api projects.model.gallery.public
   api projects.network.core.public
 
   implementation libs.kotlin.coroutines.core
+}
+
+kotlin {
+  explicitApi()
 }

@@ -2,9 +2,12 @@ apply plugin: "com.android.library"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.squareup.anvil"
 
-archivesBaseName = "network-gallery-impl-wiring"
-
 android {
+  buildFeatures {
+    buildConfig false
+    resValues false
+  }
+
   compileSdkVersion buildConfig.compileSdk
 
   defaultConfig {
@@ -12,14 +15,16 @@ android {
     targetSdkVersion buildConfig.targetSdk
   }
 
-  buildFeatures {
-    buildConfig false
-  }
-
   kotlinOptions {
     freeCompilerArgs += "-Xexplicit-api=strict"
   }
 }
+
+anvil {
+  generateDaggerFactories = true
+}
+
+archivesBaseName = "network-gallery-impl-wiring"
 
 dependencies {
   api projects.network.gallery.public
@@ -30,8 +35,4 @@ dependencies {
   implementation libs.retrofit.client
 
   implementation libs.dagger.runtime
-}
-
-anvil {
-  generateDaggerFactories = true
 }

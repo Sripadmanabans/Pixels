@@ -2,9 +2,12 @@ apply plugin: "com.android.library"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.squareup.anvil"
 
-archivesBaseName = "network-core-impl"
-
 android {
+  buildFeatures {
+    buildConfig true
+    resValues false
+  }
+
   compileSdkVersion buildConfig.compileSdk
 
   defaultConfig {
@@ -14,14 +17,16 @@ android {
     buildConfigField "String", "PIXELS_CLIENT_ID", "\"${propOrEmpty("PIXELS_CLIENT_ID")}\""
   }
 
-  buildFeatures {
-    buildConfig true
-  }
-
   kotlinOptions {
     freeCompilerArgs += "-Xexplicit-api=strict"
   }
 }
+
+anvil {
+  generateDaggerFactories = true
+}
+
+archivesBaseName = "network-core-impl"
 
 dependencies {
   api projects.network.core.public
@@ -32,8 +37,4 @@ dependencies {
   implementation libs.okhttp.client
 
   implementation libs.dagger.runtime
-}
-
-anvil {
-  generateDaggerFactories = true
 }

@@ -2,9 +2,12 @@ apply plugin: "com.android.library"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.squareup.anvil"
 
-archivesBaseName = "network-core-impl-wiring"
-
 android {
+  buildFeatures {
+    buildConfig false
+    resValues false
+  }
+
   compileSdkVersion buildConfig.compileSdk
 
   defaultConfig {
@@ -12,14 +15,16 @@ android {
     targetSdkVersion buildConfig.targetSdk
   }
 
-  buildFeatures {
-    buildConfig false
-  }
-
   kotlinOptions {
     freeCompilerArgs += "-Xexplicit-api=strict"
   }
 }
+
+anvil {
+  generateDaggerFactories = true
+}
+
+archivesBaseName = "network-core-impl-wiring"
 
 dependencies {
   api projects.network.core.public
@@ -34,11 +39,7 @@ dependencies {
   implementation libs.retrofit.converter
   implementation libs.timber
 
-  testImplementation libs.junit.jupiter.runtime
-  testRuntimeOnly libs.junit.jupiter.engine
+  testImplementation libs.junit5.jupiter.api
+  testRuntimeOnly libs.junit5.jupiter.runtime
   testImplementation libs.truth
-}
-
-anvil {
-  generateDaggerFactories = true
 }

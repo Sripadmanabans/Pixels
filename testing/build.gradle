@@ -2,6 +2,13 @@ apply plugin: "org.jetbrains.kotlin.jvm"
 
 archivesBaseName = "testing"
 
+dependencies {
+  implementation libs.kotlin.coroutines.test
+
+  implementation libs.junit5.jupiter.api
+  runtimeOnly libs.junit5.jupiter.runtime
+}
+
 kotlin {
   explicitApi()
 
@@ -10,13 +17,6 @@ kotlin {
       optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
     }
   }
-}
-
-dependencies {
-  implementation libs.kotlin.coroutines.test
-
-  implementation libs.junit.jupiter.runtime
-  runtimeOnly libs.junit.jupiter.engine
 }
 
 test {

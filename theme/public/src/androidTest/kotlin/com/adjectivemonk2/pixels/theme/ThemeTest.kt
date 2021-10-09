@@ -1,40 +1,31 @@
 package com.adjectivemonk2.pixels.theme
 
-import androidx.activity.ComponentActivity
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithText
-import androidx.test.ext.junit.runners.AndroidJUnit4
+import de.mannodermaus.junit5.compose.createComposeExtension
 import kotlinx.coroutines.flow.MutableStateFlow
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.RegisterExtension
 
-@RunWith(AndroidJUnit4::class)
 internal class ThemeTest {
 
-  @Rule @JvmField val composeRule = createAndroidComposeRule<ComponentActivity>()
+  @JvmField @RegisterExtension val extension = createComposeExtension()
 
-  @Test fun testTheme() {
+  @Test @DisplayName("Testing theme change does not affect text") fun testTheme() {
     val themeIsDark = MutableStateFlow(false)
-    composeRule.setContent {
+    extension.setContent {
       PixelsTheme(
         isDarkTheme = themeIsDark.collectAsState().value
       ) {
-        TestCompose()
+        Text(text = "Android")
       }
     }
 
-    composeRule.onNodeWithText("Android").assertIsDisplayed()
+    extension.onNodeWithText("Android").assertIsDisplayed()
     themeIsDark.value = true
-    composeRule.onNodeWithText("Android").assertIsDisplayed()
-  }
-
-  @Suppress("TestFunctionName")
-  @Composable fun TestCompose() {
-    Text(text = "Android")
+    extension.onNodeWithText("Android").assertIsDisplayed()
   }
 }

@@ -3,15 +3,15 @@ apply plugin: "com.google.devtools.ksp"
 
 archivesBaseName = "model-gallery-public"
 
-kotlin {
-  explicitApi()
-}
-
 dependencies {
   implementation libs.kotlin.stdlib.common
 
   implementation libs.moshi.adapters
   implementation libs.moshix.sealed.runtime
-  ksp libs.moshix.sealed.ksp
+  ksp libs.moshix.sealed.codegen
   ksp libs.moshix.ksp
+}
+
+kotlin {
+  explicitApi()
 }
