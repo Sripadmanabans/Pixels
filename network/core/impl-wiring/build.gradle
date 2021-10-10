@@ -36,8 +36,8 @@ dependencies {
 
   implementation libs.byteUnits
   implementation libs.dagger.runtime
+  implementation libs.logcat
   implementation libs.retrofit.converter
-  implementation libs.timber
 
   testImplementation libs.junit5.jupiter.api
   testRuntimeOnly libs.junit5.jupiter.runtime

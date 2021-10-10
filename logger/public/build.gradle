@@ -22,6 +22,6 @@ android {
 archivesBaseName = "logger-public"
 
 dependencies {
-  api libs.timber
+  api libs.logcat
   api libs.workflow.runtime
 }

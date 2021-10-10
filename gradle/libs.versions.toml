@@ -39,7 +39,7 @@ workflow = "1.0.0"
 
 # Helper Components
 byteUnits = "0.9.1"
-timber = "5.0.1"
+logcat = "0.1"
 
 # Testing Components
 androidxJunit = "1.1.4-alpha03"
@@ -135,6 +135,8 @@ kotlin-time = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref =
 
 leakCanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakCanary" }
 
+logcat = { module = "com.squareup.logcat:logcat", version.ref = "logcat" }
+
 lottie = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie" }
 
 moshi-adapters = { module = "com.squareup.moshi:moshi-adapters", version.ref = "moshi" }
@@ -157,8 +159,6 @@ sqlDelight-coroutines = { module = "com.squareup.sqldelight:coroutines-extension
 sqlDelight-classpath = { module = "com.squareup.sqldelight:gradle-plugin", version.ref = "sqldelight" }
 sqlDelight-jvm = { module = "com.squareup.sqldelight:sqlite-driver", version.ref = "sqldelight" }
 sqlDelight-runtime = { module = "com.squareup.sqldelight:runtime", version.ref = "sqldelight" }
-
-timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 
 truth = { module = "com.google.truth:truth", version.ref = "truth" }
 

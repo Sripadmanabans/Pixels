@@ -3,7 +3,9 @@ package com.adjectivemonk2.pixels
 import android.app.Activity
 import android.app.Application
 import com.adjectivemonk2.pixels.di.AppComponent
-import timber.log.Timber
+import com.adjectivemonk2.pixels.logger.LoggerInitializer
+import logcat.LogcatLogger
+import logcat.logcat
 import javax.inject.Inject
 
 class PixelApplication : Application() {
@@ -12,14 +14,14 @@ class PixelApplication : Application() {
     AppComponent.builder().application(this).build()
   }
 
-  @Inject internal lateinit var tree: Timber.Tree
+  @Inject internal lateinit var logger: LogcatLogger
 
   override fun onCreate() {
     appComponent.injectInTo(this)
     super.onCreate()
-    Timber.plant(tree)
+    LoggerInitializer.installOnDebuggableApp(this, logger)
 
-    Timber.v("onCreate")
+    logcat { "onCreate" }
   }
 }
 
