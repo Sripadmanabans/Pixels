@@ -6,7 +6,6 @@ import com.adjectivemonk2.pixels.network.gallery.GalleryRepository
 import com.adjectivemonk2.pixels.scope.ActivityScope
 import com.adjectivemonk2.pixels.ui.galleries.common.GalleriesScreen
 import com.adjectivemonk2.pixels.ui.galleries.common.GalleriesWorkflow
-import com.adjectivemonk2.pixels.ui.galleries.common.GalleryConverter
 import com.squareup.anvil.annotations.ContributesBinding
 import com.squareup.workflow1.Snapshot
 import com.squareup.workflow1.StatefulWorkflow
@@ -44,7 +43,12 @@ public class GalleriesWorkflowImpl @Inject constructor(
           GalleriesScreen.Empty
         }
       }
-      is GalleriesState.Error -> GalleriesScreen.Error(renderState.throwable?.message ?: "Error")
+      is GalleriesState.Error -> {
+        GalleriesScreen.Error(
+          message = renderState.throwable?.message ?: "Error",
+          onRetryClick = context.eventHandler { state = GalleriesState.Loading },
+        )
+      }
       GalleriesState.Loading -> {
         val gallery = repository.getGallery()
           .map<List<Gallery>, GalleriesState> { GalleriesState.Data(it) }

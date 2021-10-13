@@ -16,7 +16,10 @@ public sealed class GalleriesScreen {
   public object Loading : GalleriesScreen()
 
   @Immutable
-  public data class Error(val message: String) : GalleriesScreen()
+  public data class Error(
+    val message: String,
+    val onRetryClick: () -> Unit = {},
+  ) : GalleriesScreen()
 }
 
 @Immutable

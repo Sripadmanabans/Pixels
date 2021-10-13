@@ -131,7 +131,8 @@ jobs:
           key: gradle-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/*.gradle*') }}-${{ github.sha }}
 
       # Retrieve the cached emulator snapshot.
-      - uses: actions/cache@v2
+      - name: Try and get AVD from cache
+        uses: actions/cache@v2
         id: avd-cache
         with:
           path: |

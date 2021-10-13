@@ -1,4 +1,4 @@
-package com.adjectivemonk2.pixels.ui.galleries.common
+package com.adjectivemonk2.pixels.ui.galleries.common.impl
 
 import com.adjectivemonk2.pixels.model.gallery.Gif
 import com.adjectivemonk2.pixels.model.gallery.Jpeg
@@ -6,6 +6,7 @@ import com.adjectivemonk2.pixels.model.gallery.Media
 import com.adjectivemonk2.pixels.model.gallery.Mp4
 import com.adjectivemonk2.pixels.model.gallery.Png
 import com.adjectivemonk2.pixels.model.gallery.Unknown
+import com.adjectivemonk2.pixels.ui.galleries.common.MediaItem
 import javax.inject.Inject
 
 public class MediaConverter @Inject constructor() {

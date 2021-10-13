@@ -1,10 +1,11 @@
-package com.adjectivemonk2.pixels.ui.galleries.common
+package com.adjectivemonk2.pixels.ui.galleries.common.impl
 
 import com.adjectivemonk2.pixels.model.gallery.Unknown
 import com.adjectivemonk2.pixels.network.gallery.fake.gifMedia
 import com.adjectivemonk2.pixels.network.gallery.fake.jpegMedia
 import com.adjectivemonk2.pixels.network.gallery.fake.mp4Media
 import com.adjectivemonk2.pixels.network.gallery.fake.pngMedia
+import com.adjectivemonk2.pixels.ui.galleries.common.MediaItem
 import com.google.common.truth.Truth.assertThat
 import org.junit.jupiter.api.Test
 
