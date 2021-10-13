@@ -1,4 +1,4 @@
-package com.adjectivemonk2.pixels.ui.galleries.common
+package com.adjectivemonk2.pixels.ui.galleries.common.impl
 
 import javax.inject.Inject
 

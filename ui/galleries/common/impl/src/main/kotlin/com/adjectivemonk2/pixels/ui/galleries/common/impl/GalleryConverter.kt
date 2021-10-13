@@ -1,6 +1,7 @@
-package com.adjectivemonk2.pixels.ui.galleries.common
+package com.adjectivemonk2.pixels.ui.galleries.common.impl
 
 import com.adjectivemonk2.pixels.model.gallery.Gallery
+import com.adjectivemonk2.pixels.ui.galleries.common.GalleryListItem
 import javax.inject.Inject
 
 public class GalleryConverter @Inject constructor(
