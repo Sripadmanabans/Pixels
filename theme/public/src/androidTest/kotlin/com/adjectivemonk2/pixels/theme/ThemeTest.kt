@@ -15,17 +15,19 @@ internal class ThemeTest {
   @JvmField @RegisterExtension val extension = createComposeExtension()
 
   @Test @DisplayName("Testing theme change does not affect text") fun testTheme() {
-    val themeIsDark = MutableStateFlow(false)
-    extension.setContent {
-      PixelsTheme(
-        isDarkTheme = themeIsDark.collectAsState().value
-      ) {
-        Text(text = "Android")
+    extension.runComposeTest {
+      val themeIsDark = MutableStateFlow(false)
+      setContent {
+        PixelsTheme(
+          isDarkTheme = themeIsDark.collectAsState().value
+        ) {
+          Text(text = "Android")
+        }
       }
-    }
 
-    extension.onNodeWithText("Android").assertIsDisplayed()
-    themeIsDark.value = true
-    extension.onNodeWithText("Android").assertIsDisplayed()
+      onNodeWithText("Android").assertIsDisplayed()
+      themeIsDark.value = true
+      onNodeWithText("Android").assertIsDisplayed()
+    }
   }
 }

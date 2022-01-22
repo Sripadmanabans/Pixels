@@ -42,6 +42,7 @@ archivesBaseName = "ui-galleries-common-impl"
 dependencies {
   api projects.ui.galleries.common.public
 
+  implementation projects.dispatcher.public
   implementation projects.network.gallery.public
   implementation projects.scope.public
 

@@ -37,8 +37,8 @@ buildscript {
 }
 
 plugins {
-  id "com.github.ben-manes.versions" version "0.39.0"
-  id "com.google.devtools.ksp" version "1.5.31-1.0.0"
+  id "com.github.ben-manes.versions" version "0.41.0"
+  id "com.google.devtools.ksp" version "1.6.10-1.0.2"
 }
 
 allprojects {
@@ -130,7 +130,7 @@ subprojects {
           "continuation_indent_size": "4",
           "insert_final_newline"    : "true",
       ]
-      ktlint("0.42.1").userData(userData)
+      ktlint("0.43.2").userData(userData)
     }
   }
 

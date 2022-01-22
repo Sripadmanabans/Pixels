@@ -1,0 +1,13 @@
+apply plugin: "org.jetbrains.kotlin.jvm"
+
+archivesBaseName = "dispatcher-public"
+
+dependencies {
+  api libs.kotlin.coroutines.core
+
+  implementation libs.dagger.runtime
+}
+
+kotlin {
+  explicitApi()
+}

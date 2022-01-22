@@ -1,0 +1,11 @@
+apply plugin: "org.jetbrains.kotlin.jvm"
+
+archivesBaseName = "dispatcher-impl"
+
+dependencies {
+  implementation projects.dispatcher.public
+}
+
+kotlin {
+  explicitApi()
+}
