@@ -5,15 +5,10 @@ apply plugin: "com.squareup.anvil"
 android {
   buildFeatures {
     buildConfig false
-    compose true
     resValues false
   }
 
   compileSdkVersion buildConfig.compileSdk
-
-  composeOptions {
-    kotlinCompilerExtensionVersion libs.versions.compose.get()
-  }
 
   defaultConfig {
     minSdkVersion buildConfig.minSdk
@@ -29,13 +24,13 @@ anvil {
   generateDaggerFactories = true
 }
 
-archivesBaseName = "ui-galleries-common-public"
+archivesBaseName = "dispatcher-impl-wiring"
 
 dependencies {
-  api projects.model.gallery.public
+  api projects.dispatcher.public
+  api projects.dispatcher.impl
 
-  api libs.compose.runtime.runtime
-  api libs.workflow.core
+  implementation projects.scope.public
 
   implementation libs.dagger.runtime
 }

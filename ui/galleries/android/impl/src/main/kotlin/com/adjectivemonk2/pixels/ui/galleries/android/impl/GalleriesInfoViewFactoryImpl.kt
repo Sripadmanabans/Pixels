@@ -1,22 +1,29 @@
 package com.adjectivemonk2.pixels.ui.galleries.android.impl
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
+import coil.transform.CircleCropTransformation
 import com.adjectivemonk2.pixels.scope.ActivityScope
+import com.adjectivemonk2.pixels.theme.PixelsTheme
 import com.adjectivemonk2.pixels.ui.galleries.android.GalleriesInfoViewFactory
 import com.adjectivemonk2.pixels.ui.galleries.common.GalleriesScreen.Info
 import com.adjectivemonk2.pixels.ui.galleries.common.GalleryListItem
@@ -37,7 +44,10 @@ public class GalleriesInfoViewFactoryImpl @Inject constructor() : GalleriesInfoV
           .animateContentSize(),
       ) {
         LazyColumn {
-          items(items = rendering.galleryListItems) { item ->
+          items(
+            items = rendering.galleryListItems,
+            key = { it.galleryId },
+          ) { item ->
             GalleryItem(galleryListItem = item)
           }
         }
@@ -49,28 +59,31 @@ public class GalleriesInfoViewFactoryImpl @Inject constructor() : GalleriesInfoV
     val painter = if (LocalInspectionMode.current) {
       painterResource(id = R.drawable.error)
     } else {
-      rememberImagePainter(data = galleryListItem.accountImageUrl)
+      rememberAsyncImagePainter(
+        model = ImageRequest.Builder(LocalContext.current)
+          .data(galleryListItem.accountImageUrl)
+          .transformations(CircleCropTransformation())
+          .build(),
+      )
     }
-    Image(
-      painter = painter,
-      contentDescription = stringResource(id = R.string.profile_image),
-      modifier = Modifier.size(48.dp)
-    )
+    Row {
+      Image(
+        painter = painter,
+        contentDescription = stringResource(id = R.string.profile_image),
+        modifier = Modifier.size(48.dp)
+      )
+      Text(text = galleryListItem.userId)
+    }
   }
 }
 
-@Preview(showBackground = true)
-@Composable private fun GalleriesSuccessViewFactoryPreview() {
-  val factory = GalleriesInfoViewFactoryImpl()
-  factory.Preview(Info(emptyList()))
-}
-
-@Preview(showBackground = true)
+@Preview(name = "Gallery Single Item Light Preview")
+@Preview(name = "Gallery Single Item Dark Preview", uiMode = UI_MODE_NIGHT_YES)
 @Composable private fun GalleryItemPreview() {
   val factory = GalleriesInfoViewFactoryImpl()
   val galleryItem1 = GalleryListItem(
     galleryId = "123",
-    userId = "asv",
+    userId = "Big Name to show",
     accountImageUrl = "https://www.w3schools.com/howto/img_avatar2.png",
     mediaItem = MediaItem.Image(id = "sample", "https://www.w3schools.com/howto/img_avatar.png"),
     title = "Sample one",
@@ -81,9 +94,18 @@ public class GalleriesInfoViewFactoryImpl @Inject constructor() : GalleriesInfoV
     showItemCount = false,
     itemCount = "10",
   )
-  val galleryItem2 = GalleryListItem(
+  PixelsTheme {
+    factory.GalleryItem(galleryItem1)
+  }
+}
+
+@Preview(name = "Gallery List Light Preview")
+@Preview(name = "Gallery List Dark Preview", uiMode = UI_MODE_NIGHT_YES)
+@Composable private fun GalleryListPreview() {
+  val factory = GalleriesInfoViewFactoryImpl()
+  val galleryItem1 = GalleryListItem(
     galleryId = "123",
-    userId = "asv",
+    userId = "Big Name to show",
     accountImageUrl = "https://www.w3schools.com/howto/img_avatar2.png",
     mediaItem = MediaItem.Image(id = "sample", "https://www.w3schools.com/howto/img_avatar.png"),
     title = "Sample one",
@@ -94,5 +116,7 @@ public class GalleriesInfoViewFactoryImpl @Inject constructor() : GalleriesInfoV
     showItemCount = false,
     itemCount = "10",
   )
-  factory.Preview(Info(listOf(galleryItem1, galleryItem2)))
+  PixelsTheme {
+    factory.Preview(Info(listOf(galleryItem1)))
+  }
 }

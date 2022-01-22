@@ -81,6 +81,8 @@ dependencies {
 
   implementation projects.database.session.implWiring
 
+  implementation projects.dispatcher.implWiring
+
   implementation projects.network.core.implWiring
   implementation projects.network.gallery.implWiring
 

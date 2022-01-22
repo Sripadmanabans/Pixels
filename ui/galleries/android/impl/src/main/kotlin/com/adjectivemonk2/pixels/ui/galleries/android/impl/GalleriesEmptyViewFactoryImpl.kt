@@ -42,25 +42,9 @@ public class GalleriesEmptyViewFactoryImpl @Inject constructor() : GalleriesEmpt
   }
 }
 
-@Preview(
-  showBackground = true,
-  name = "Empty dark mode",
-  uiMode = Configuration.UI_MODE_NIGHT_YES,
-)
-@Composable private fun EmptyDarkPreview() {
-  val factory = GalleriesEmptyViewFactoryImpl()
-  PixelsTheme(true) {
-    factory.Preview(Empty)
-  }
-}
-
-@Preview(
-  showBackground = true,
-  name = "Empty light mode",
-)
+@Preview(name = "Empty dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(name = "Empty light mode")
 @Composable private fun EmptyLightPreview() {
   val factory = GalleriesEmptyViewFactoryImpl()
-  PixelsTheme(false) {
-    factory.Preview(Empty)
-  }
+  PixelsTheme { factory.Preview(Empty) }
 }

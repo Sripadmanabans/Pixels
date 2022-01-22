@@ -1,5 +1,6 @@
 package com.adjectivemonk2.pixels.ui.galleries.common.impl
 
+import com.adjectivemonk2.pixels.dispatcher.IoDispatcher
 import com.adjectivemonk2.pixels.model.gallery.Gallery
 import com.adjectivemonk2.pixels.network.core.apiCatch
 import com.adjectivemonk2.pixels.network.gallery.GalleryRepository
@@ -12,6 +13,8 @@ import com.squareup.workflow1.StatefulWorkflow
 import com.squareup.workflow1.action
 import com.squareup.workflow1.asWorker
 import com.squareup.workflow1.runningWorker
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
@@ -22,6 +25,7 @@ import javax.inject.Inject
 public class GalleriesWorkflowImpl @Inject constructor(
   private val repository: GalleryRepository,
   private val galleryConverter: GalleryConverter,
+  @IoDispatcher private val dispatcher: CoroutineDispatcher,
 ) : GalleriesWorkflow, StatefulWorkflow<Unit, GalleriesState, Unit, GalleriesScreen>() {
 
   override fun initialState(props: Unit, snapshot: Snapshot?): GalleriesState {
@@ -53,6 +57,7 @@ public class GalleriesWorkflowImpl @Inject constructor(
         val gallery = repository.getGallery()
           .map<List<Gallery>, GalleriesState> { GalleriesState.Data(it) }
           .apiCatch { emit(GalleriesState.Error(it)) }
+          .flowOn(dispatcher)
           .asWorker()
         context.runningWorker(gallery) { result ->
           action { state = result }

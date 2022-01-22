@@ -52,25 +52,9 @@ public class GalleriesErrorViewFactoryImpl @Inject constructor() : GalleriesErro
   }
 }
 
-@Preview(
-  showBackground = true,
-  name = "Error dark mode",
-  uiMode = UI_MODE_NIGHT_YES,
-)
-@Composable private fun ErrorDarkPreview() {
-  val factory = GalleriesErrorViewFactoryImpl()
-  PixelsTheme(true) {
-    factory.Preview(Error("Error message"))
-  }
-}
-
-@Preview(
-  showBackground = true,
-  name = "Error light mode",
-)
+@Preview(name = "Error dark mode", uiMode = UI_MODE_NIGHT_YES)
+@Preview(name = "Error light mode")
 @Composable private fun ErrorLightPreview() {
   val factory = GalleriesErrorViewFactoryImpl()
-  PixelsTheme(false) {
-    factory.Preview(Error("Error message"))
-  }
+  PixelsTheme { factory.Preview(Error("Error message")) }
 }

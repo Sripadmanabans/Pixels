@@ -10,7 +10,7 @@ import com.adjectivemonk2.pixels.ui.galleries.common.GalleriesScreen
 import com.adjectivemonk2.pixels.ui.galleries.common.GalleriesWorkflow
 import com.google.common.truth.Truth.assertThat
 import com.squareup.workflow1.testing.launchForTestingFromStartWith
-import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.TestDispatcher
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
@@ -25,15 +25,14 @@ internal class GalleriesWorkflowImplTest {
 
     @Test @ExtendWith(value = [DispatcherParameterResolver::class])
     fun `Success with empty list, we will show loading then the empty screen`(
-      dispatcher: TestCoroutineDispatcher
+      dispatcher: TestDispatcher
     ) {
       val repository = FakeGalleryRepository()
-      createWorkflow(repository).launchForTestingFromStartWith(context = dispatcher) {
-        dispatcher.pauseDispatcher()
+      createWorkflow(repository, dispatcher).launchForTestingFromStartWith {
         val render1 = awaitNextRendering()
         assertThat(render1).isEqualTo(GalleriesScreen.Loading)
-        dispatcher.advanceUntilIdle()
-        dispatcher.resumeDispatcher()
+        dispatcher.scheduler.advanceUntilIdle()
+        dispatcher.scheduler.runCurrent()
         val render2 = awaitNextRendering()
         assertThat(render2).isEqualTo(GalleriesScreen.Empty)
       }
@@ -41,7 +40,7 @@ internal class GalleriesWorkflowImplTest {
 
     @Test @ExtendWith(value = [DispatcherParameterResolver::class])
     fun `Success with data, we will show loading then the empty screen`(
-      dispatcher: TestCoroutineDispatcher
+      dispatcher: TestDispatcher
     ) {
       val galleryConverter = GalleryConverter(MediaConverter(), AccountImageUrlGenerator())
       val galleries = listOf(galleryWithMedia1, galleryWithMedia2)
@@ -49,15 +48,11 @@ internal class GalleriesWorkflowImplTest {
       val repository = FakeGalleryRepository().apply {
         setGalleryList(galleries)
       }
-      createWorkflow(
-        repository,
-        galleryConverter
-      ).launchForTestingFromStartWith(context = dispatcher) {
-        dispatcher.pauseDispatcher()
+      createWorkflow(repository, dispatcher, galleryConverter).launchForTestingFromStartWith {
         val render1 = awaitNextRendering()
         assertThat(render1).isEqualTo(GalleriesScreen.Loading)
-        dispatcher.advanceUntilIdle()
-        dispatcher.resumeDispatcher()
+        dispatcher.scheduler.advanceUntilIdle()
+        dispatcher.scheduler.runCurrent()
         val render2 = awaitNextRendering()
         assertThat(render2).isEqualTo(GalleriesScreen.Info(galleryItems))
       }
@@ -70,15 +65,14 @@ internal class GalleriesWorkflowImplTest {
 
     @Test @ExtendWith(value = [DispatcherParameterResolver::class])
     fun `IO exception, we will show loading then the error screen`(
-      dispatcher: TestCoroutineDispatcher
+      dispatcher: TestDispatcher
     ) {
       val repository = FakeGalleryRepository().apply { setExceptionType(ExceptionType.IO) }
-      createWorkflow(repository).launchForTestingFromStartWith(context = dispatcher) {
-        dispatcher.pauseDispatcher()
+      createWorkflow(repository, dispatcher).launchForTestingFromStartWith {
         val render1 = awaitNextRendering()
         assertThat(render1).isEqualTo(GalleriesScreen.Loading)
-        dispatcher.advanceUntilIdle()
-        dispatcher.resumeDispatcher()
+        dispatcher.scheduler.advanceUntilIdle()
+        dispatcher.scheduler.runCurrent()
         val render2 = awaitNextRendering()
         assertThat(render2).isInstanceOf(GalleriesScreen.Error::class.java)
         val error = render2 as GalleriesScreen.Error
@@ -88,15 +82,14 @@ internal class GalleriesWorkflowImplTest {
 
     @Test @ExtendWith(value = [DispatcherParameterResolver::class])
     fun `IO exception, we will show loading then the error screen with retry click restarting flow`(
-      dispatcher: TestCoroutineDispatcher
+      dispatcher: TestDispatcher
     ) {
       val repository = FakeGalleryRepository().apply { setExceptionType(ExceptionType.IO) }
-      createWorkflow(repository).launchForTestingFromStartWith(context = dispatcher) {
-        dispatcher.pauseDispatcher()
+      createWorkflow(repository, dispatcher).launchForTestingFromStartWith {
         val render1 = awaitNextRendering()
         assertThat(render1).isEqualTo(GalleriesScreen.Loading)
-        dispatcher.advanceUntilIdle()
-        dispatcher.resumeDispatcher()
+        dispatcher.scheduler.advanceUntilIdle()
+        dispatcher.scheduler.runCurrent()
         val render2 = awaitNextRendering()
         assertThat(render2).isInstanceOf(GalleriesScreen.Error::class.java)
         val error = render2 as GalleriesScreen.Error
@@ -106,8 +99,8 @@ internal class GalleriesWorkflowImplTest {
         error.onRetryClick()
         val render3 = awaitNextRendering()
         assertThat(render3).isEqualTo(GalleriesScreen.Loading)
-        dispatcher.advanceUntilIdle()
-        dispatcher.resumeDispatcher()
+        dispatcher.scheduler.advanceUntilIdle()
+        dispatcher.scheduler.runCurrent()
         val render4 = awaitNextRendering()
         assertThat(render4).isEqualTo(GalleriesScreen.Empty)
       }
@@ -115,16 +108,15 @@ internal class GalleriesWorkflowImplTest {
 
     @Test @ExtendWith(value = [DispatcherParameterResolver::class])
     fun `Runtime exception, we will show loading then throw the exception`(
-      dispatcher: TestCoroutineDispatcher
+      dispatcher: TestDispatcher
     ) {
       assertThrows(TestRuntimeException::class.java) {
         val repository = FakeGalleryRepository().apply { setExceptionType(ExceptionType.Runtime) }
-        createWorkflow(repository).launchForTestingFromStartWith(context = dispatcher) {
-          dispatcher.pauseDispatcher()
+        createWorkflow(repository, dispatcher).launchForTestingFromStartWith {
           val render1 = awaitNextRendering()
           assertThat(render1).isEqualTo(GalleriesScreen.Loading)
-          dispatcher.advanceUntilIdle()
-          dispatcher.resumeDispatcher()
+          dispatcher.scheduler.advanceUntilIdle()
+          dispatcher.scheduler.runCurrent()
         }
       }
     }
@@ -132,11 +124,12 @@ internal class GalleriesWorkflowImplTest {
 
   private fun createWorkflow(
     fakeGalleryRepository: FakeGalleryRepository,
+    dispatcher: TestDispatcher,
     galleryConverter: GalleryConverter = GalleryConverter(
       MediaConverter(),
       AccountImageUrlGenerator()
     ),
   ): GalleriesWorkflow {
-    return GalleriesWorkflowImpl(fakeGalleryRepository, galleryConverter)
+    return GalleriesWorkflowImpl(fakeGalleryRepository, galleryConverter, dispatcher)
   }
 }

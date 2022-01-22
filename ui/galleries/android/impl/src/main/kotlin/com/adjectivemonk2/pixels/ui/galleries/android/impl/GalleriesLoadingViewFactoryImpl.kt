@@ -38,7 +38,8 @@ import com.squareup.anvil.annotations.ContributesBinding
 import com.squareup.workflow1.ui.ViewEnvironment
 import com.squareup.workflow1.ui.compose.tooling.Preview
 import javax.inject.Inject
-import kotlin.time.Duration
+import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.seconds
 import kotlin.time.DurationUnit
 
 @ContributesBinding(scope = ActivityScope::class)
@@ -128,30 +129,14 @@ public class GalleriesLoadingViewFactoryImpl @Inject constructor() : GalleriesLo
   private companion object {
     private const val START_ANGLE = 5F
     private const val END_ANGLE = -5F
-    private val LINE_ANIMATION_DURATION = Duration.seconds(1)
-    private val BOX_ANIMATION_DURATION = Duration.milliseconds(500)
+    private val LINE_ANIMATION_DURATION = 1.seconds
+    private val BOX_ANIMATION_DURATION = 500.milliseconds
   }
 }
 
-@Preview(
-  showBackground = true,
-  name = "Loading dark mode",
-  uiMode = Configuration.UI_MODE_NIGHT_YES,
-)
-@Composable private fun LoadingDarkPreview() {
-  val factory = GalleriesLoadingViewFactoryImpl()
-  PixelsTheme(true) {
-    factory.Preview(Loading)
-  }
-}
-
-@Preview(
-  showBackground = true,
-  name = "Loading light mode",
-)
+@Preview(name = "Loading dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(name = "Loading light mode")
 @Composable private fun LoadingLightPreview() {
   val factory = GalleriesLoadingViewFactoryImpl()
-  PixelsTheme(false) {
-    factory.Preview(Loading)
-  }
+  PixelsTheme { factory.Preview(Loading) }
 }

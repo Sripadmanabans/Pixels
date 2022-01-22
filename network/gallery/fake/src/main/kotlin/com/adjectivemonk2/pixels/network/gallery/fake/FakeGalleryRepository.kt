@@ -9,7 +9,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.io.IOException
-import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
 
 public class FakeGalleryRepository : GalleryRepository {
 
@@ -31,7 +31,7 @@ public class FakeGalleryRepository : GalleryRepository {
     page: Int
   ): Flow<List<Gallery>> {
     return flow {
-      delay(Duration.seconds(ONE))
+      delay(ONE.seconds)
       when (exceptionType) {
         ExceptionType.IO -> throw IOException("IO Exception")
         ExceptionType.Runtime -> throw TestRuntimeException("Runtime exception")
