@@ -6,6 +6,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -18,6 +19,8 @@ import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
@@ -66,57 +69,55 @@ public class GalleriesInfoViewFactoryImpl @Inject constructor() : GalleriesInfoV
           .build(),
       )
     }
-    Row {
-      Image(
-        painter = painter,
-        contentDescription = stringResource(id = R.string.profile_image),
-        modifier = Modifier.size(48.dp)
-      )
-      Text(text = galleryListItem.userId)
+    Surface {
+      Row(modifier = Modifier.fillMaxWidth()) {
+        Image(
+          painter = painter,
+          contentDescription = stringResource(id = R.string.profile_image),
+          modifier = Modifier.size(48.dp)
+        )
+        Text(text = galleryListItem.userId)
+      }
     }
   }
 }
 
 @Preview(name = "Gallery Single Item Light Preview")
 @Preview(name = "Gallery Single Item Dark Preview", uiMode = UI_MODE_NIGHT_YES)
-@Composable private fun GalleryItemPreview() {
+@Composable internal fun GalleryItemPreview(
+  @PreviewParameter(GalleryItemParameterProvider::class) galleryItem: GalleryListItem,
+) {
   val factory = GalleriesInfoViewFactoryImpl()
-  val galleryItem1 = GalleryListItem(
-    galleryId = "123",
-    userId = "Big Name to show",
-    accountImageUrl = "https://www.w3schools.com/howto/img_avatar2.png",
-    mediaItem = MediaItem.Image(id = "sample", "https://www.w3schools.com/howto/img_avatar.png"),
-    title = "Sample one",
-    showDownArrow = false,
-    diff = "20000",
-    commentCount = "1234",
-    views = "23456",
-    showItemCount = false,
-    itemCount = "10",
-  )
-  PixelsTheme {
-    factory.GalleryItem(galleryItem1)
-  }
+  PixelsTheme { factory.GalleryItem(galleryItem) }
 }
 
 @Preview(name = "Gallery List Light Preview")
 @Preview(name = "Gallery List Dark Preview", uiMode = UI_MODE_NIGHT_YES)
-@Composable private fun GalleryListPreview() {
+@Composable internal fun GalleryListPreview(
+  @PreviewParameter(GalleryItemParameterProvider::class) galleryItem: GalleryListItem,
+) {
   val factory = GalleriesInfoViewFactoryImpl()
-  val galleryItem1 = GalleryListItem(
-    galleryId = "123",
-    userId = "Big Name to show",
-    accountImageUrl = "https://www.w3schools.com/howto/img_avatar2.png",
-    mediaItem = MediaItem.Image(id = "sample", "https://www.w3schools.com/howto/img_avatar.png"),
-    title = "Sample one",
-    showDownArrow = false,
-    diff = "20000",
-    commentCount = "1234",
-    views = "23456",
-    showItemCount = false,
-    itemCount = "10",
-  )
-  PixelsTheme {
-    factory.Preview(Info(listOf(galleryItem1)))
-  }
+  PixelsTheme { factory.Preview(Info(listOf(galleryItem))) }
+}
+
+internal class GalleryItemParameterProvider : PreviewParameterProvider<GalleryListItem> {
+  override val values: Sequence<GalleryListItem>
+    get() = sequenceOf(
+      GalleryListItem(
+        galleryId = "123",
+        userId = "Big Name to show",
+        accountImageUrl = "https://www.w3schools.com/howto/img_avatar2.png",
+        mediaItem = MediaItem.Image(
+          id = "sample",
+          url = "https://www.w3schools.com/howto/img_avatar.png"
+        ),
+        title = "Sample one",
+        showDownArrow = false,
+        diff = "20000",
+        commentCount = "1234",
+        views = "23456",
+        showItemCount = false,
+        itemCount = "10",
+      ),
+    )
 }

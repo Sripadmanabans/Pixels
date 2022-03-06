@@ -10,7 +10,6 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  GRADLE_HOME: ${{ github.workspace }}/gradle-home
   ORG_GRADLE_PROJECT_PIXELS_KEY_ALIAS: ${{ secrets.ORG_GRADLE_PROJECT_PIXELS_KEY_ALIAS }}
   ORG_GRADLE_PROJECT_PIXELS_KEY_PASSWORD: ${{ secrets.ORG_GRADLE_PROJECT_PIXELS_KEY_PASSWORD }}
   ORG_GRADLE_PROJECT_PIXELS_STORE_PASSWORD: ${{ secrets.ORG_GRADLE_PROJECT_PIXELS_STORE_PASSWORD }}
@@ -24,44 +23,23 @@ jobs:
     steps:
       # These setup steps should be common across all jobs in this workflow.
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Gradle wrapper validation
         uses: gradle/wrapper-validation-action@v1
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
-          distribution: 'adopt'
+          distribution: 'zulu'
           java-version: 11
 
-      ## Caching
-      - name: Cache gradle dependencies
-        uses: actions/cache@v2
+      - uses: burrunan/gradle-cache-action@v1
+        name: Assemble with gradle — make sure everything builds
         with:
-          path: ${{ env.GRADLE_HOME }}/caches
-          # Include the SHA in the hash so this step always adds a cache entry. If we didn't use the SHA, the artifacts
-          # would only get cached once for each build config hash.
-          # Don't use ${{ runner.os }} in the key so we don't re-assemble for UI tests.
-          key: gradle-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/*.gradle*') }}-${{ github.sha }}
-          # The first time a SHA is assembled, we still want to load dependencies from the cache.
-          # Note that none of jobs dependent on this one need restore keys, since they'll always have an exact hit.
-          restore-keys: |
-            gradle-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/*.gradle*') }}-
-
-      # We want to keep the dependencies from the cache, but clear out the build cache which contains the actual
-      # compiled artifacts from this project. This ensures we don't run into any issues with stale cache entries,
-      # and that the resulting cache we upload for the other jobs won't waste any space on stale binaries.
-      # A simpler approach would be simply to delete the build-cache before uploading the cache archive, however
-      # if we did that in this job it would defeat the purpose of sharing that directory with dependent jobs,
-      # and there's no way to modify the cache after the job that created it finishes.
-      - name: Clean gradle build cache to assemble fresh
-        run: |
-          ls -lhrt "$GRADLE_HOME/caches" || true
-          rm -rf "$GRADLE_HOME/caches/build-cache-1"
-          ls -lhrt "$GRADLE_HOME/caches" || true
-
-      ## Actual task
-      - name: Assemble with gradle
-        run: ./gradlew assemble --build-cache --no-daemon --stacktrace --gradle-user-home "$GRADLE_HOME" -Dorg.gradle.unsafe.configuration-cache=false
+          gradle-dependencies-cache-key: |
+            gradle/libs.versions.toml
+          arguments: |
+            assemble --no-daemon --stacktrace -Dorg.gradle.unsafe.configuration-cache=false
+          concurrent: true
 
   # Runs all check tasks in parallel.
   check:
@@ -81,25 +59,21 @@ jobs:
           - detekt
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
-          distribution: 'adopt'
+          distribution: 'zulu'
           java-version: 11
 
-      ## Caching
-      - name: Cache build artifacts
-        uses: actions/cache@v2
+      - uses: burrunan/gradle-cache-action@v1
+        name: Check with Gradle
         with:
-          path: ${{ env.GRADLE_HOME }}/caches
-          # Don't set restore-keys so cache is always only valid for the current build config.
-          # Also don't use ${{ runner.os }} in the key so we don't re-assemble for UI tests.
-          key: gradle-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/*.gradle*') }}-${{ github.sha }}
-
-      ## Actual task
-      - name: Check with Gradle
-        run: ./gradlew ${{ matrix.gradle-task }} --build-cache --no-daemon --stacktrace --gradle-user-home "$GRADLE_HOME" -Dorg.gradle.unsafe.configuration-cache=false
+          gradle-dependencies-cache-key: |
+            gradle/libs.versions.toml
+          arguments: |
+            ${{ matrix.gradle-task }} --no-daemon --stacktrace -Dorg.gradle.unsafe.configuration-cache=false
+          concurrent: true
 
   instrumentation-tests:
     name: Instrumentation tests
@@ -114,58 +88,37 @@ jobs:
         api-level: [ 30 ]
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
-          distribution: 'adopt'
+          distribution: 'zulu'
           java-version: 11
 
-      ## Caching
-      - name: Cache build artifacts
-        uses: actions/cache@v2
+      ## Build before running tests, using cache.
+      - uses: burrunan/gradle-cache-action@v1
+        name: Build instrumented tests
         with:
-          path: ${{ env.GRADLE_HOME }}/caches
-          # Don't set restore-keys so cache is always only valid for the current build config.
-          # Also don't use ${{ runner.os }} in the key so we don't re-assemble for UI tests.
-          key: gradle-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/*.gradle*') }}-${{ github.sha }}
+          gradle-dependencies-cache-key: |
+            gradle/libs.versions.toml
+          arguments: |
+            assembleDebugAndroidTest --no-daemon --stacktrace -Dorg.gradle.unsafe.configuration-cache=false
+          concurrent: true
 
-      # Retrieve the cached emulator snapshot.
-      - name: Try and get AVD from cache
-        uses: actions/cache@v2
-        id: avd-cache
-        with:
-          path: |
-            ~/.android/avd/*
-            ~/.android/adb*
-          key: avd-${{ matrix.api-level }}
-
-      # Creating cache when necessary
-      - name: Create AVD and generate snapshot for caching
-        if: steps.avd-cache.outputs.cache-hit != 'true'
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: ${{ matrix.api-level }}
-          target: ${{ matrix.target }}
-          force-avd-creation: false
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: true
-          arch: x86_64
-          script: echo "Generated AVD snapshot for caching."
-
-      ## Actual task
+      ## Actual task.
       - name: Instrumentation Tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: ${{ matrix.api-level }}
           target: ${{ matrix.target }}
-          force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -no-snapshot-save
           disable-animations: true
           arch: x86_64
-          script: ./gradlew connectedCheck --build-cache --no-daemon --stacktrace --gradle-user-home "$GRADLE_HOME" -Dorg.gradle.unsafe.configuration-cache=false
+          script: ./gradlew connectedCheck --no-daemon --stacktrace -Dorg.gradle.unsafe.configuration-cache=false
+
+      ## Uploading test data.
       - name: Upload results
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
-          name: instrumentation-test-results
+          name: instrumentation-test-results-${{ matrix.api-level }}
           path: ./**/build/reports/androidTests/connected/**
