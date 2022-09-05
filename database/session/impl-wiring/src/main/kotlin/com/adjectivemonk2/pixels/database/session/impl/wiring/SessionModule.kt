@@ -12,7 +12,8 @@ import dagger.Provides
 @ContributesTo(AppScope::class)
 public object SessionModule {
 
-  @Provides @SingleIn(AppScope::class)
+  @Provides
+  @SingleIn(AppScope::class)
   public fun sessionAdapter(durationColumnAdapter: DurationColumnAdapter): Session.Adapter {
     return Session.Adapter(expiresInAdapter = durationColumnAdapter)
   }

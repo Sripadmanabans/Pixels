@@ -1,6 +1,6 @@
 package com.adjectivemonk2.pixels.theme
 
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.onNodeWithText
@@ -12,14 +12,19 @@ import org.junit.jupiter.api.extension.RegisterExtension
 
 internal class ThemeTest {
 
-  @JvmField @RegisterExtension val extension = createComposeExtension()
+  @Suppress("JUnit5MalformedExtensions")
+  @JvmField
+  @RegisterExtension
+  val extension = createComposeExtension()
 
-  @Test @DisplayName("Testing theme change does not affect text") fun testTheme() {
+  @Test
+  @DisplayName("Testing theme change does not affect text")
+  fun testTheme() {
     extension.runComposeTest {
       val themeIsDark = MutableStateFlow(false)
       setContent {
         PixelsTheme(
-          isDarkTheme = themeIsDark.collectAsState().value
+          isDarkTheme = themeIsDark.collectAsState().value,
         ) {
           Text(text = "Android")
         }

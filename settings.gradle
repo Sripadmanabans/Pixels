@@ -49,5 +49,4 @@ include ":ui:galleries:common:public"
 
 // Has info on preview features
 // https://docs.gradle.org/7.0/release-notes.html
-enableFeaturePreview("VERSION_CATALOGS")
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")

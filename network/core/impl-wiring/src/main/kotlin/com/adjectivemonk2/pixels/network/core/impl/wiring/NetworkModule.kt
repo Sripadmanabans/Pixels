@@ -18,15 +18,20 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 @ContributesTo(AppScope::class)
 public object NetworkModule {
 
-  @Provides public fun moshi(): Moshi {
+  @Provides
+  public fun moshi(): Moshi {
     return Moshi.Builder().build()
   }
 
-  @Provides public fun moshiConverterFactory(moshi: Moshi): Converter.Factory {
+  @Provides
+  public fun moshiConverterFactory(moshi: Moshi): Converter.Factory {
     return MoshiConverterFactory.create(moshi)
   }
 
-  @Provides @SingleIn(AppScope::class) @ApiRetrofit public fun retrofit(
+  @Provides
+  @SingleIn(AppScope::class)
+  @ApiRetrofit
+  public fun retrofit(
     okHttpClient: OkHttpClient,
     baseUrl: HttpUrl,
     dataConverter: DataConverterFactory,

@@ -9,15 +9,8 @@ android {
     resValues false
   }
 
-  compileSdkVersion buildConfig.compileSdk
-
   composeOptions {
     kotlinCompilerExtensionVersion libs.versions.compose.get()
-  }
-
-  defaultConfig {
-    minSdkVersion buildConfig.minSdk
-    targetSdkVersion buildConfig.targetSdk
   }
 
   kotlinOptions {
@@ -34,7 +27,7 @@ archivesBaseName = "ui-galleries-common-public"
 dependencies {
   api projects.model.gallery.public
 
-  api libs.compose.runtime.runtime
+  api libs.androidx.compose.runtime
   api libs.workflow.core
 
   implementation libs.dagger.runtime

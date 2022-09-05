@@ -8,30 +8,36 @@ import com.jakewharton.byteunits.BinaryByteUnit
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
+import java.io.File
 import logcat.logcat
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import java.io.File
 
 @Module
 @ContributesTo(AppScope::class)
 public object OkHttpModule {
 
-  @Provides @SingleIn(AppScope::class) public fun cacheDir(application: Application): File {
+  @Provides
+  @SingleIn(AppScope::class)
+  public fun cacheDir(application: Application): File {
     return File(application.cacheDir, HTTP)
   }
 
-  @Provides public fun cache(cacheDir: File): Cache {
+  @Provides
+  public fun cache(cacheDir: File): Cache {
     return Cache(cacheDir, BinaryByteUnit.MEBIBYTES.toBytes(CACHE_SIZE_MB))
   }
 
-  @Provides public fun loggingInterceptor(): HttpLoggingInterceptor {
+  @Provides
+  public fun loggingInterceptor(): HttpLoggingInterceptor {
     return HttpLoggingInterceptor { logcat(HTTP) { it } }
       .apply { level = HttpLoggingInterceptor.Level.BASIC }
   }
 
-  @Provides @SingleIn(AppScope::class) public fun okHttp(
+  @Provides
+  @SingleIn(AppScope::class)
+  public fun okHttp(
     cache: Cache,
     authInterceptor: AuthInterceptor,
     loggingInterceptor: HttpLoggingInterceptor,

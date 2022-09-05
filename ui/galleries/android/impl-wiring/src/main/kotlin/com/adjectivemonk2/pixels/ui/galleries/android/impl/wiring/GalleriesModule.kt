@@ -15,7 +15,9 @@ import dagger.multibindings.IntoSet
 @ContributesTo(ActivityScope::class)
 public object GalleriesModule {
 
-  @Provides @IntoSet public fun viewFactories(
+  @Provides
+  @IntoSet
+  public fun viewFactories(
     loading: GalleriesLoadingViewFactory,
     success: GalleriesInfoViewFactory,
     empty: GalleriesEmptyViewFactory,

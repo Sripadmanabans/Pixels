@@ -4,9 +4,9 @@ import android.app.Activity
 import android.app.Application
 import com.adjectivemonk2.pixels.di.AppComponent
 import com.adjectivemonk2.pixels.logger.LoggerInitializer
+import javax.inject.Inject
 import logcat.LogcatLogger
 import logcat.logcat
-import javax.inject.Inject
 
 class PixelApplication : Application() {
 

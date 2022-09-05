@@ -23,9 +23,10 @@ internal class GalleriesWorkflowImplTest {
   @Nested
   inner class Success {
 
-    @Test @ExtendWith(value = [DispatcherParameterResolver::class])
+    @Test
+    @ExtendWith(value = [DispatcherParameterResolver::class])
     fun `Success with empty list, we will show loading then the empty screen`(
-      dispatcher: TestDispatcher
+      dispatcher: TestDispatcher,
     ) {
       val repository = FakeGalleryRepository()
       createWorkflow(repository, dispatcher).launchForTestingFromStartWith {
@@ -38,9 +39,10 @@ internal class GalleriesWorkflowImplTest {
       }
     }
 
-    @Test @ExtendWith(value = [DispatcherParameterResolver::class])
+    @Test
+    @ExtendWith(value = [DispatcherParameterResolver::class])
     fun `Success with data, we will show loading then the empty screen`(
-      dispatcher: TestDispatcher
+      dispatcher: TestDispatcher,
     ) {
       val galleryConverter = GalleryConverter(MediaConverter(), AccountImageUrlGenerator())
       val galleries = listOf(galleryWithMedia1, galleryWithMedia2)
@@ -63,9 +65,10 @@ internal class GalleriesWorkflowImplTest {
   @Nested
   inner class Error {
 
-    @Test @ExtendWith(value = [DispatcherParameterResolver::class])
+    @Test
+    @ExtendWith(value = [DispatcherParameterResolver::class])
     fun `IO exception, we will show loading then the error screen`(
-      dispatcher: TestDispatcher
+      dispatcher: TestDispatcher,
     ) {
       val repository = FakeGalleryRepository().apply { setExceptionType(ExceptionType.IO) }
       createWorkflow(repository, dispatcher).launchForTestingFromStartWith {
@@ -80,9 +83,10 @@ internal class GalleriesWorkflowImplTest {
       }
     }
 
-    @Test @ExtendWith(value = [DispatcherParameterResolver::class])
+    @Test
+    @ExtendWith(value = [DispatcherParameterResolver::class])
     fun `IO exception, we will show loading then the error screen with retry click restarting flow`(
-      dispatcher: TestDispatcher
+      dispatcher: TestDispatcher,
     ) {
       val repository = FakeGalleryRepository().apply { setExceptionType(ExceptionType.IO) }
       createWorkflow(repository, dispatcher).launchForTestingFromStartWith {
@@ -106,9 +110,10 @@ internal class GalleriesWorkflowImplTest {
       }
     }
 
-    @Test @ExtendWith(value = [DispatcherParameterResolver::class])
+    @Test
+    @ExtendWith(value = [DispatcherParameterResolver::class])
     fun `Runtime exception, we will show loading then throw the exception`(
-      dispatcher: TestDispatcher
+      dispatcher: TestDispatcher,
     ) {
       assertThrows(TestRuntimeException::class.java) {
         val repository = FakeGalleryRepository().apply { setExceptionType(ExceptionType.Runtime) }
@@ -127,7 +132,7 @@ internal class GalleriesWorkflowImplTest {
     dispatcher: TestDispatcher,
     galleryConverter: GalleryConverter = GalleryConverter(
       MediaConverter(),
-      AccountImageUrlGenerator()
+      AccountImageUrlGenerator(),
     ),
   ): GalleriesWorkflow {
     return GalleriesWorkflowImpl(fakeGalleryRepository, galleryConverter, dispatcher)

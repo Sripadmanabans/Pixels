@@ -17,7 +17,9 @@ typealias WorkflowInterceptors = List<@JvmSuppressWildcards WorkflowInterceptor>
 class PixelActivity : FragmentActivity() {
 
   @Inject internal lateinit var galleriesWorkflow: GalleriesWorkflow
+
   @Inject internal lateinit var viewEnvironment: ViewEnvironment
+
   @Inject internal lateinit var workflowInterceptors: WorkflowInterceptors
 
   override fun onCreate(savedInstanceState: Bundle?) {

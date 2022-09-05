@@ -101,23 +101,14 @@ dependencies {
   implementation libs.androidx.fragment.ktx
   implementation libs.androidx.core
 
-  implementation libs.compose.animation.animation
+  implementation libs.androidx.compose.material3
 
-  implementation libs.compose.foundation.foundation
-  implementation libs.compose.foundation.layout
+  implementation libs.androidx.compose.runtime
 
-  implementation libs.compose.material.iconset
-  implementation libs.compose.material.material
-
-  implementation libs.compose.runtime.runtime
-  implementation libs.compose.runtime.saveable
-
-  implementation libs.compose.ui.ui
-  implementation libs.compose.ui.text
-  implementation libs.compose.ui.tooling
-  implementation libs.compose.ui.unit
-  implementation libs.compose.ui.util
-  implementation libs.compose.ui.viewbinding
+  implementation libs.androidx.compose.ui.ui
+  implementation libs.androidx.compose.ui.text
+  implementation libs.androidx.compose.ui.tooling
+  implementation libs.androidx.compose.ui.unit
 
   implementation libs.coil.coil
 
@@ -132,8 +123,8 @@ dependencies {
   testRuntimeOnly libs.junit5.jupiter.runtime
   testImplementation libs.truth
 
-  androidTestImplementation libs.compose.ui.test.core
-  androidTestImplementation libs.compose.ui.test.junit
+  androidTestImplementation libs.androidx.compose.ui.test.core
+  androidTestImplementation libs.androidx.compose.ui.test.junit
 
   androidTestImplementation libs.androidx.test.espresso.core
   androidTestImplementation libs.androidx.test.junit

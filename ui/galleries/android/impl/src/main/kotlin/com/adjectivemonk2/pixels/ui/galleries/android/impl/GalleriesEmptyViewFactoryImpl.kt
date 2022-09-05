@@ -6,8 +6,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,7 +34,7 @@ public class GalleriesEmptyViewFactoryImpl @Inject constructor() : GalleriesEmpt
           .wrapContentSize()
           .animateContentSize()
           .padding(12.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
       ) {
         Text(text = stringResource(R.string.no_items))
       }
@@ -44,7 +44,8 @@ public class GalleriesEmptyViewFactoryImpl @Inject constructor() : GalleriesEmpt
 
 @Preview(name = "Empty dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(name = "Empty light mode")
-@Composable private fun EmptyLightPreview() {
+@Composable
+private fun EmptyLightPreview() {
   val factory = GalleriesEmptyViewFactoryImpl()
   PixelsTheme { factory.Preview(Empty) }
 }

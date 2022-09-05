@@ -1,36 +1,38 @@
 [versions]
 # Android Components
-activity = "1.5.0-alpha03"
-androidBuild = "7.3.0-alpha05"
-core = "1.9.0-alpha01"
-fragment = "1.5.0-alpha03"
-lifecycle = "2.4.0-beta01"
-paging = "1.0.0-alpha12"
+activity = "1.6.0-rc01"
+androidBuild = "7.4.0-alpha10"
+core = "1.9.0-rc01"
+fragment = "1.6.0-alpha02"
+lifecycle = "2.6.0-alpha01"
+paging = "1.0.0-alpha16"
 
 # Compose Components
-accompanist = "0.21.3-beta"
-compose = "1.2.0-alpha01"
-composeSnapshot = "-"
+accompanist = "0.26.2-beta"
+compose = "1.3.0"
+composeAndroid = "1.3.0-beta01"
+composeJetbrains = "1.1.1"
+composeMaterial3 = "1.0.0-beta01"
 
 # DI components
-anvil = "2.4.0-M1"
-dagger = "2.41"
+anvil = "2.4.2"
+dagger = "2.43.2"
 
 # Image Component
-coil = "2.0.0-rc01"
+coil = "2.2.0"
 
 # Animations
 lottie = "4.1.0"
 
 # Core Components
-coroutines = "1.6.0"
-kotlin = "1.6.10"
-time = "0.3.2"
+coroutines = "1.6.4"
+kotlin = "1.7.10"
+time = "0.4.0"
 
 # Network Components
 moshi = "1.13.0"
-moshix = "0.17.0"
-okhttp = "5.0.0-alpha.5"
+moshix = "0.18.3"
+okhttp = "5.0.0-alpha.10"
 retrofit = "2.9.0"
 sqldelight = "1.5.3"
 
@@ -39,26 +41,27 @@ workflow = "1.6.0"
 
 # Helper Components
 byteUnits = "0.9.1"
+ksp = "1.7.10-1.0.6"
 logcat = "0.1"
 
 # Testing Components
-androidxJunit = "1.1.4-alpha04"
-espresso = "3.5.0-alpha04"
+androidxJunit = "1.1.4-alpha07"
+espresso = "3.5.0-alpha07"
 androidJunit5 = "1.3.0"
-androidJunit5ClassPath = "1.8.2.0"
+androidJunit5ClassPath = "1.8.2.1"
 androidJunit5Compose = "1.0.0-SNAPSHOT"
-androidxOrchestrator = "1.4.2-alpha01"
-androidxRules = "1.4.1-alpha04"
-androidxRunner = "1.5.0-alpha01"
-androidxTest = "1.4.1-alpha04"
-junit5 = "5.8.2"
+androidxOrchestrator = "1.4.2-alpha04"
+androidxRules = "1.4.1-alpha07"
+androidxRunner = "1.5.0-alpha04"
+androidxTest = "1.5.0-alpha02"
+junit5 = "5.9.0"
 truth = "1.1.3"
 
 # Code Health Components
 ben = "0.42.0"
-detekt = "1.20.0-RC1"
-leakCanary = "2.8.1"
-spotless = "6.3.0"
+detekt = "1.21.0"
+leakCanary = "2.9.1"
+kotlinter = "3.11.1"
 
 [libraries]
 accompanist-drawable = { module = "com.google.accompanist:accompanist-drawablepainter", version.ref = "accompanist" }
@@ -75,13 +78,19 @@ android-classpath = { module = "com.android.tools.build:gradle", version.ref = "
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity" }
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
 androidx-core = { module = "androidx.core:core-ktx", version.ref = "core" }
+androidx-compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "composeMaterial3" }
+androidx-compose-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "composeAndroid" }
+androidx-compose-ui-test-core = { module = "androidx.compose.ui:ui-test", version.ref = "composeAndroid" }
+androidx-compose-ui-test-junit = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "composeAndroid" }
+androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "composeAndroid" }
+androidx-compose-ui-text = { module = "androidx.compose.ui:ui-text", version.ref = "composeAndroid" }
+androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "composeAndroid" }
+androidx-compose-ui-ui = { module = "androidx.compose.ui:ui", version.ref = "composeAndroid" }
+androidx-compose-ui-unit = { module = "androidx.compose.ui:ui-unit", version.ref = "composeAndroid" }
 androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment" }
 androidx-fragment-testing = { module = "androidx.fragment:fragment-testing", version.ref = "fragment" }
-
 androidx-lifecycle-viewmodel-savedstate = { module = "androidx.lifecycle:lifecycle-viewmodel-savedstate", version.ref = "lifecycle" }
-
 androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "paging" }
-
 androidx-test-core = { module = "androidx.test:core", version.ref = "androidxTest" }
 androidx-test-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
 androidx-test-junit = { module = "androidx.test.ext:junit-ktx", version.ref = "androidxJunit" }
@@ -92,35 +101,20 @@ androidx-test-runner = { module = "androidx.test:runner", version.ref = "android
 anvil-classpath = { module = "com.squareup.anvil:gradle-plugin", version.ref = "anvil" }
 
 ben-classpath = { module = "com.github.ben-manes:gradle-versions-plugin", version.ref = "ben" }
+byteUnits = { module = "com.jakewharton.byteunits:byteunits", version.ref = "byteUnits" }
 
 coil-coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 coil-gif = { module = "io.coil-kt:coil-gif", version.ref = "coil" }
 
-compose-animation-animation = { module = "androidx.compose.animation:animation", version.ref = "compose" }
-compose-foundation-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
-compose-foundation-layout = { module = "androidx.compose.foundation:foundation-layout", version.ref = "compose" }
-compose-material-iconset = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose" }
-compose-material-material = { module = "androidx.compose.material:material", version.ref = "compose" }
-compose-runtime-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "compose" }
-compose-runtime-saveable = { module = "androidx.compose.runtime:runtime-saveable", version.ref = "compose" }
-compose-ui-test-core = { module = "androidx.compose.ui:ui-test", version.ref = "compose" }
-compose-ui-test-junit = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose" }
-compose-ui-text = { module = "androidx.compose.ui:ui-text", version.ref = "compose" }
-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
-compose-ui-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
-compose-ui-unit = { module = "androidx.compose.ui:ui-unit", version.ref = "compose" }
-compose-ui-util = { module = "androidx.compose.ui:ui-util", version.ref = "compose" }
-compose-ui-viewbinding = { module = "androidx.compose.ui:ui-viewbinding", version.ref = "compose" }
-
 dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
 dagger-runtime = { module = "com.google.dagger:dagger", version.ref = "dagger" }
-
 detekt-classpath = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 
-byteUnits = { module = "com.jakewharton.byteunits:byteunits", version.ref = "byteUnits" }
+google-ksp-classpath = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin", version.ref = "ksp" }
 
+jetbrains-compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "composeJetbrains" }
+jetbrains-compose-classpath = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "composeJetbrains" }
 junit5-android-classpath = { module = "de.mannodermaus.gradle.plugins:android-junit5", version.ref = "androidJunit5ClassPath" }
 junit5-android-compose = { module = "de.mannodermaus.junit5:android-test-compose", version.ref = "androidJunit5Compose" }
 junit5-android-core = { module = "de.mannodermaus.junit5:android-test-core", version.ref = "androidJunit5" }
@@ -135,11 +129,10 @@ kotlin-extensions = { module = "org.jetbrains.kotlin:kotlin-android-extensions",
 kotlin-classpath = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-stdlib-common = { module = "org.jetbrains.kotlin:kotlin-stdlib-common", version.ref = "kotlin" }
 kotlin-time = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "time" }
+kotlinter-classpath = { module = "org.jmailen.gradle:kotlinter-gradle", version.ref = "kotlinter" }
 
 leakCanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakCanary" }
-
 logcat = { module = "com.squareup.logcat:logcat", version.ref = "logcat" }
-
 lottie = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie" }
 
 moshi-adapters = { module = "com.squareup.moshi:moshi-adapters", version.ref = "moshi" }
@@ -154,8 +147,6 @@ okhttp-mockWebServer = { module = "com.squareup.okhttp3:mockwebserver", version.
 
 retrofit-client = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-converter = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
-
-spotless-classpath = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
 
 sqlDelight-android = { module = "com.squareup.sqldelight:android-driver", version.ref = "sqldelight" }
 sqlDelight-coroutines = { module = "com.squareup.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
