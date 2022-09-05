@@ -55,9 +55,9 @@ dependencies {
 
   implementation libs.coil.compose
 
-  implementation libs.compose.material.material
-  implementation libs.compose.ui.ui
-  implementation libs.compose.ui.tooling
+  implementation libs.androidx.compose.material3
+  implementation libs.androidx.compose.ui.ui
+  implementation libs.androidx.compose.ui.tooling
 
   implementation libs.dagger.runtime
 
@@ -66,9 +66,9 @@ dependencies {
   // Need to make compose tooling to work ¯\_(ツ)_/¯
   implementation libs.androidx.lifecycle.viewmodel.savedstate
 
-  androidTestImplementation libs.compose.ui.test.core
-  androidTestImplementation libs.compose.ui.test.junit
-  androidTestImplementation libs.compose.ui.test.manifest
+  androidTestImplementation libs.androidx.compose.ui.test.core
+  androidTestImplementation libs.androidx.compose.ui.test.junit
+  androidTestImplementation libs.androidx.compose.ui.test.manifest
 
   androidTestImplementation libs.androidx.test.espresso.core
   androidTestRuntimeOnly libs.androidx.test.runner

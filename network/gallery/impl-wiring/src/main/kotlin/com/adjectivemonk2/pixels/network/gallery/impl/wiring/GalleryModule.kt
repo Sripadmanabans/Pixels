@@ -14,7 +14,9 @@ import retrofit2.create
 @ContributesTo(AppScope::class)
 public object GalleryModule {
 
-  @Provides @SingleIn(AppScope::class) public fun galleryService(
+  @Provides
+  @SingleIn(AppScope::class)
+  public fun galleryService(
     @ApiRetrofit retrofit: Retrofit,
   ): GalleryService {
     return retrofit.create()

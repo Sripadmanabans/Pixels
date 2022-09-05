@@ -12,11 +12,13 @@ import logcat.AndroidLogcatLogger
 @Module
 public class LoggerModule {
 
-  @Provides public fun workflowInterceptors(
+  @Provides
+  public fun workflowInterceptors(
     loggingWorkflowInterceptor: LoggingWorkflowInterceptor,
   ): List<WorkflowInterceptor> {
     return listOf(loggingWorkflowInterceptor)
   }
 
-  @Provides public fun androidLogcatLogger(): AndroidLogcatLogger = AndroidLogcatLogger()
+  @Provides
+  public fun androidLogcatLogger(): AndroidLogcatLogger = AndroidLogcatLogger()
 }

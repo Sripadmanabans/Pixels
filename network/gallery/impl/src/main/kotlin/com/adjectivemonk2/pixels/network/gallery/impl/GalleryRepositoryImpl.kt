@@ -8,20 +8,20 @@ import com.adjectivemonk2.pixels.network.gallery.Window
 import com.adjectivemonk2.pixels.scope.AppScope
 import com.adjectivemonk2.pixels.scope.SingleIn
 import com.squareup.anvil.annotations.ContributesBinding
+import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import javax.inject.Inject
 
 @SingleIn(AppScope::class)
 @ContributesBinding(AppScope::class)
 public class GalleryRepositoryImpl @Inject constructor(
-  private val galleryService: GalleryService
+  private val galleryService: GalleryService,
 ) : GalleryRepository {
   override fun getGallery(
     section: Section,
     sort: Sort,
     window: Window,
-    page: Int
+    page: Int,
   ): Flow<List<Gallery>> {
     return flow {
       emit(galleryService.getGallery(section.param, sort.param, window.param, page))

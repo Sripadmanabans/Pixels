@@ -13,7 +13,7 @@ import dagger.Provides
 object ActivityModule {
 
   @Provides fun viewEnvironment(
-    viewRegistries: Set<@JvmSuppressWildcards ViewRegistry>
+    viewRegistries: Set<@JvmSuppressWildcards ViewRegistry>,
   ): ViewEnvironment {
     val registry = viewRegistries.reduce { acc, viewRegistry -> acc + viewRegistry }
     return ViewEnvironment(mapOf(ViewRegistry to registry))

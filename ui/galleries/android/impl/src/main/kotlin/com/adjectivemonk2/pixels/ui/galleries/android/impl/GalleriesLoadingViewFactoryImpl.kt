@@ -20,8 +20,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment.Companion.CenterVertically
@@ -66,16 +66,16 @@ public class GalleriesLoadingViewFactoryImpl @Inject constructor() : GalleriesLo
           modifier = Modifier
             .rotate(angle)
             .background(
-              color = MaterialTheme.colors.onBackground.copy(alpha = 0.5f),
+              color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f),
               shape = RoundedCornerShape(4.dp),
             )
-            .size(48.dp)
+            .size(48.dp),
         )
 
         Spacer(
           modifier = Modifier
             .wrapContentHeight()
-            .width(12.dp)
+            .width(12.dp),
         )
 
         LoadingRows(transition = transition)
@@ -85,7 +85,6 @@ public class GalleriesLoadingViewFactoryImpl @Inject constructor() : GalleriesLo
 
   @Composable private fun RowScope.LoadingRows(transition: InfiniteTransition) {
     Column(modifier = Modifier.align(CenterVertically)) {
-
       val width1 by transition.animateValue(
         initialValue = Dp.Hairline,
         targetValue = 72.dp,
@@ -93,15 +92,15 @@ public class GalleriesLoadingViewFactoryImpl @Inject constructor() : GalleriesLo
         animationSpec = infiniteRepeatable(
           animation = tween(LINE_ANIMATION_DURATION.toInt(DurationUnit.MILLISECONDS)),
           repeatMode = RepeatMode.Restart,
-        )
+        ),
       )
       Spacer(
         modifier = Modifier
           .background(
-            color = MaterialTheme.colors.onBackground.copy(alpha = 0.5f),
+            color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f),
             shape = RoundedCornerShape(4.dp),
           )
-          .size(width1, 12.dp)
+          .size(width1, 12.dp),
       )
 
       Spacer(modifier = Modifier.size(108.dp, 12.dp))
@@ -113,15 +112,15 @@ public class GalleriesLoadingViewFactoryImpl @Inject constructor() : GalleriesLo
         animationSpec = infiniteRepeatable(
           animation = tween(LINE_ANIMATION_DURATION.toInt(DurationUnit.MILLISECONDS)),
           repeatMode = RepeatMode.Restart,
-        )
+        ),
       )
       Spacer(
         modifier = Modifier
           .background(
-            color = MaterialTheme.colors.onBackground.copy(alpha = 0.5f),
+            color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f),
             shape = RoundedCornerShape(4.dp),
           )
-          .size(width2, 12.dp)
+          .size(width2, 12.dp),
       )
     }
   }
@@ -136,7 +135,8 @@ public class GalleriesLoadingViewFactoryImpl @Inject constructor() : GalleriesLo
 
 @Preview(name = "Loading dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(name = "Loading light mode")
-@Composable private fun LoadingLightPreview() {
+@Composable
+private fun LoadingLightPreview() {
   val factory = GalleriesLoadingViewFactoryImpl()
   PixelsTheme { factory.Preview(Loading) }
 }

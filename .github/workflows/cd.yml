@@ -55,7 +55,7 @@ jobs:
           # Unit tests
           - test
           - lint
-          - spotlessCheck
+          - lintKotlin
           - detekt
     steps:
       - name: Checkout code
@@ -85,7 +85,7 @@ jobs:
       fail-fast: false
       matrix:
         target: [ google_apis ]
-        api-level: [ 30 ]
+        api-level: [ 31 ]
     steps:
       - name: Checkout code
         uses: actions/checkout@v3

@@ -1,10 +1,10 @@
 package com.adjectivemonk2.pixels.logger.impl
 
 import com.squareup.workflow1.SimpleLoggingWorkflowInterceptor
+import javax.inject.Inject
 import logcat.LogPriority.ERROR
 import logcat.LogPriority.VERBOSE
 import logcat.logcat
-import javax.inject.Inject
 
 public class LoggingWorkflowInterceptor @Inject constructor() : SimpleLoggingWorkflowInterceptor() {
 

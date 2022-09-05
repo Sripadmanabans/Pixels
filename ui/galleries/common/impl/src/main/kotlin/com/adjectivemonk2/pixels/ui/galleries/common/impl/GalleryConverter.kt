@@ -24,7 +24,7 @@ public class GalleryConverter @Inject constructor(
         commentCount = gallery.commentCount.toString(),
         views = gallery.views.toString(),
         showItemCount = mediaItems.size > 1,
-        itemCount = (mediaItems.size).toString()
+        itemCount = (mediaItems.size).toString(),
       )
     }
   }

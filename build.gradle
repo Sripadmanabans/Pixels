@@ -1,18 +1,18 @@
-import com.android.build.gradle.BaseExtension
+import org.jetbrains.kotlin.gradle.dsl.KotlinCompile
 
 buildscript {
 
   ext.buildConfig = [
-      "compileSdk": 31,
-      "minSdk"    : 29,
-      "targetSdk" : 31,
+    "compileSdk": 33,
+    "minSdk"    : 31,
+    "targetSdk" : 33,
 
-      "version"   : [
-          "major": 1,
-          "minor": 0,
-          "patch": 0,
-          "build": 0,
-      ],
+    "version"   : [
+      "major": 1,
+      "minor": 0,
+      "patch": 0,
+      "build": 0,
+    ],
   ]
   ext.buildConfig.version["name"] = "${buildConfig.version.major}.${buildConfig.version.minor}.${buildConfig.version.patch}"
   ext.buildConfig.version["fullName"] = "${buildConfig.version.name}.${buildConfig.version.build}"
@@ -25,20 +25,21 @@ buildscript {
   }
 
   dependencies {
-    classpath(libs.android.classpath)
-    classpath(libs.anvil.classpath)
-    classpath(libs.ben.classpath)
-    classpath(libs.detekt.classpath)
-    classpath(libs.junit5.android.classpath)
-    classpath(libs.kotlin.classpath)
-    classpath(libs.spotless.classpath)
-    classpath(libs.sqlDelight.classpath)
+    classpath libs.android.classpath
+    classpath libs.anvil.classpath
+    classpath libs.ben.classpath
+    classpath libs.detekt.classpath
+    classpath libs.junit5.android.classpath
+    classpath libs.kotlin.classpath
+    classpath libs.kotlinter.classpath
+    classpath libs.sqlDelight.classpath
+    classpath libs.google.ksp.classpath
   }
 }
 
 plugins {
   id "com.github.ben-manes.versions" version "0.42.0"
-  id "com.google.devtools.ksp" version "1.6.10-1.0.2"
+  id "com.google.devtools.ksp" version "1.7.10-1.0.6"
 }
 
 allprojects {
@@ -47,10 +48,6 @@ allprojects {
     mavenCentral()
     // Used for Accompanist snapshots
     maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-    def composeSnapshot = libs.versions.composeSnapshot.get()
-    if (composeSnapshot.length() > 1) {
-      maven { url "https://androidx.dev/snapshots/builds/$composeSnapshot/artifacts/repository/" }
-    }
   }
 }
 
@@ -60,48 +57,39 @@ subprojects {
     // This is a Compose app, so there's no need for these.
     exclude group: "androidx.appcompat"
     exclude group: "com.google.android.material", module: "material"
+  }
 
-    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-      if (details.requested.group == "org.jetbrains.kotlinx"
-          && details.requested.module.name == "kotlinx-collections-immutable-jvm") {
-        // kotlinx-collections-immutable-jvm 0.3.4+ is available on Maven Central
-        details.useVersion "0.3.4"
-      }
-      // Can be removed when SQL Delight upgrades kotlin version.
-      if (details.requested.group == "org.jetbrains.kotlin"
-          && details.requested.module.name.startsWith("kotlin-stdlib")) {
-        details.useVersion libs.versions.kotlin.get()
-      }
-      // Forcing compose to one version.
-      if (details.requested.group.startsWith("androidx.compose")) {
-        details.useVersion libs.versions.compose.get()
-      }
-      // Forcing lifecycle to one version.
-      if (details.requested.group.startsWith("androidx.lifecycle")) {
-        details.useVersion libs.versions.lifecycle.get()
+  plugins.withId('java-base') {
+    java {
+      toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
       }
     }
   }
 
-  apply plugin: "com.diffplug.spotless"
-  apply plugin: "io.gitlab.arturbosch.detekt"
-
-  tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
-    kotlinOptions {
+  tasks.withType(KotlinCompile).configureEach { task ->
+    task.kotlinOptions {
+      jvmTarget = "11"
       allWarningsAsErrors = true
 
       freeCompilerArgs += "-XXLanguage:+NewInference"
       freeCompilerArgs += "-progressive"
-
-      jvmTarget = "11"
     }
   }
 
   plugins.withType(com.android.build.gradle.BasePlugin).configureEach { plugin ->
-    def extension = project.extensions.getByName("android") as BaseExtension
-    extension.compileOptions {
+    def android = plugin.extension
+
+    android.compileOptions {
       sourceCompatibility = JavaVersion.VERSION_11
       targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    android.compileSdkVersion buildConfig.compileSdk
+
+    android.defaultConfig {
+      minSdkVersion buildConfig.minSdk
+      targetSdkVersion buildConfig.targetSdk
     }
   }
 
@@ -122,18 +110,15 @@ subprojects {
   //  }
   //}
 
-  spotless {
-    kotlin {
-      target "src/**/*.kt"
-      def userData = [
-          "indent_size"             : "2",
-          "continuation_indent_size": "4",
-          "insert_final_newline"    : "true",
-      ]
-      ktlint("0.43.2").userData(userData)
-    }
+  apply plugin: "org.jmailen.kotlinter"
+  tasks.withType(org.jmailen.gradle.kotlinter.tasks.LintTask) {
+    exclude { it.file.path.contains("generated/") }
+  }
+  tasks.withType(org.jmailen.gradle.kotlinter.tasks.FormatTask) {
+    exclude { it.file.path.contains("generated/") }
   }
 
+  apply plugin: "io.gitlab.arturbosch.detekt"
   detekt {
     config = files("${rootDir}/detekt.yml")
     // Treat config file as an override for the default config.

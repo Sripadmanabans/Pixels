@@ -49,19 +49,16 @@ android {
 archivesBaseName = "theme-public"
 
 dependencies {
-  implementation libs.compose.foundation.foundation
+  implementation libs.androidx.compose.material3
 
-  implementation libs.compose.material.material
+  implementation libs.androidx.compose.runtime
 
-  implementation libs.compose.runtime.runtime
+  implementation libs.androidx.compose.ui.text
+  implementation libs.androidx.compose.ui.ui
 
-  implementation libs.compose.ui.text
-  implementation libs.compose.ui.ui
-  implementation libs.compose.ui.unit
-
-  androidTestImplementation libs.compose.ui.test.core
-  androidTestImplementation libs.compose.ui.test.junit
-  androidTestImplementation libs.compose.ui.test.manifest
+  androidTestImplementation libs.androidx.compose.ui.test.core
+  androidTestImplementation libs.androidx.compose.ui.test.junit
+  androidTestImplementation libs.androidx.compose.ui.test.manifest
 
   androidTestImplementation libs.androidx.test.espresso.core
   androidTestRuntimeOnly libs.androidx.test.runner

@@ -13,14 +13,14 @@ import com.squareup.workflow1.StatefulWorkflow
 import com.squareup.workflow1.action
 import com.squareup.workflow1.asWorker
 import com.squareup.workflow1.runningWorker
+import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 
 @ContributesBinding(
   scope = ActivityScope::class,
-  boundType = GalleriesWorkflow::class
+  boundType = GalleriesWorkflow::class,
 )
 public class GalleriesWorkflowImpl @Inject constructor(
   private val repository: GalleryRepository,
@@ -35,7 +35,7 @@ public class GalleriesWorkflowImpl @Inject constructor(
   override fun render(
     renderProps: Unit,
     renderState: GalleriesState,
-    context: RenderContext
+    context: RenderContext,
   ): GalleriesScreen {
     return when (renderState) {
       is GalleriesState.Data -> {

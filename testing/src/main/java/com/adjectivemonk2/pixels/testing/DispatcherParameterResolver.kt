@@ -18,14 +18,14 @@ public class DispatcherParameterResolver :
 
   override fun supportsParameter(
     parameterContext: ParameterContext,
-    extensionContext: ExtensionContext?
+    extensionContext: ExtensionContext?,
   ): Boolean {
     return parameterContext.parameter.type == TestDispatcher::class.java
   }
 
   override fun resolveParameter(
     parameterContext: ParameterContext?,
-    extensionContext: ExtensionContext?
+    extensionContext: ExtensionContext?,
   ): Any {
     return dispatcher!!
   }

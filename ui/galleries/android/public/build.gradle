@@ -29,7 +29,7 @@ archivesBaseName = "ui-galleries-android-public"
 dependencies {
   api projects.ui.galleries.common.public
 
-  api libs.compose.runtime.runtime
+  api libs.androidx.compose.runtime
 
   api libs.workflow.ui.compose.core
 }

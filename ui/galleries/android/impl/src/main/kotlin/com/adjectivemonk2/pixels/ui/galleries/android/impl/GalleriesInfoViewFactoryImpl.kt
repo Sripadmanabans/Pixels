@@ -10,8 +10,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -74,7 +74,7 @@ public class GalleriesInfoViewFactoryImpl @Inject constructor() : GalleriesInfoV
         Image(
           painter = painter,
           contentDescription = stringResource(id = R.string.profile_image),
-          modifier = Modifier.size(48.dp)
+          modifier = Modifier.size(48.dp),
         )
         Text(text = galleryListItem.userId)
       }
@@ -84,7 +84,8 @@ public class GalleriesInfoViewFactoryImpl @Inject constructor() : GalleriesInfoV
 
 @Preview(name = "Gallery Single Item Light Preview")
 @Preview(name = "Gallery Single Item Dark Preview", uiMode = UI_MODE_NIGHT_YES)
-@Composable internal fun GalleryItemPreview(
+@Composable
+internal fun GalleryItemPreview(
   @PreviewParameter(GalleryItemParameterProvider::class) galleryItem: GalleryListItem,
 ) {
   val factory = GalleriesInfoViewFactoryImpl()
@@ -93,7 +94,8 @@ public class GalleriesInfoViewFactoryImpl @Inject constructor() : GalleriesInfoV
 
 @Preview(name = "Gallery List Light Preview")
 @Preview(name = "Gallery List Dark Preview", uiMode = UI_MODE_NIGHT_YES)
-@Composable internal fun GalleryListPreview(
+@Composable
+internal fun GalleryListPreview(
   @PreviewParameter(GalleryItemParameterProvider::class) galleryItem: GalleryListItem,
 ) {
   val factory = GalleriesInfoViewFactoryImpl()
@@ -109,7 +111,7 @@ internal class GalleryItemParameterProvider : PreviewParameterProvider<GalleryLi
         accountImageUrl = "https://www.w3schools.com/howto/img_avatar2.png",
         mediaItem = MediaItem.Image(
           id = "sample",
-          url = "https://www.w3schools.com/howto/img_avatar.png"
+          url = "https://www.w3schools.com/howto/img_avatar.png",
         ),
         title = "Sample one",
         showDownArrow = false,

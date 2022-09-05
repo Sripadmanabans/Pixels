@@ -7,9 +7,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.material.Button
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,7 +37,7 @@ public class GalleriesErrorViewFactoryImpl @Inject constructor() : GalleriesErro
           .wrapContentSize()
           .animateContentSize()
           .padding(12.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
       ) {
         Image(
           painter = painterResource(id = R.drawable.error),
@@ -54,7 +54,8 @@ public class GalleriesErrorViewFactoryImpl @Inject constructor() : GalleriesErro
 
 @Preview(name = "Error dark mode", uiMode = UI_MODE_NIGHT_YES)
 @Preview(name = "Error light mode")
-@Composable private fun ErrorLightPreview() {
+@Composable
+private fun ErrorLightPreview() {
   val factory = GalleriesErrorViewFactoryImpl()
   PixelsTheme { factory.Preview(Error("Error message")) }
 }
