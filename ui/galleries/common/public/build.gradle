@@ -1,22 +1,5 @@
-apply plugin: "com.android.library"
-apply plugin: "org.jetbrains.kotlin.android"
+apply plugin: "org.jetbrains.kotlin.jvm"
 apply plugin: "com.squareup.anvil"
-
-android {
-  buildFeatures {
-    buildConfig false
-    compose true
-    resValues false
-  }
-
-  composeOptions {
-    kotlinCompilerExtensionVersion libs.versions.compose.get()
-  }
-
-  kotlinOptions {
-    freeCompilerArgs += "-Xexplicit-api=strict"
-  }
-}
 
 anvil {
   generateDaggerFactories = true
@@ -27,8 +10,12 @@ archivesBaseName = "ui-galleries-common-public"
 dependencies {
   api projects.model.gallery.public
 
-  api libs.androidx.compose.runtime
+  api libs.jetbrains.compose.runtime
   api libs.workflow.core
 
   implementation libs.dagger.runtime
+}
+
+kotlin {
+  explicitApi()
 }

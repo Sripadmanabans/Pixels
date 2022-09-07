@@ -1,27 +1,12 @@
-apply plugin: "com.android.library"
-apply plugin: "org.jetbrains.kotlin.android"
-
-android {
-  buildFeatures {
-    buildConfig false
-    resValues false
-  }
-
-  compileSdkVersion buildConfig.compileSdk
-
-  defaultConfig {
-    minSdkVersion buildConfig.minSdk
-    targetSdkVersion buildConfig.targetSdk
-  }
-
-  kotlinOptions {
-    freeCompilerArgs += "-Xexplicit-api=strict"
-  }
-}
+apply plugin: "org.jetbrains.kotlin.jvm"
 
 archivesBaseName = "ui-galleries-common-impl-wiring"
 
 dependencies {
   api projects.ui.galleries.common.public
   api projects.ui.galleries.common.impl
+}
+
+kotlin {
+  explicitApi()
 }
