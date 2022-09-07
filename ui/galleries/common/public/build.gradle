@@ -10,10 +10,10 @@ archivesBaseName = "ui-galleries-common-public"
 dependencies {
   api projects.model.gallery.public
 
-  api libs.jetbrains.compose.runtime
   api libs.workflow.core
 
   implementation libs.dagger.runtime
+  implementation libs.jetbrains.compose.runtime
 }
 
 kotlin {
