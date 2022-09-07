@@ -1,37 +1,5 @@
-apply plugin: "com.android.library"
-apply plugin: "org.jetbrains.kotlin.android"
+apply plugin: "org.jetbrains.kotlin.jvm"
 apply plugin: "com.squareup.anvil"
-
-android {
-  buildFeatures {
-    buildConfig false
-    compose true
-    resValues false
-  }
-
-  compileSdkVersion buildConfig.compileSdk
-
-  composeOptions {
-    kotlinCompilerExtensionVersion libs.versions.compose.get()
-  }
-
-  defaultConfig {
-    minSdkVersion buildConfig.minSdk
-    targetSdkVersion buildConfig.targetSdk
-  }
-
-  kotlinOptions {
-    freeCompilerArgs += "-Xexplicit-api=strict"
-  }
-
-  testOptions {
-    unitTests {
-      all {
-        useJUnitPlatform()
-      }
-    }
-  }
-}
 
 anvil {
   generateDaggerFactories = true
@@ -62,6 +30,8 @@ dependencies {
 }
 
 kotlin {
+  explicitApi()
+
   sourceSets.all {
     languageSettings {
       optIn("com.squareup.workflow1.ui.WorkflowUiExperimentalApi")
@@ -69,3 +39,8 @@ kotlin {
     }
   }
 }
+
+test {
+  useJUnitPlatform()
+}
+

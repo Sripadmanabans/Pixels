@@ -29,6 +29,7 @@ buildscript {
     classpath libs.anvil.classpath
     classpath libs.ben.classpath
     classpath libs.detekt.classpath
+    classpath libs.jetbrains.compose.classpath
     classpath libs.junit5.android.classpath
     classpath libs.kotlin.classpath
     classpath libs.kotlinter.classpath
@@ -39,7 +40,6 @@ buildscript {
 
 plugins {
   id "com.github.ben-manes.versions" version "0.42.0"
-  id "com.google.devtools.ksp" version "1.7.10-1.0.6"
 }
 
 allprojects {
