@@ -1,5 +1,7 @@
-apply plugin: "org.jetbrains.kotlin.jvm"
-apply plugin: "com.google.devtools.ksp"
+plugins {
+  alias libs.plugins.kotlin.jvm
+  alias libs.plugins.ksp
+}
 
 archivesBaseName = "model-gallery-public"
 

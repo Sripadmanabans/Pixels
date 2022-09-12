@@ -1,5 +1,7 @@
-apply plugin: "org.jetbrains.kotlin.jvm"
-apply plugin: "com.squareup.anvil"
+plugins {
+  alias libs.plugins.kotlin.jvm
+  alias libs.plugins.square.anvil
+}
 
 archivesBaseName = "scope-public"
 
