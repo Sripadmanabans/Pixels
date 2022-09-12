@@ -25,21 +25,32 @@ buildscript {
   }
 
   dependencies {
-    classpath libs.android.classpath
-    classpath libs.anvil.classpath
-    classpath libs.ben.classpath
+    // FIXME: Need to remove this more info at (https://github.com/Sripadmanabans/Pixels/issues/30)
     classpath libs.detekt.classpath
-    classpath libs.jetbrains.compose.classpath
-    classpath libs.junit5.android.classpath
-    classpath libs.kotlin.classpath
     classpath libs.kotlinter.classpath
-    classpath libs.sqlDelight.classpath
-    classpath libs.google.ksp.classpath
   }
 }
 
 plugins {
-  id "com.github.ben-manes.versions" version "0.42.0"
+  alias libs.plugins.ben.gradle apply true
+
+  alias libs.plugins.android.application apply false
+  alias libs.plugins.android.junit5 apply false
+  alias libs.plugins.android.library apply false
+
+  alias libs.plugins.compose apply false
+
+  alias libs.plugins.detekt apply false
+
+  alias libs.plugins.kotlin.android apply false
+  alias libs.plugins.kotlin.jvm apply false
+  alias libs.plugins.kotlin.kapt apply false
+  alias libs.plugins.kotlinter apply false
+
+  alias libs.plugins.ksp apply false
+
+  alias libs.plugins.square.anvil apply false
+  alias libs.plugins.square.sqldelight apply false
 }
 
 subprojects {

@@ -1,6 +1,8 @@
-apply plugin: "com.android.library"
-apply plugin: "org.jetbrains.kotlin.android"
-apply plugin: "com.squareup.anvil"
+plugins {
+  alias libs.plugins.android.library
+  alias libs.plugins.kotlin.android
+  alias libs.plugins.square.anvil
+}
 
 android {
   buildFeatures {

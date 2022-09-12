@@ -1,6 +1,8 @@
-apply plugin: "com.android.library"
-apply plugin: "de.mannodermaus.android-junit5"
-apply plugin: "org.jetbrains.kotlin.android"
+plugins {
+  alias libs.plugins.android.junit5
+  alias libs.plugins.android.library
+  alias libs.plugins.kotlin.android
+}
 
 android {
   buildFeatures {
