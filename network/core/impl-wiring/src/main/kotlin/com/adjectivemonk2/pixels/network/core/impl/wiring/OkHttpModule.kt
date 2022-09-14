@@ -8,11 +8,11 @@ import com.jakewharton.byteunits.BinaryByteUnit
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
-import java.io.File
 import logcat.logcat
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import java.io.File
 
 @Module
 @ContributesTo(AppScope::class)

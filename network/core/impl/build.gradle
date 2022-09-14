@@ -1,31 +1,16 @@
 plugins {
-  alias libs.plugins.android.library
-  alias libs.plugins.kotlin.android
-  alias libs.plugins.square.anvil
+  id "com.adjectivemonk2.android.lib"
+  id "com.adjectivemonk2.anvil.lib"
 }
 
 android {
   buildFeatures {
     buildConfig true
-    resValues false
   }
-
-  compileSdkVersion buildConfig.compileSdk
 
   defaultConfig {
-    minSdkVersion buildConfig.minSdk
-    targetSdkVersion buildConfig.targetSdk
-
     buildConfigField "String", "PIXELS_CLIENT_ID", "\"${propOrEmpty("PIXELS_CLIENT_ID")}\""
   }
-
-  kotlinOptions {
-    freeCompilerArgs += "-Xexplicit-api=strict"
-  }
-}
-
-anvil {
-  generateDaggerFactories = true
 }
 
 archivesBaseName = "network-core-impl"
@@ -37,6 +22,4 @@ dependencies {
 
   implementation libs.moshi.client
   implementation libs.okhttp.client
-
-  implementation libs.dagger.runtime
 }

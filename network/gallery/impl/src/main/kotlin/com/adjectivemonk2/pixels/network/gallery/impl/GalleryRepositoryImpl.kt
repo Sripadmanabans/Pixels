@@ -8,9 +8,9 @@ import com.adjectivemonk2.pixels.network.gallery.Window
 import com.adjectivemonk2.pixels.scope.AppScope
 import com.adjectivemonk2.pixels.scope.SingleIn
 import com.squareup.anvil.annotations.ContributesBinding
-import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
 @SingleIn(AppScope::class)
 @ContributesBinding(AppScope::class)

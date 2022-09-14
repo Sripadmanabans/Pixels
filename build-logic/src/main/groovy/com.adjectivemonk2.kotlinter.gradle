@@ -1,0 +1,11 @@
+plugins {
+  id "org.jmailen.kotlinter"
+}
+
+lintKotlinMain {
+  exclude { it.file.path.contains("generated") }
+}
+
+formatKotlinMain {
+  exclude { it.file.path.contains("generated") }
+}

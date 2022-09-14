@@ -1,8 +1,8 @@
 style:
-  # This is picking up @Preview annotated methods of compose as unused
   UnusedPrivateMember:
-    active: false
+    active: true
+    ignoreAnnotated: [ "Preview" ]
 naming:
-  # This is picking up @Compose as having the wrong function name
   FunctionNaming:
-    active: false
+    active: true
+    ignoreAnnotated: [ "Composable" ]

@@ -1,26 +1,18 @@
 plugins {
-  alias libs.plugins.kotlin.jvm
+  id "com.adjectivemonk2.jvm.lib"
+  id "com.adjectivemonk2.jvm.test.lib"
 }
 
 archivesBaseName = "testing"
 
 dependencies {
   implementation libs.kotlin.coroutines.test
-
-  implementation libs.junit5.jupiter.api
-  runtimeOnly libs.junit5.jupiter.runtime
 }
 
 kotlin {
-  explicitApi()
-
   sourceSets.all {
     languageSettings {
       optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
     }
   }
-}
-
-test {
-  useJUnitPlatform()
 }

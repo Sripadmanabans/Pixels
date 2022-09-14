@@ -1,0 +1,82 @@
+plugins {
+  id "com.android.application"
+  id "org.jetbrains.kotlin.android"
+  id "com.adjectivemonk2.detekt"
+  id "com.adjectivemonk2.kotlinter"
+}
+
+android {
+  buildFeatures {
+    compose true
+  }
+
+  buildTypes {
+    debug {
+      applicationIdSuffix ".debug"
+      signingConfig signingConfigs.debug
+    }
+    release {
+      if (file("keystore/upload.keystore").exists()) {
+        signingConfig signingConfigs.upload
+      } else {
+        signingConfig signingConfigs.debug
+      }
+
+      minifyEnabled true
+      shrinkResources true
+    }
+  }
+
+  compileOptions {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+  }
+
+  compileSdkVersion buildConfig.compileSdk
+
+  composeOptions {
+    kotlinCompilerExtensionVersion libs.versions.compose.get()
+  }
+
+  defaultConfig {
+    minSdkVersion buildConfig.minSdk
+    targetSdkVersion buildConfig.targetSdk
+    versionCode buildConfig.version.code
+    versionName buildConfig.version.name
+  }
+
+  kotlinOptions {
+    jvmTarget = "11"
+    allWarningsAsErrors = true
+
+    freeCompilerArgs += "-XXLanguage:+NewInference"
+    freeCompilerArgs += "-progressive"
+    freeCompilerArgs += "-Xexplicit-api=strict"
+  }
+
+  packagingOptions {
+    resources {
+      exclude "META-INF/AL2.0"
+      exclude "META-INF/LGPL2.1"
+      exclude "META-INF/LICENSE*"
+    }
+  }
+
+  signingConfigs {
+    debug {
+      storeFile file("keystore/debug.keystore")
+      storePassword "pixels"
+      keyAlias "pixels"
+      keyPassword "pixels"
+    }
+
+    if (file("keystore/upload.keystore").exists()) {
+      upload {
+        storeFile file("keystore/upload.keystore")
+        storePassword propOrEmpty("PIXELS_STORE_PASSWORD")
+        keyAlias propOrEmpty("PIXELS_KEY_ALIAS")
+        keyPassword propOrEmpty("PIXELS_KEY_PASSWORD")
+      }
+    }
+  }
+}

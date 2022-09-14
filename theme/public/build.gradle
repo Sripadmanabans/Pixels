@@ -1,76 +1,10 @@
 plugins {
-  alias libs.plugins.android.junit5
-  alias libs.plugins.android.library
-  alias libs.plugins.kotlin.android
-}
-
-android {
-  buildFeatures {
-    buildConfig false
-    compose true
-    resValues false
-  }
-
-  compileSdkVersion buildConfig.compileSdk
-
-  composeOptions {
-    kotlinCompilerExtensionVersion libs.versions.compose.get()
-  }
-
-  defaultConfig {
-    minSdkVersion buildConfig.minSdk
-    targetSdkVersion buildConfig.targetSdk
-
-    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-    // The following argument makes the Android Test Orchestrator run its
-    // "pm clear" command after each test invocation. This command ensures
-    // that the app's state is completely cleared between tests.
-    testInstrumentationRunnerArguments clearPackageData: "true"
-    // Connect JUnit 5 to the runner
-    testInstrumentationRunnerArguments runnerBuilder: "de.mannodermaus.junit5.AndroidJUnit5Builder"
-  }
-
-  kotlinOptions {
-    freeCompilerArgs += "-Xexplicit-api=strict"
-  }
-
-  packagingOptions {
-    resources {
-      exclude "META-INF/AL2.0"
-      exclude "META-INF/LGPL2.1"
-    }
-  }
-
-  testOptions {
-    animationsDisabled true
-    execution "ANDROIDX_TEST_ORCHESTRATOR"
-  }
+  id "com.adjectivemonk2.android.compose.lib"
+  id "com.adjectivemonk2.android.compose.test.lib"
 }
 
 archivesBaseName = "theme-public"
 
 dependencies {
   implementation libs.androidx.compose.material3
-
-  implementation libs.androidx.compose.runtime
-
-  implementation libs.androidx.compose.ui.text
-  implementation libs.androidx.compose.ui.ui
-
-  androidTestImplementation libs.androidx.compose.ui.test.core
-  androidTestImplementation libs.androidx.compose.ui.test.junit
-  androidTestImplementation libs.androidx.compose.ui.test.manifest
-
-  androidTestImplementation libs.androidx.test.espresso.core
-  androidTestRuntimeOnly libs.androidx.test.runner
-
-  androidTestImplementation libs.junit5.android.compose
-  androidTestImplementation libs.junit5.android.core
-  androidTestRuntimeOnly libs.junit5.android.runner
-
-  androidTestImplementation libs.junit5.jupiter.api
-  androidTestRuntimeOnly libs.junit5.jupiter.runtime
-
-  androidTestUtil libs.androidx.test.orchestrator
 }

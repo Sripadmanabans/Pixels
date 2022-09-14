@@ -1,10 +1,6 @@
 plugins {
-  alias libs.plugins.kotlin.jvm
-  alias libs.plugins.square.anvil
-}
-
-anvil {
-  generateDaggerFactories = true
+  id "com.adjectivemonk2.jvm.lib"
+  id "com.adjectivemonk2.anvil.lib"
 }
 
 archivesBaseName = "ui-galleries-common-public"
@@ -14,10 +10,5 @@ dependencies {
 
   api libs.workflow.core
 
-  implementation libs.dagger.runtime
   implementation libs.jetbrains.compose.runtime
-}
-
-kotlin {
-  explicitApi()
 }

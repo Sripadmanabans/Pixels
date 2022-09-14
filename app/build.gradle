@@ -1,82 +1,8 @@
 plugins {
-  alias libs.plugins.android.application
-  alias libs.plugins.kotlin.android
-  alias libs.plugins.kotlin.kapt
-  alias libs.plugins.square.anvil
-  alias libs.plugins.square.sqldelight
-}
-
-android {
-  buildFeatures {
-    compose true
-  }
-
-  buildTypes {
-    debug {
-      applicationIdSuffix ".debug"
-      signingConfig signingConfigs.debug
-    }
-    release {
-      if (file("keystore/upload.keystore").exists()) {
-        signingConfig signingConfigs.upload
-      } else {
-        signingConfig signingConfigs.debug
-      }
-
-      minifyEnabled true
-      shrinkResources true
-    }
-  }
-
-  compileSdkVersion buildConfig.compileSdk
-
-  composeOptions {
-    kotlinCompilerExtensionVersion libs.versions.compose.get()
-  }
-
-  defaultConfig {
-    minSdkVersion buildConfig.minSdk
-    targetSdkVersion buildConfig.targetSdk
-    versionCode buildConfig.version.code
-    versionName buildConfig.version.name
-
-    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-    // The following argument makes the Android Test Orchestrator run its
-    // "pm clear" command after each test invocation. This command ensures
-    // that the app's state is completely cleared between tests.
-    testInstrumentationRunnerArguments clearPackageData: "true"
-  }
-
-  packagingOptions {
-    resources {
-      exclude "META-INF/AL2.0"
-      exclude "META-INF/LGPL2.1"
-    }
-  }
-
-  signingConfigs {
-    debug {
-      storeFile file("keystore/debug.keystore")
-      storePassword "pixels"
-      keyAlias "pixels"
-      keyPassword "pixels"
-    }
-
-    if (file("keystore/upload.keystore").exists()) {
-      upload {
-        storeFile file("keystore/upload.keystore")
-        storePassword propOrEmpty("PIXELS_STORE_PASSWORD")
-        keyAlias propOrEmpty("PIXELS_KEY_ALIAS")
-        keyPassword propOrEmpty("PIXELS_KEY_PASSWORD")
-      }
-    }
-  }
-
-  testOptions {
-    animationsDisabled true
-    execution "ANDROIDX_TEST_ORCHESTRATOR"
-  }
+  id "com.adjectivemonk2.android.application"
+  id "org.jetbrains.kotlin.kapt"
+  id "com.squareup.anvil"
+  id "com.squareup.sqldelight"
 }
 
 dependencies {
@@ -96,8 +22,6 @@ dependencies {
 
   implementation projects.ui.galleries.android.implWiring
   implementation projects.ui.galleries.common.implWiring
-
-  implementation libs.kotlin.stdlib.common
 
   implementation libs.androidx.activity.compose
   implementation libs.androidx.fragment.ktx
@@ -120,20 +44,6 @@ dependencies {
   implementation libs.sqlDelight.android
 
   debugImplementation libs.leakCanary
-
-  testImplementation libs.junit5.jupiter.api
-  testRuntimeOnly libs.junit5.jupiter.runtime
-  testImplementation libs.truth
-
-  androidTestImplementation libs.androidx.compose.ui.test.core
-  androidTestImplementation libs.androidx.compose.ui.test.junit
-
-  androidTestImplementation libs.androidx.test.espresso.core
-  androidTestImplementation libs.androidx.test.junit
-  androidTestImplementation libs.androidx.test.rules
-  androidTestRuntimeOnly libs.androidx.test.runner
-
-  androidTestUtil libs.androidx.test.orchestrator
 }
 
 kapt {

@@ -1,0 +1,32 @@
+plugins {
+  id "com.adjectivemonk2.android.lib"
+}
+
+android {
+  buildFeatures {
+    compose true
+  }
+
+  composeOptions {
+    kotlinCompilerExtensionVersion libs.versions.compose.get()
+  }
+
+  kotlinOptions {
+    if (project.findProperty("pixels.enableComposeCompilerReports") == "true") {
+      freeCompilerArgs += [
+        "-P",
+        "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=" +
+          buildDir.absolutePath + "/compose_metrics"
+      ]
+      freeCompilerArgs += [
+        "-P",
+        "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=" +
+          buildDir.absolutePath + "/compose_metrics"
+      ]
+    }
+  }
+}
+
+dependencies {
+  implementation libs.androidx.compose.runtime
+}

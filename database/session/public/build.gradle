@@ -1,5 +1,5 @@
 plugins {
-  alias libs.plugins.kotlin.jvm
+  id "com.adjectivemonk2.jvm.lib"
 }
 
 archivesBaseName = "database-session-public"
@@ -10,8 +10,6 @@ dependencies {
 }
 
 kotlin {
-  explicitApi()
-
   sourceSets.all {
     languageSettings {
       optIn("kotlin.time.ExperimentalTime")

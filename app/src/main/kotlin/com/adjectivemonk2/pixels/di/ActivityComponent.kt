@@ -8,4 +8,4 @@ import com.squareup.anvil.annotations.MergeSubcomponent
 
 @SingleIn(ActivityScope::class)
 @MergeSubcomponent(ActivityScope::class)
-interface ActivityComponent : Injector<PixelActivity>
+public interface ActivityComponent : Injector<PixelActivity>

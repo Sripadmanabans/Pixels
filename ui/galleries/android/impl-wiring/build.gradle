@@ -1,34 +1,6 @@
 plugins {
-  alias libs.plugins.android.library
-  alias libs.plugins.kotlin.android
-  alias libs.plugins.square.anvil
-}
-
-android {
-  buildFeatures {
-    buildConfig false
-    compose true
-    resValues false
-  }
-
-  compileSdkVersion buildConfig.compileSdk
-
-  composeOptions {
-    kotlinCompilerExtensionVersion libs.versions.compose.get()
-  }
-
-  defaultConfig {
-    minSdkVersion buildConfig.minSdk
-    targetSdkVersion buildConfig.targetSdk
-  }
-
-  kotlinOptions {
-    freeCompilerArgs += "-Xexplicit-api=strict"
-  }
-}
-
-anvil {
-  generateDaggerFactories = true
+  id "com.adjectivemonk2.android.compose.lib"
+  id "com.adjectivemonk2.anvil.lib"
 }
 
 archivesBaseName = "ui-galleries-android-impl-wiring"
@@ -38,8 +10,6 @@ dependencies {
   api projects.ui.galleries.android.impl
 
   implementation projects.scope.public
-
-  implementation libs.dagger.runtime
 
   implementation libs.workflow.ui.core.android
 }

@@ -1,0 +1,12 @@
+plugins {
+  id "com.adjectivemonk2.android.compose.lib"
+  id "com.adjectivemonk2.android.test.lib"
+}
+
+dependencies {
+  androidTestImplementation libs.androidx.compose.ui.test.core
+  androidTestImplementation libs.androidx.compose.ui.test.junit
+  androidTestImplementation libs.androidx.compose.ui.test.manifest
+
+  androidTestImplementation libs.junit5.android.compose
+}

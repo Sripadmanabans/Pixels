@@ -1,9 +1,9 @@
 package com.adjectivemonk2.pixels.network.core.impl.interceptor
 
 import com.adjectivemonk2.pixels.network.core.impl.BuildConfig
-import javax.inject.Inject
 import okhttp3.Interceptor
 import okhttp3.Response
+import javax.inject.Inject
 
 public class AuthInterceptor @Inject constructor() : Interceptor {
 

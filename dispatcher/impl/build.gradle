@@ -1,13 +1,9 @@
 plugins {
-  alias libs.plugins.kotlin.jvm
+  id "com.adjectivemonk2.jvm.lib"
 }
 
 archivesBaseName = "dispatcher-impl"
 
 dependencies {
   implementation projects.dispatcher.public
-}
-
-kotlin {
-  explicitApi()
 }

@@ -45,23 +45,23 @@ ksp = "1.7.10-1.0.6"
 logcat = "0.1"
 
 # Testing Components
-androidxJunit = "1.1.4-alpha07"
-espresso = "3.5.0-alpha07"
 androidJunit5 = "1.3.0"
-androidJunit5Plugin = "1.8.2.1"
 androidJunit5Compose = "1.0.0-SNAPSHOT"
+androidJunit5Plugin = "1.8.2.1"
 androidxOrchestrator = "1.4.2-alpha04"
+androidxJunit = "1.1.4-alpha07"
 androidxRules = "1.4.1-alpha07"
 androidxRunner = "1.5.0-alpha04"
 androidxTest = "1.5.0-alpha02"
+espresso = "3.5.0-alpha07"
 junit5 = "5.9.0"
 truth = "1.1.3"
 
 # Code Health Components
 ben = "0.42.0"
 detekt = "1.21.0"
+kotlinter = "3.12.0"
 leakCanary = "2.9.1"
-kotlinter = "3.11.1"
 
 [libraries]
 accompanist-drawable = { module = "com.google.accompanist:accompanist-drawablepainter", version.ref = "accompanist" }
@@ -104,7 +104,6 @@ coil-gif = { module = "io.coil-kt:coil-gif", version.ref = "coil" }
 
 dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
 dagger-runtime = { module = "com.google.dagger:dagger", version.ref = "dagger" }
-detekt-classpath = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 
 jetbrains-compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "composeJetbrains" }
 junit5-android-compose = { module = "de.mannodermaus.junit5:android-test-compose", version.ref = "androidJunit5Compose" }
@@ -117,9 +116,7 @@ kotlin-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines
 kotlin-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlin-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 kotlin-extensions = { module = "org.jetbrains.kotlin:kotlin-android-extensions", version.ref = "kotlin" }
-kotlin-stdlib-common = { module = "org.jetbrains.kotlin:kotlin-stdlib-common", version.ref = "kotlin" }
 kotlin-time = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "time" }
-kotlinter-classpath = { module = "org.jmailen.gradle:kotlinter-gradle", version.ref = "kotlinter" }
 
 leakCanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakCanary" }
 logcat = { module = "com.squareup.logcat:logcat", version.ref = "logcat" }
@@ -165,6 +162,8 @@ ben-gradle = { id = "com.github.ben-manes.versions", version.ref = "ben" }
 compose = { id = "org.jetbrains.compose", version.ref = "composeJetbrains" }
 
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+
+groovy = { id = "dev.gradleplugins.groovy-gradle-plugin", version = "1.6.7" }
 
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

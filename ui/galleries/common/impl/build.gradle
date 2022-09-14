@@ -1,10 +1,7 @@
 plugins {
-  alias libs.plugins.kotlin.jvm
-  alias libs.plugins.square.anvil
-}
-
-anvil {
-  generateDaggerFactories = true
+  id "com.adjectivemonk2.jvm.lib"
+  id "com.adjectivemonk2.jvm.test.lib"
+  id "com.adjectivemonk2.anvil.lib"
 }
 
 archivesBaseName = "ui-galleries-common-impl"
@@ -16,8 +13,6 @@ dependencies {
   implementation projects.network.gallery.public
   implementation projects.scope.public
 
-  implementation libs.dagger.runtime
-
   implementation libs.workflow.ui.core.common
 
   testImplementation projects.network.gallery.fake
@@ -25,23 +20,13 @@ dependencies {
 
   testImplementation libs.kotlin.coroutines.test
   testImplementation libs.workflow.test
-
-  testImplementation libs.junit5.jupiter.api
-  testRuntimeOnly libs.junit5.jupiter.runtime
-  testImplementation libs.truth
 }
 
 kotlin {
-  explicitApi()
-
   sourceSets.all {
     languageSettings {
       optIn("com.squareup.workflow1.ui.WorkflowUiExperimentalApi")
       optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
     }
   }
-}
-
-test {
-  useJUnitPlatform()
 }

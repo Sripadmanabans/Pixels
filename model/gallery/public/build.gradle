@@ -1,20 +1,6 @@
 plugins {
-  alias libs.plugins.kotlin.jvm
-  alias libs.plugins.ksp
+  id "com.adjectivemonk2.jvm.lib"
+  id "com.adjectivemonk2.moshi.lib"
 }
 
-archivesBaseName = "model-gallery-public"
-
-dependencies {
-  implementation libs.kotlin.stdlib.common
-
-  implementation libs.moshi.adapters
-  ksp libs.moshi.codegen
-
-  implementation libs.moshix.sealed.runtime
-  ksp libs.moshix.sealed.codegen
-}
-
-kotlin {
-  explicitApi()
-}
+archivesBaseName = "model-core-public"
