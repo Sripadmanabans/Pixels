@@ -1,29 +1,6 @@
 plugins {
-  alias libs.plugins.android.library
-  alias libs.plugins.kotlin.android
-  alias libs.plugins.square.anvil
-}
-
-android {
-  buildFeatures {
-    buildConfig false
-    resValues false
-  }
-
-  compileSdkVersion buildConfig.compileSdk
-
-  defaultConfig {
-    minSdkVersion buildConfig.minSdk
-    targetSdkVersion buildConfig.targetSdk
-  }
-
-  kotlinOptions {
-    freeCompilerArgs += "-Xexplicit-api=strict"
-  }
-}
-
-anvil {
-  generateDaggerFactories = true
+  id "com.adjectivemonk2.android.lib"
+  id "com.adjectivemonk2.anvil.lib"
 }
 
 archivesBaseName = "dispatcher-impl-wiring"
@@ -33,6 +10,4 @@ dependencies {
   api projects.dispatcher.impl
 
   implementation projects.scope.public
-
-  implementation libs.dagger.runtime
 }

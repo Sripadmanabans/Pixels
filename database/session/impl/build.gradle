@@ -1,11 +1,7 @@
 plugins {
-  alias libs.plugins.kotlin.jvm
-  alias libs.plugins.square.anvil
-  alias libs.plugins.square.sqldelight
-}
-
-anvil {
-  generateDaggerFactories = true
+  id "com.adjectivemonk2.jvm.lib"
+  id "com.adjectivemonk2.anvil.lib"
+  id "com.adjectivemonk2.sqldelight.lib"
 }
 
 archivesBaseName = "database-session-impl"
@@ -14,18 +10,11 @@ dependencies {
   api projects.database.session.public
   api projects.scope.public
 
-  implementation libs.dagger.runtime
-
   implementation libs.kotlin.coroutines.core
   implementation libs.kotlin.time
-
-  implementation libs.sqlDelight.runtime
-  implementation libs.sqlDelight.coroutines
 }
 
 kotlin {
-  explicitApi()
-
   sourceSets.all {
     languageSettings {
       optIn("kotlin.time.ExperimentalTime")

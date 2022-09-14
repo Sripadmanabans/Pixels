@@ -1,14 +1,9 @@
 plugins {
-  alias libs.plugins.kotlin.jvm
-  alias libs.plugins.square.anvil
+  id "com.adjectivemonk2.jvm.lib"
 }
 
 archivesBaseName = "scope-public"
 
 dependencies {
   implementation libs.dagger.runtime
-}
-
-kotlin {
-  explicitApi()
 }

@@ -1,29 +1,6 @@
 plugins {
-  alias libs.plugins.android.library
-  alias libs.plugins.kotlin.android
-  alias libs.plugins.square.anvil
-}
-
-apply plugin: "com.android.library"
-apply plugin: "org.jetbrains.kotlin.android"
-apply plugin: "com.squareup.anvil"
-
-android {
-  buildFeatures {
-    buildConfig false
-    resValues false
-  }
-
-  compileSdkVersion buildConfig.compileSdk
-
-  defaultConfig {
-    minSdkVersion buildConfig.minSdk
-    targetSdkVersion buildConfig.targetSdk
-  }
-
-  kotlinOptions {
-    freeCompilerArgs += "-Xexplicit-api=strict"
-  }
+  id "com.adjectivemonk2.android.lib"
+  id "com.adjectivemonk2.anvil.lib"
 }
 
 archivesBaseName = "database-session-impl-wiring"
@@ -31,6 +8,4 @@ archivesBaseName = "database-session-impl-wiring"
 dependencies {
   api projects.database.session.public
   api projects.database.session.impl
-
-  implementation libs.dagger.runtime
 }

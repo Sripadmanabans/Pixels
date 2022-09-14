@@ -12,9 +12,9 @@ import com.squareup.workflow1.ui.compose.WorkflowRendering
 import com.squareup.workflow1.ui.compose.renderAsState
 import javax.inject.Inject
 
-typealias WorkflowInterceptors = List<@JvmSuppressWildcards WorkflowInterceptor>
+public typealias WorkflowInterceptors = List<@JvmSuppressWildcards WorkflowInterceptor>
 
-class PixelActivity : FragmentActivity() {
+public class PixelActivity : FragmentActivity() {
 
   @Inject internal lateinit var galleriesWorkflow: GalleriesWorkflow
 

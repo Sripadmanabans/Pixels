@@ -1,5 +1,5 @@
 plugins {
-  alias libs.plugins.kotlin.jvm
+  id "com.adjectivemonk2.jvm.lib"
 }
 
 archivesBaseName = "network-gallery-public"
@@ -10,8 +10,4 @@ dependencies {
   api projects.network.core.public
 
   implementation libs.kotlin.coroutines.core
-}
-
-kotlin {
-  explicitApi()
 }

@@ -1,0 +1,9 @@
+plugins {
+  id "io.gitlab.arturbosch.detekt"
+}
+
+detekt {
+  config = files("${rootDir}/detekt.yml")
+  // Treat config file as an override for the default config.
+  buildUponDefaultConfig = true
+}

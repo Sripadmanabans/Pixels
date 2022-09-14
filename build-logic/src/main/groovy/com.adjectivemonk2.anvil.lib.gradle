@@ -1,0 +1,11 @@
+plugins {
+  id "com.squareup.anvil"
+}
+
+anvil {
+  generateDaggerFactories = true
+}
+
+dependencies {
+  implementation libs.dagger.runtime
+}

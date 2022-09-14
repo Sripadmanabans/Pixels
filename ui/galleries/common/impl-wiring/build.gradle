@@ -1,5 +1,5 @@
 plugins {
-  alias libs.plugins.kotlin.jvm
+  id "com.adjectivemonk2.jvm.lib"
 }
 
 archivesBaseName = "ui-galleries-common-impl-wiring"
@@ -7,8 +7,4 @@ archivesBaseName = "ui-galleries-common-impl-wiring"
 dependencies {
   api projects.ui.galleries.common.public
   api projects.ui.galleries.common.impl
-}
-
-kotlin {
-  explicitApi()
 }

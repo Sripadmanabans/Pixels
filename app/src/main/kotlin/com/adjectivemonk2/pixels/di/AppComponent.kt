@@ -11,18 +11,16 @@ import dagger.Component
 
 @SingleIn(AppScope::class)
 @MergeComponent(scope = AppScope::class)
-interface AppComponent : Injector<PixelApplication> {
+public interface AppComponent : Injector<PixelApplication> {
 
-  fun activityComponent(): ActivityComponent
+  public fun activityComponent(): ActivityComponent
 
-  @Component.Builder
-  interface Builder {
-    fun application(@BindsInstance application: Application): Builder
-
-    fun build(): AppComponent
+  @Component.Factory
+  public interface Factory {
+    public fun create(@BindsInstance application: Application): AppComponent
   }
 
-  companion object {
-    fun builder(): Builder = DaggerAppComponent.builder()
+  public companion object {
+    public fun factory(): Factory = DaggerAppComponent.factory()
   }
 }

@@ -5,11 +5,11 @@ import com.adjectivemonk2.pixels.network.gallery.GalleryRepository
 import com.adjectivemonk2.pixels.network.gallery.Section
 import com.adjectivemonk2.pixels.network.gallery.Sort
 import com.adjectivemonk2.pixels.network.gallery.Window
-import java.io.IOException
-import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import java.io.IOException
+import kotlin.time.Duration.Companion.seconds
 
 public class FakeGalleryRepository : GalleryRepository {
 

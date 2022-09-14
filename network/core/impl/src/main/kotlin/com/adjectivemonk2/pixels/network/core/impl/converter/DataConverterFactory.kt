@@ -2,11 +2,11 @@ package com.adjectivemonk2.pixels.network.core.impl.converter
 
 import com.adjectivemonk2.pixels.model.core.Data
 import com.squareup.moshi.Types
-import java.lang.reflect.Type
-import javax.inject.Inject
 import okhttp3.ResponseBody
 import retrofit2.Converter
 import retrofit2.Retrofit
+import java.lang.reflect.Type
+import javax.inject.Inject
 
 public class DataConverterFactory @Inject constructor() : Converter.Factory() {
 

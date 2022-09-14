@@ -10,9 +10,9 @@ import dagger.Provides
 
 @Module
 @ContributesTo(ActivityScope::class)
-object ActivityModule {
+public object ActivityModule {
 
-  @Provides fun viewEnvironment(
+  @Provides public fun viewEnvironment(
     viewRegistries: Set<@JvmSuppressWildcards ViewRegistry>,
   ): ViewEnvironment {
     val registry = viewRegistries.reduce { acc, viewRegistry -> acc + viewRegistry }

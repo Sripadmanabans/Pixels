@@ -4,14 +4,14 @@ import android.app.Activity
 import android.app.Application
 import com.adjectivemonk2.pixels.di.AppComponent
 import com.adjectivemonk2.pixels.logger.LoggerInitializer
-import javax.inject.Inject
 import logcat.LogcatLogger
 import logcat.logcat
+import javax.inject.Inject
 
-class PixelApplication : Application() {
+public class PixelApplication : Application() {
 
-  val appComponent by lazy(LazyThreadSafetyMode.NONE) {
-    AppComponent.builder().application(this).build()
+  public val appComponent: AppComponent by lazy(LazyThreadSafetyMode.NONE) {
+    AppComponent.factory().create(this)
   }
 
   @Inject internal lateinit var logger: LogcatLogger
@@ -25,7 +25,7 @@ class PixelApplication : Application() {
   }
 }
 
-val Activity.appComponent: AppComponent
+public val Activity.appComponent: AppComponent
   get() {
     return (application as PixelApplication).appComponent
   }

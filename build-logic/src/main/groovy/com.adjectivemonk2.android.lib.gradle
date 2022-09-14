@@ -1,0 +1,34 @@
+plugins {
+  id "com.android.library"
+  id "org.jetbrains.kotlin.android"
+  id "com.adjectivemonk2.detekt"
+  id "com.adjectivemonk2.kotlinter"
+}
+
+android {
+  buildFeatures {
+    buildConfig false
+    resValues false
+  }
+
+  compileOptions {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+  }
+
+  compileSdkVersion buildConfig.compileSdk
+
+  defaultConfig {
+    minSdkVersion buildConfig.minSdk
+    targetSdkVersion buildConfig.targetSdk
+  }
+
+  kotlinOptions {
+    jvmTarget = "11"
+    allWarningsAsErrors = true
+
+    freeCompilerArgs += "-XXLanguage:+NewInference"
+    freeCompilerArgs += "-progressive"
+    freeCompilerArgs += "-Xexplicit-api=strict"
+  }
+}

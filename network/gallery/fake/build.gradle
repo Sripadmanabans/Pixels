@@ -1,10 +1,6 @@
 plugins {
-  alias libs.plugins.kotlin.jvm
-  alias libs.plugins.square.anvil
-}
-
-anvil {
-  generateDaggerFactories = true
+  id "com.adjectivemonk2.jvm.lib"
+  id "com.adjectivemonk2.anvil.lib"
 }
 
 archivesBaseName = "network-gallery-impl"
@@ -16,13 +12,9 @@ dependencies {
   implementation libs.kotlin.coroutines.core
   implementation libs.kotlin.time
   implementation libs.retrofit.client
-
-  implementation libs.dagger.runtime
 }
 
 kotlin {
-  explicitApi()
-
   sourceSets.all {
     languageSettings {
       optIn("kotlin.time.ExperimentalTime")

@@ -11,25 +11,26 @@ import com.squareup.sqldelight.db.SqlDriver
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import com.adjectivemonk2.pixels.database.session.PixelsDb as PixelsDb0
 
 @Module
 @ContributesTo(AppScope::class)
-interface SqlModule {
+public interface SqlModule {
 
   @Binds
-  fun pixelsDb(pixelsDb: PixelsDb): com.adjectivemonk2.pixels.database.session.PixelsDb
+  public fun pixelsDb(pixelsDb: PixelsDb): PixelsDb0
 
-  companion object {
+  public companion object {
 
     @Provides
     @SingleIn(AppScope::class)
-    fun sqlDriver(application: Application): SqlDriver {
+    public fun sqlDriver(application: Application): SqlDriver {
       return AndroidSqliteDriver(PixelsDb.Schema, application, "pixels.db")
     }
 
     @Provides
     @SingleIn(AppScope::class)
-    fun pixelsDb(
+    public fun pixelsDb(
       sqlDriver: SqlDriver,
       sessionAdapter: Session.Adapter,
     ): PixelsDb {

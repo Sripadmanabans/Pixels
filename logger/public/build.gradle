@@ -1,24 +1,5 @@
 plugins {
-  alias libs.plugins.android.library
-  alias libs.plugins.kotlin.android
-}
-
-android {
-  buildFeatures {
-    buildConfig false
-    resValues false
-  }
-
-  compileSdkVersion buildConfig.compileSdk
-
-  defaultConfig {
-    minSdkVersion buildConfig.minSdk
-    targetSdkVersion buildConfig.targetSdk
-  }
-
-  kotlinOptions {
-    freeCompilerArgs += "-Xexplicit-api=strict"
-  }
+  id "com.adjectivemonk2.android.lib"
 }
 
 archivesBaseName = "logger-public"
