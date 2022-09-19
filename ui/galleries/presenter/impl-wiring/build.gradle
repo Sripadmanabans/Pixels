@@ -1,0 +1,12 @@
+apply plugin: "org.jetbrains.kotlin.jvm"
+
+archivesBaseName = "ui-galleries-presenter-impl-wiring"
+
+dependencies {
+  api projects.ui.galleries.presenter.public
+  api projects.ui.galleries.presenter.impl
+}
+
+kotlin {
+  explicitApi()
+}

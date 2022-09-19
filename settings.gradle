@@ -26,9 +26,9 @@ include ":database:session:impl"
 include ":database:session:impl-wiring"
 include ":database:session:public"
 
-include ':dispatcher:impl'
-include ':dispatcher:impl-wiring'
-include ':dispatcher:public'
+include ":dispatcher:impl"
+include ":dispatcher:impl-wiring"
+include ":dispatcher:public"
 
 include ":model:core:public"
 include ":model:gallery:public"
@@ -50,15 +50,17 @@ include ":logger:impl"
 include ":logger:impl-wiring"
 include ":logger:public"
 
-include ':testing'
+include ":testing"
 
 include ":ui:galleries:android:impl"
 include ":ui:galleries:android:impl-wiring"
 include ":ui:galleries:android:public"
 
-include ":ui:galleries:common:impl"
-include ":ui:galleries:common:impl-wiring"
-include ":ui:galleries:common:public"
+include ":ui:galleries:presenter:impl"
+include ":ui:galleries:presenter:impl-wiring"
+include ":ui:galleries:presenter:public"
+include ":ui:presenter:public"
+include ":ui:renderer:public"
 
 // Has info on preview features
 // https://docs.gradle.org/7.0/release-notes.html

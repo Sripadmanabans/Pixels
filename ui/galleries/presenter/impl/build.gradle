@@ -1,0 +1,28 @@
+plugins {
+  id "com.adjectivemonk2.jvm.compose.lib"
+  id "com.adjectivemonk2.jvm.test.lib"
+  id "com.adjectivemonk2.anvil.lib"
+}
+
+archivesBaseName = "ui-galleries-presenter-impl"
+
+dependencies {
+  api projects.ui.galleries.presenter.public
+
+  implementation projects.dispatcher.public
+  implementation projects.network.gallery.public
+  implementation projects.scope.public
+
+  testImplementation projects.network.gallery.fake
+  testImplementation projects.testing
+
+  testImplementation libs.kotlin.coroutines.test
+}
+
+kotlin {
+  sourceSets.all {
+    languageSettings {
+      optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
+    }
+  }
+}

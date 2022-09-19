@@ -1,0 +1,5 @@
+plugins {
+  id "com.adjectivemonk2.jvm.compose.lib"
+}
+
+archivesBaseName = "ui-presenter-public"

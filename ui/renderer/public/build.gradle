@@ -1,0 +1,13 @@
+plugins {
+  id "com.adjectivemonk2.android.compose.lib"
+}
+
+android {
+  namespace "com.adjectivemonk2.pixels.ui.renderer"
+}
+
+archivesBaseName = "ui-renderer-public"
+
+dependencies {
+  api projects.ui.presenter.public
+}
