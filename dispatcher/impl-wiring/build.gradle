@@ -3,6 +3,10 @@ plugins {
   id "com.adjectivemonk2.anvil.lib"
 }
 
+android {
+  namespace "com.adjectivemonk2.pixels.dispatcher.impl.wiring"
+}
+
 archivesBaseName = "dispatcher-impl-wiring"
 
 dependencies {

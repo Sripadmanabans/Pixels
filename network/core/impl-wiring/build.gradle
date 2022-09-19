@@ -3,6 +3,10 @@ plugins {
   id "com.adjectivemonk2.anvil.lib"
 }
 
+android {
+  namespace "com.adjectivemonk2.pixels.network.core.impl.wiring"
+}
+
 archivesBaseName = "network-core-impl-wiring"
 
 dependencies {
