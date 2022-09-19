@@ -9,8 +9,10 @@ android {
   }
 
   defaultConfig {
-    buildConfigField "String", "PIXELS_CLIENT_ID", "\"${propOrEmpty("PIXELS_CLIENT_ID")}\""
+    buildConfigField "String", "PIXELS_CLIENT_ID", "\"${PIXELS_CLIENT_ID}\""
   }
+
+  namespace "com.adjectivemonk2.pixels.network.core.impl"
 }
 
 archivesBaseName = "network-core-impl"

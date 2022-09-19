@@ -1,0 +1,13 @@
+plugins {
+  id "com.adjectivemonk2.jvm.lib"
+  id "com.adjectivemonk2.anvil.lib"
+}
+
+archivesBaseName = "ui-galleries-presenter-public"
+
+dependencies {
+  api projects.model.gallery.public
+  api projects.ui.presenter.public
+
+  implementation libs.jetbrains.compose.runtime
+}

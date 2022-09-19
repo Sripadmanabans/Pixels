@@ -3,21 +3,13 @@ plugins {
   id "com.adjectivemonk2.anvil.lib"
 }
 
+android {
+  namespace "com.adjectivemonk2.pixels.ui.galleries.android.impl.wiring"
+}
+
 archivesBaseName = "ui-galleries-android-impl-wiring"
 
 dependencies {
   api projects.ui.galleries.android.public
   api projects.ui.galleries.android.impl
-
-  implementation projects.scope.public
-
-  implementation libs.workflow.ui.core.android
-}
-
-kotlin {
-  sourceSets.all {
-    languageSettings {
-      optIn("com.squareup.workflow1.ui.WorkflowUiExperimentalApi")
-    }
-  }
 }

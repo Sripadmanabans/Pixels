@@ -1,0 +1,18 @@
+plugins {
+  id "org.jetbrains.kotlin.jvm"
+  id "org.jetbrains.compose"
+  id "com.adjectivemonk2.detekt"
+  id "com.adjectivemonk2.kotlinter"
+}
+
+dependencies {
+  implementation libs.jetbrains.compose.runtime
+}
+
+kotlin {
+  explicitApi()
+
+  jvmToolchain {
+    languageVersion = JavaLanguageVersion.of(11)
+  }
+}

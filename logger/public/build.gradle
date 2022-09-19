@@ -2,9 +2,12 @@ plugins {
   id "com.adjectivemonk2.android.lib"
 }
 
+android {
+  namespace "com.adjectivemonk2.pixels.logger"
+}
+
 archivesBaseName = "logger-public"
 
 dependencies {
   api libs.logcat
-  api libs.workflow.runtime
 }

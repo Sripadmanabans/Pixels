@@ -2,6 +2,8 @@ style:
   UnusedPrivateMember:
     active: true
     ignoreAnnotated: [ "Preview" ]
+  ForbiddenComment:
+    allowedPatterns: 'https:\/\/github\.com\/.+\/issues\/\d+'
 naming:
   FunctionNaming:
     active: true

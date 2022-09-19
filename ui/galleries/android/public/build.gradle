@@ -2,20 +2,13 @@ plugins {
   id "com.adjectivemonk2.android.compose.lib"
 }
 
+android {
+  namespace "com.adjectivemonk2.pixels.ui.galleries.android"
+}
+
 archivesBaseName = "ui-galleries-android-public"
 
 dependencies {
-  api projects.ui.galleries.common.public
-
-  api libs.androidx.compose.runtime
-
-  api libs.workflow.ui.compose.core
-}
-
-kotlin {
-  sourceSets.all {
-    languageSettings {
-      optIn("com.squareup.workflow1.ui.WorkflowUiExperimentalApi")
-    }
-  }
+  api projects.ui.galleries.presenter.public
+  api projects.ui.renderer.public
 }

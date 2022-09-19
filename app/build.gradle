@@ -21,7 +21,7 @@ dependencies {
   implementation projects.logger.implWiring
 
   implementation projects.ui.galleries.android.implWiring
-  implementation projects.ui.galleries.common.implWiring
+  implementation projects.ui.galleries.presenter.implWiring
 
   implementation libs.androidx.activity.compose
   implementation libs.androidx.fragment.ktx
@@ -54,7 +54,6 @@ kotlin {
   sourceSets.all {
     languageSettings {
       optIn("kotlin.time.ExperimentalTime")
-      optIn("com.squareup.workflow1.ui.WorkflowUiExperimentalApi")
     }
   }
 }

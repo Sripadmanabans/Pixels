@@ -4,6 +4,10 @@ plugins {
   id "com.adjectivemonk2.anvil.lib"
 }
 
+android {
+  namespace "com.adjectivemonk2.pixels.ui.galleries.android.impl"
+}
+
 archivesBaseName = "ui-galleries-android-impl"
 
 dependencies {
@@ -17,17 +21,11 @@ dependencies {
   implementation libs.androidx.compose.material3
   implementation libs.androidx.compose.ui.ui
   implementation libs.androidx.compose.ui.tooling
-
-  implementation libs.workflow.ui.compose.tooling
-
-  // Need to make compose tooling to work ¯\_(ツ)_/¯
-  implementation libs.androidx.lifecycle.viewmodel.savedstate
 }
 
 kotlin {
   sourceSets.all {
     languageSettings {
-      optIn("com.squareup.workflow1.ui.WorkflowUiExperimentalApi")
       optIn("coil.annotation.ExperimentalCoilApi")
       optIn("kotlin.time.ExperimentalTime")
     }
