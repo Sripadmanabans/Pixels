@@ -3,6 +3,10 @@ plugins {
   id "com.adjectivemonk2.android.compose.test.lib"
 }
 
+android {
+  namespace "com.adjectivemonk2.pixels.theme"
+}
+
 archivesBaseName = "theme-public"
 
 dependencies {
