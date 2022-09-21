@@ -10,7 +10,6 @@ archivesBaseName = "ui-galleries-presenter-impl"
 dependencies {
   api projects.ui.galleries.presenter.public
 
-  implementation projects.dispatcher.public
   implementation projects.network.gallery.public
   implementation projects.scope.public
 

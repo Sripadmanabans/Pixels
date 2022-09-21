@@ -1,9 +1,0 @@
-plugins {
-  id "com.adjectivemonk2.jvm.lib"
-}
-
-archivesBaseName = "dispatcher-impl"
-
-dependencies {
-  implementation projects.dispatcher.public
-}
