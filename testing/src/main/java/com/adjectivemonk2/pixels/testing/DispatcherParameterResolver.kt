@@ -3,39 +3,44 @@ package com.adjectivemonk2.pixels.testing
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestDispatcher
-import org.junit.jupiter.api.extension.AfterEachCallback
-import org.junit.jupiter.api.extension.BeforeEachCallback
 import org.junit.jupiter.api.extension.ExtensionContext
+import org.junit.jupiter.api.extension.ExtensionContext.Namespace
+import org.junit.jupiter.api.extension.ExtensionContext.Store
 import org.junit.jupiter.api.extension.ParameterContext
 import org.junit.jupiter.api.extension.ParameterResolver
 
-public class DispatcherParameterResolver :
-  ParameterResolver,
-  BeforeEachCallback,
-  AfterEachCallback {
+public class DispatcherParameterResolver : ParameterResolver {
 
-  private var dispatcher: TestDispatcher? = null
+  private class DispatcherProvider : Store.CloseableResource {
+    val dispatcher = StandardTestDispatcher()
+    override fun close() {
+      dispatcher.cancel()
+    }
+  }
 
   override fun supportsParameter(
     parameterContext: ParameterContext,
-    extensionContext: ExtensionContext?,
+    extensionContext: ExtensionContext,
   ): Boolean {
     return parameterContext.parameter.type == TestDispatcher::class.java
   }
 
   override fun resolveParameter(
-    parameterContext: ParameterContext?,
-    extensionContext: ExtensionContext?,
+    parameterContext: ParameterContext,
+    extensionContext: ExtensionContext,
   ): Any {
-    return dispatcher!!
+    val dispatcherProvider = extensionContext.store
+      .getOrComputeIfAbsentInline(extensionContext.uniqueId) { DispatcherProvider() }
+    return dispatcherProvider.dispatcher
   }
 
-  override fun beforeEach(context: ExtensionContext?) {
-    dispatcher = StandardTestDispatcher()
-  }
+  private val ExtensionContext.store: Store
+    get() = getStore(Namespace.create(testClass, requiredTestMethod))
 
-  override fun afterEach(context: ExtensionContext?) {
-    dispatcher!!.cancel()
-    dispatcher = null
+  private inline fun <Key, reified Value> Store.getOrComputeIfAbsentInline(
+    key: Key,
+    crossinline defaultCreator: (Key) -> Value,
+  ): Value {
+    return getOrComputeIfAbsent(key, { defaultCreator(it) }, Value::class.java)
   }
 }
