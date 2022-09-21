@@ -9,13 +9,15 @@
   <application
     android:name=".PixelApplication"
     android:allowBackup="true"
+    android:appComponentFactory="com.adjectivemonk2.pixels.PixelComponentFactory"
     android:fullBackupContent="@xml/backup_descriptor"
     android:icon="@mipmap/ic_launcher"
     android:label="@string/app_name"
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/Theme.Pixels"
-    tools:ignore="AllowBackup,DataExtractionRules">
+    tools:ignore="AllowBackup,DataExtractionRules,Instantiatable"
+    tools:replace="android:appComponentFactory">
     <activity
       android:name=".PixelActivity"
       android:exported="true"
