@@ -2,14 +2,12 @@ package com.adjectivemonk2.pixels.ui.galleries.presenter.impl
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import com.adjectivemonk2.pixels.model.gallery.Gallery
 import com.adjectivemonk2.pixels.network.core.apiCatch
 import com.adjectivemonk2.pixels.network.gallery.GalleryRepository
@@ -37,8 +35,9 @@ public class GalleriesPresenterImpl @Inject constructor(
 
   @Composable override fun present(events: Flow<GalleriesEvent>): GalleriesScreen {
     var isLoading by remember { mutableStateOf(true) }
-    var error by remember<MutableState<String?>> { mutableStateOf(null) }
-    val items = remember<SnapshotStateList<GalleryListItem>> { mutableStateListOf() }
+    var error by remember { mutableStateOf<String?>(null) }
+    val stateItems = remember { mutableStateListOf<GalleryListItem>() }
+    val items by derivedStateOf { stateItems.toList() }
     val state by derivedStateOf { GalleriesScreen(items, isLoading, error) }
     var apiKey by remember { mutableStateOf(Key()) }
     LaunchedEffect(apiKey) {
@@ -51,18 +50,18 @@ public class GalleriesPresenterImpl @Inject constructor(
             is GalleriesState.Data -> {
               isLoading = false
               error = null
-              items.clear()
-              items.addAll(apiState.data.mapNotNull { galleryConverter.toGalleryListItem(it) })
+              stateItems.clear()
+              stateItems.addAll(apiState.data.mapNotNull { galleryConverter.toGalleryListItem(it) })
             }
             is GalleriesState.Error -> {
               isLoading = false
               error = apiState.message
-              items.clear()
+              stateItems.clear()
             }
             GalleriesState.Loading -> {
               isLoading = true
               error = null
-              items.clear()
+              stateItems.clear()
             }
           }
         }

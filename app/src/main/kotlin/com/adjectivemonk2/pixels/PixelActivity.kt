@@ -36,5 +36,5 @@ public class PixelActivity : FragmentActivity() {
 ) {
   val events = remember { MutableSharedFlow<Event>(extraBufferCapacity = 1) }
   val screen = presenter.present(events = events)
-  renderer.Render(screen) { events.tryEmit(it) }
+  renderer.Render(screen) { check(events.tryEmit(it)) { "Event $it was not consumed!!" } }
 }

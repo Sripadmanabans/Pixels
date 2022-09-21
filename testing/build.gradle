@@ -6,7 +6,7 @@ plugins {
 archivesBaseName = "testing"
 
 dependencies {
-  implementation libs.kotlin.coroutines.test
+  api libs.kotlin.coroutines.test
 }
 
 kotlin {

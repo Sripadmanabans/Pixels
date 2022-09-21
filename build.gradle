@@ -1,5 +1,4 @@
 buildscript {
-
   ext.buildConfig = [
     "compileSdk": 33,
     "minSdk"    : 31,
@@ -15,12 +14,6 @@ buildscript {
   ext.buildConfig.version["name"] = "${buildConfig.version.major}.${buildConfig.version.minor}.${buildConfig.version.patch}"
   ext.buildConfig.version["fullName"] = "${buildConfig.version.name}.${buildConfig.version.build}"
   ext.buildConfig.version["code"] = buildConfig.version.major * 1000000 + buildConfig.version.minor * 10000 + buildConfig.version.patch * 100 + buildConfig.version.build
-
-  repositories {
-    google()
-    mavenCentral()
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-  }
 }
 
 plugins {
@@ -40,6 +33,8 @@ plugins {
   alias libs.plugins.kotlinter apply false
 
   alias libs.plugins.ksp apply false
+
+  alias libs.plugins.molecule apply false
 
   alias libs.plugins.square.anvil apply false
   alias libs.plugins.square.sqldelight apply false
