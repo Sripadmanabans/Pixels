@@ -3,7 +3,9 @@ plugins {
 }
 
 detekt {
-  config = files("${rootDir}/detekt.yml")
-  // Treat config file as an override for the default config.
+  allRules = true
   buildUponDefaultConfig = true
+  config = files("${rootDir}/detekt.yml")
+  ignoredBuildTypes = ["release"]
+  parallel = true
 }

@@ -26,10 +26,6 @@ include ":database:session:impl"
 include ":database:session:impl-wiring"
 include ":database:session:public"
 
-include ":dispatcher:impl"
-include ":dispatcher:impl-wiring"
-include ":dispatcher:public"
-
 include ":model:core:public"
 include ":model:gallery:public"
 

@@ -2,6 +2,9 @@ name: CI
 
 on:
   pull_request:
+  push:
+    branches:
+      - develop
 
 concurrency:
   group: ${{ github.head_ref }}
@@ -50,7 +53,7 @@ jobs:
           - test
           - lint
           - lintKotlin
-          - detekt
+          - detektMain
     steps:
       - name: Checkout code
         uses: actions/checkout@v3

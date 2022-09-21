@@ -53,11 +53,13 @@ public class GalleriesPresenterImpl @Inject constructor(
               stateItems.clear()
               stateItems.addAll(apiState.data.mapNotNull { galleryConverter.toGalleryListItem(it) })
             }
+
             is GalleriesState.Error -> {
               isLoading = false
               error = apiState.message
               stateItems.clear()
             }
+
             GalleriesState.Loading -> {
               isLoading = true
               error = null

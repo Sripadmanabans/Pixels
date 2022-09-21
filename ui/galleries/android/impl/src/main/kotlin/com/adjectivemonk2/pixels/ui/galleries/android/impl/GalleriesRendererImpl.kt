@@ -18,7 +18,10 @@ public class GalleriesRendererImpl @Inject constructor() : GalleriesRenderer {
     Surface {
       when {
         state.isLoading -> GalleriesLoading()
-        state.error != null -> GalleriesError(message = state.error!!, onEvent = onEvent)
+        state.error != null -> {
+          GalleriesError(message = checkNotNull(state.error), onEvent = onEvent)
+        }
+
         state.galleryListItems.isEmpty() -> GalleriesEmpty()
         else -> GalleriesInfo(items = state.galleryListItems)
       }
