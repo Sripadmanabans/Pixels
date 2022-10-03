@@ -18,8 +18,8 @@ dependencies {
 
   implementation projects.logger.implWiring
 
-  implementation projects.ui.galleries.android.implWiring
   implementation projects.ui.galleries.presenter.implWiring
+  implementation projects.ui.galleries.renderer.implWiring
 
   implementation libs.androidx.activity.compose
   implementation libs.androidx.fragment.ktx
@@ -39,6 +39,8 @@ dependencies {
   implementation libs.dagger.runtime
   kapt libs.dagger.compiler
 
+  implementation libs.kotlin.time
+
   implementation libs.sqlDelight.android
 
   debugImplementation libs.leakCanary
@@ -52,6 +54,7 @@ kotlin {
   sourceSets.all {
     languageSettings {
       optIn("kotlin.time.ExperimentalTime")
+      optIn("kotlinx.coroutines.FlowPreview")
     }
   }
 }

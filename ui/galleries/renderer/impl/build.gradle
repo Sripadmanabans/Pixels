@@ -11,7 +11,7 @@ android {
 archivesBaseName = "ui-galleries-android-impl"
 
 dependencies {
-  api projects.ui.galleries.android.public
+  api projects.ui.galleries.renderer.public
 
   implementation projects.scope.public
   implementation projects.theme.public

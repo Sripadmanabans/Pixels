@@ -1,6 +1,7 @@
 package com.adjectivemonk2.pixels
 
 import android.app.Application
+import com.adjectivemonk2.pixels.di.ActivityComponent
 import com.adjectivemonk2.pixels.logger.LoggerInitializer
 import com.adjectivemonk2.pixels.scope.AppScope
 import com.adjectivemonk2.pixels.scope.SingleIn
@@ -13,6 +14,7 @@ import javax.inject.Inject
 @ContributesBinding(AppScope::class)
 public class PixelApplication @Inject constructor(
   private val logger: LogcatLogger,
+  public val activityComponentFactory: ActivityComponent.Factory,
 ) : Application() {
 
   override fun onCreate() {

@@ -1,5 +1,5 @@
 plugins {
-  id "com.adjectivemonk2.jvm.lib"
+  id "com.adjectivemonk2.jvm.compose.lib"
   id "com.adjectivemonk2.jvm.test.lib"
 }
 
@@ -7,6 +7,10 @@ archivesBaseName = "testing"
 
 dependencies {
   api libs.kotlin.coroutines.test
+  api libs.truth
+  api libs.turbine
+
+  implementation libs.junit5.jupiter.api
 }
 
 kotlin {

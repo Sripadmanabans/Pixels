@@ -15,9 +15,6 @@ dependencies {
 
   testImplementation projects.network.gallery.fake
   testImplementation projects.testing
-
-  testImplementation libs.truth
-  testImplementation libs.turbine
 }
 
 kotlin {

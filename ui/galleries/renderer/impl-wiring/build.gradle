@@ -10,6 +10,6 @@ android {
 archivesBaseName = "ui-galleries-android-impl-wiring"
 
 dependencies {
-  api projects.ui.galleries.android.public
-  api projects.ui.galleries.android.impl
+  api projects.ui.galleries.renderer.public
+  api projects.ui.galleries.renderer.impl
 }
