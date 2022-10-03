@@ -26,7 +26,6 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
 
-// TODO: Need to write tests for this refer https://github.com/Sripadmanabans/Pixels/issues/33.
 @ContributesBinding(scope = ActivityScope::class)
 public class GalleriesPresenterImpl @Inject constructor(
   private val repository: GalleryRepository,

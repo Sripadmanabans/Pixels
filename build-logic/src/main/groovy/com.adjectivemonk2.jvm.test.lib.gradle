@@ -3,8 +3,8 @@ plugins {
 }
 
 dependencies {
-  implementation libs.junit5.jupiter.api
-  runtimeOnly libs.junit5.jupiter.runtime
+  testImplementation libs.junit5.jupiter.api
+  testRuntimeOnly libs.junit5.jupiter.runtime
   testImplementation libs.truth
 }
 

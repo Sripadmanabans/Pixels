@@ -8,6 +8,7 @@ pluginManagement {
     maven { url "https://maven.pkg.jetbrains.space/public/p/compose/dev" }
   }
 }
+
 dependencyResolutionManagement {
   repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
   repositories {
@@ -48,13 +49,13 @@ include ":logger:public"
 
 include ":testing"
 
-include ":ui:galleries:android:impl"
-include ":ui:galleries:android:impl-wiring"
-include ":ui:galleries:android:public"
-
 include ":ui:galleries:presenter:impl"
 include ":ui:galleries:presenter:impl-wiring"
 include ":ui:galleries:presenter:public"
+include ":ui:galleries:renderer:impl"
+include ":ui:galleries:renderer:impl-wiring"
+include ":ui:galleries:renderer:public"
+
 include ":ui:presenter:public"
 include ":ui:renderer:public"
 
