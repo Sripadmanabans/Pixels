@@ -1,6 +1,6 @@
 package com.adjectivemonk2.pixels.di
 
-import androidx.fragment.app.FragmentActivity
+import androidx.activity.ComponentActivity
 import com.adjectivemonk2.pixels.scope.ActivityScope
 import com.adjectivemonk2.pixels.scope.AppScope
 import com.adjectivemonk2.pixels.scope.SingleIn
@@ -11,7 +11,7 @@ import com.squareup.anvil.annotations.ContributesTo
 @ContributesSubcomponent(scope = ActivityScope::class, parentScope = AppScope::class)
 public interface ActivityComponent {
 
-  public val activity: FragmentActivity
+  public val activity: ComponentActivity
 
   @ContributesSubcomponent.Factory
   public interface Factory {

@@ -22,7 +22,6 @@ dependencies {
   implementation projects.ui.galleries.renderer.implWiring
 
   implementation libs.androidx.activity.compose
-  implementation libs.androidx.fragment.ktx
   implementation libs.androidx.core
 
   implementation libs.androidx.compose.material3
