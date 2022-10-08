@@ -1,10 +1,10 @@
 package com.adjectivemonk2.pixels
 
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.fragment.app.FragmentActivity
 import com.adjectivemonk2.pixels.scope.ActivityScope
 import com.adjectivemonk2.pixels.scope.SingleIn
 import com.adjectivemonk2.pixels.theme.PixelsTheme
@@ -24,7 +24,7 @@ import kotlin.time.Duration.Companion.milliseconds
 public class PixelActivity @Inject constructor(
   private val galleriesPresenter: Provider<GalleriesPresenter>,
   private val galleriesRenderer: Provider<GalleriesRenderer>,
-) : FragmentActivity() {
+) : ComponentActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
