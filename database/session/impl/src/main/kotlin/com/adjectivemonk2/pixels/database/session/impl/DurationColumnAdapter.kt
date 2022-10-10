@@ -1,6 +1,6 @@
 package com.adjectivemonk2.pixels.database.session.impl
 
-import com.squareup.sqldelight.ColumnAdapter
+import app.cash.sqldelight.ColumnAdapter
 import javax.inject.Inject
 import kotlin.time.Duration
 import kotlin.time.DurationUnit

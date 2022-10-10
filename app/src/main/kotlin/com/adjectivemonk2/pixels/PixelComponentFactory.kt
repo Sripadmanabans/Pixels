@@ -17,7 +17,7 @@ public class PixelComponentFactory : AppComponentFactory() {
   @Inject internal lateinit var application: Provider<PixelApplication>
 
   init {
-    appComponent.injectInTo(this)
+    appComponent.injectInto(this)
   }
 
   override fun instantiateApplicationCompat(cl: ClassLoader, className: String): Application {

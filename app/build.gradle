@@ -1,13 +1,14 @@
 plugins {
   id "com.adjectivemonk2.android.application"
-  id "org.jetbrains.kotlin.kapt"
+  id "app.cash.sqldelight"
   id "com.squareup.anvil"
-  id "com.squareup.sqldelight"
+  id "org.jetbrains.kotlin.kapt"
 }
 
 dependencies {
 
   implementation projects.database.session.implWiring
+  implementation projects.dispatcher.public
 
   implementation projects.network.core.implWiring
   implementation projects.network.gallery.implWiring
