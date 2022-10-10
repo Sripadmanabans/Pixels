@@ -33,7 +33,7 @@ moshi = "1.14.0"
 moshix = "1.7.20-Beta-0.18.3"
 okhttp = "5.0.0-alpha.10"
 retrofit = "2.9.0"
-sqldelight = "1.5.4"
+sqldelight = "2.0.0-alpha04"
 
 # Helper Components
 byteUnits = "0.9.1"
@@ -131,10 +131,11 @@ okhttp-mockWebServer = { module = "com.squareup.okhttp3:mockwebserver", version.
 retrofit-client = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-converter = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
 
-sqlDelight-android = { module = "com.squareup.sqldelight:android-driver", version.ref = "sqldelight" }
-sqlDelight-coroutines = { module = "com.squareup.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
-sqlDelight-jvm = { module = "com.squareup.sqldelight:sqlite-driver", version.ref = "sqldelight" }
-sqlDelight-runtime = { module = "com.squareup.sqldelight:runtime", version.ref = "sqldelight" }
+sqlDelight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
+sqlDelight-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
+sqlDelight-jvm = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqldelight" }
+sqlDelight-primitive-adapter = { module = "app.cash.sqldelight:primitive-adapters", version.ref = "sqldelight" }
+sqlDelight-runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sqldelight" }
 
 truth = { module = "com.google.truth:truth", version.ref = "truth" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
@@ -161,5 +162,5 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 molecule = { id = "app.cash.molecule", version.ref = "molecule" }
 
+sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
 square-anvil = { id = "com.squareup.anvil", version.ref = "anvil" }
-square-sqldelight = { id = "com.squareup.sqldelight", version.ref = "sqldelight" }

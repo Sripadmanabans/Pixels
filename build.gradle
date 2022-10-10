@@ -36,8 +36,8 @@ plugins {
 
   alias libs.plugins.molecule apply false
 
+  alias libs.plugins.sqldelight apply false
   alias libs.plugins.square.anvil apply false
-  alias libs.plugins.square.sqldelight apply false
 }
 
 @SuppressWarnings('unused')

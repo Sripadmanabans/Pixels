@@ -1,0 +1,12 @@
+plugins {
+  id "com.adjectivemonk2.jvm.lib"
+  id "com.adjectivemonk2.anvil.lib"
+}
+
+archivesBaseName = "dispatcher-public"
+
+dependencies {
+  implementation projects.scope.public
+
+  implementation libs.kotlin.coroutines.core
+}

@@ -10,6 +10,7 @@ archivesBaseName = "database-session-impl"
 
 dependencies {
   api projects.database.session.public
+  api projects.dispatcher.public
   api projects.scope.public
 
   implementation libs.kotlin.coroutines.core

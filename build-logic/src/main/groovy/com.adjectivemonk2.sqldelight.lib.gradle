@@ -1,8 +1,9 @@
 plugins {
-  id "com.squareup.sqldelight"
+  id "app.cash.sqldelight"
 }
 
 dependencies {
-  implementation libs.sqlDelight.runtime
   implementation libs.sqlDelight.coroutines
+  implementation libs.sqlDelight.runtime
+  implementation libs.sqlDelight.primitive.adapter
 }
