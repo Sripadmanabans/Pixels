@@ -29,9 +29,6 @@ include ":database:session:public"
 
 include ":dispatcher:public"
 
-include ":model:core:public"
-include ":model:gallery:public"
-
 include ":network:core:impl"
 include ":network:core:impl-wiring"
 include ":network:core:public"
@@ -40,6 +37,9 @@ include ":network:gallery:fake"
 include ":network:gallery:impl"
 include ":network:gallery:impl-wiring"
 include ":network:gallery:public"
+
+include ":network:model:core:public"
+include ":network:model:gallery:public"
 
 include ":scope:public"
 

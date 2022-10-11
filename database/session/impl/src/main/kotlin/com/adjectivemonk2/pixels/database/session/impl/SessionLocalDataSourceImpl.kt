@@ -2,10 +2,10 @@ package com.adjectivemonk2.pixels.database.session.impl
 
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
-import com.adjectivemonk2.dispatcher.CoroutineDispatchers
 import com.adjectivemonk2.pixels.database.session.PixelsDb
 import com.adjectivemonk2.pixels.database.session.SessionLocalDataSource
 import com.adjectivemonk2.pixels.database.session.model.SessionInfo
+import com.adjectivemonk2.pixels.disptacher.CoroutineDispatchers
 import com.adjectivemonk2.pixels.scope.AppScope
 import com.adjectivemonk2.pixels.scope.SingleIn
 import com.squareup.anvil.annotations.ContributesBinding

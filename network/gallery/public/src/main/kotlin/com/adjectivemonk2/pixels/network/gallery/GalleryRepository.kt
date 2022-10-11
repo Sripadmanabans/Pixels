@@ -1,6 +1,6 @@
 package com.adjectivemonk2.pixels.network.gallery
 
-import com.adjectivemonk2.pixels.model.gallery.Gallery
+import com.adjectivemonk2.pixels.network.model.gallery.Gallery
 import kotlinx.coroutines.flow.Flow
 
 public interface GalleryRepository {

@@ -1,6 +1,6 @@
 package com.adjectivemonk2.pixels.network.core.impl.converter
 
-import com.adjectivemonk2.pixels.model.core.Data
+import com.adjectivemonk2.pixels.network.model.core.Data
 import com.squareup.moshi.Types
 import okhttp3.ResponseBody
 import retrofit2.Converter

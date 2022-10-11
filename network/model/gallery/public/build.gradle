@@ -4,3 +4,7 @@ plugins {
 }
 
 archivesBaseName = "model-core-public"
+
+dependencies {
+  implementation libs.kotlin.time
+}
