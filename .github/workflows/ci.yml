@@ -25,11 +25,11 @@ jobs:
       # These setup steps should be common across all jobs in this workflow.
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Set up JDK 17
+      - name: Set up JDK 18
         uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: 17
+          java-version: 18
 
       - name: Assemble with gradle — make sure everything builds
         uses: gradle/gradle-build-action@v2
@@ -57,11 +57,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Set up JDK 17
+      - name: Set up JDK 18
         uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: 17
+          java-version: 18
 
       - name: Check with Gradle
         uses: gradle/gradle-build-action@v2
@@ -91,11 +91,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Set up JDK 17
+      - name: Set up JDK 18
         uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: 17
+          java-version: 18
 
       ## Build before running tests, using cache.
       - name: Build instrumented tests

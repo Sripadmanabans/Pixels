@@ -7,11 +7,16 @@ import com.adjectivemonk2.pixels.network.model.gallery.Png
 import com.adjectivemonk2.pixels.network.model.gallery.Processing
 import kotlinx.datetime.Instant
 
+internal const val MediaTime1InMs = 1633673556L
+internal const val MediaTime2InMs = 1633615656L
+internal const val MediaTime3InMs = 1633773556L
+internal const val MediaTime4InMs = 1633783556L
+
 public val jpegMedia: Jpeg = Jpeg(
   id = "JPEG id",
   title = null,
   description = null,
-  dateTime = Instant.fromEpochMilliseconds(1633673556L),
+  dateTime = Instant.fromEpochMilliseconds(MediaTime1InMs),
   animated = false,
   width = 100L,
   height = 100L,
@@ -36,7 +41,7 @@ public val pngMedia: Png = Png(
   id = "PNG id",
   title = null,
   description = null,
-  dateTime = Instant.fromEpochMilliseconds(1633673556L),
+  dateTime = Instant.fromEpochMilliseconds(MediaTime2InMs),
   animated = false,
   width = 100L,
   height = 100L,
@@ -61,7 +66,7 @@ public val gifMedia: Gif = Gif(
   id = "GIF id",
   title = null,
   description = null,
-  dateTime = Instant.fromEpochMilliseconds(1633673556L),
+  dateTime = Instant.fromEpochMilliseconds(MediaTime3InMs),
   animated = false,
   width = 100L,
   height = 100L,
@@ -86,7 +91,7 @@ public val mp4Media: Mp4 = Mp4(
   id = "MP4 id",
   title = null,
   description = null,
-  dateTime = Instant.fromEpochMilliseconds(1633673556L),
+  dateTime = Instant.fromEpochMilliseconds(MediaTime4InMs),
   animated = false,
   width = 100L,
   height = 100L,

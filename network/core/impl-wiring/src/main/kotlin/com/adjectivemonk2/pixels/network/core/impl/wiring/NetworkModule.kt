@@ -1,6 +1,7 @@
 package com.adjectivemonk2.pixels.network.core.impl.wiring
 
 import com.adjectivemonk2.pixels.network.core.ApiRetrofit
+import com.adjectivemonk2.pixels.network.core.impl.adapter.InstantAdapter
 import com.adjectivemonk2.pixels.network.core.impl.converter.DataConverterFactory
 import com.adjectivemonk2.pixels.scope.AppScope
 import com.adjectivemonk2.pixels.scope.SingleIn
@@ -19,8 +20,8 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 public object NetworkModule {
 
   @Provides
-  public fun moshi(): Moshi {
-    return Moshi.Builder().build()
+  public fun moshi(instantAdapter: InstantAdapter): Moshi {
+    return Moshi.Builder().add(instantAdapter).build()
   }
 
   @Provides
