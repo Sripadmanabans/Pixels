@@ -1,4 +1,4 @@
-package com.adjectivemonk2.pixels.model.core
+package com.adjectivemonk2.pixels.network.model.core
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

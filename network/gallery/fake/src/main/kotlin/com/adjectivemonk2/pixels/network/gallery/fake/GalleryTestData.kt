@@ -1,13 +1,19 @@
 package com.adjectivemonk2.pixels.network.gallery.fake
 
-import com.adjectivemonk2.pixels.model.gallery.Gallery
-import com.adjectivemonk2.pixels.model.gallery.Unknown
+import com.adjectivemonk2.pixels.network.model.gallery.Gallery
+import com.adjectivemonk2.pixels.network.model.gallery.Unknown
+import kotlinx.datetime.Instant
+
+internal const val GalleryTime1InMs = 1633673556L
+internal const val GalleryTime2InMs = 1633615656L
+internal const val GalleryTime3InMs = 1633773556L
+internal const val GalleryTime4InMs = 1633783556L
 
 public val galleryWithMedia1: Gallery = Gallery(
   id = "galleryId1",
   title = "Gallery item 1",
   description = null,
-  dateTime = 1633759956L,
+  dateTime = Instant.fromEpochMilliseconds(GalleryTime1InMs),
   cover = null,
   coverWidth = null,
   coverHeight = null,
@@ -42,7 +48,7 @@ public val galleryWithMedia2: Gallery = Gallery(
   id = "galleryId2",
   title = "Gallery item 2",
   description = null,
-  dateTime = 1633759856L,
+  dateTime = Instant.fromEpochMilliseconds(GalleryTime2InMs),
   cover = null,
   coverWidth = null,
   coverHeight = null,
@@ -77,7 +83,7 @@ public val galleryWithOutMedia: Gallery = Gallery(
   id = "galleryId2",
   title = "Gallery item 2",
   description = null,
-  dateTime = 1633759856L,
+  dateTime = Instant.fromEpochMilliseconds(GalleryTime3InMs),
   cover = null,
   coverWidth = null,
   coverHeight = null,
@@ -112,7 +118,7 @@ public val galleryWithUnknownMedia: Gallery = Gallery(
   id = "galleryId2",
   title = "Gallery item 2",
   description = null,
-  dateTime = 1633759856L,
+  dateTime = Instant.fromEpochMilliseconds(GalleryTime4InMs),
   cover = null,
   coverWidth = null,
   coverHeight = null,

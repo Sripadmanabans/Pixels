@@ -1,10 +1,10 @@
 package com.adjectivemonk2.pixels.network.gallery.impl
 
-import com.adjectivemonk2.pixels.model.gallery.Gallery
 import com.adjectivemonk2.pixels.network.gallery.GalleryRepository
 import com.adjectivemonk2.pixels.network.gallery.Section
 import com.adjectivemonk2.pixels.network.gallery.Sort
 import com.adjectivemonk2.pixels.network.gallery.Window
+import com.adjectivemonk2.pixels.network.model.gallery.Gallery
 import com.adjectivemonk2.pixels.scope.AppScope
 import com.adjectivemonk2.pixels.scope.SingleIn
 import com.squareup.anvil.annotations.ContributesBinding

@@ -1,11 +1,11 @@
 package com.adjectivemonk2.pixels.ui.galleries.presenter.impl
 
-import com.adjectivemonk2.pixels.model.gallery.Gif
-import com.adjectivemonk2.pixels.model.gallery.Jpeg
-import com.adjectivemonk2.pixels.model.gallery.Media
-import com.adjectivemonk2.pixels.model.gallery.Mp4
-import com.adjectivemonk2.pixels.model.gallery.Png
-import com.adjectivemonk2.pixels.model.gallery.Unknown
+import com.adjectivemonk2.pixels.network.model.gallery.Gif
+import com.adjectivemonk2.pixels.network.model.gallery.Jpeg
+import com.adjectivemonk2.pixels.network.model.gallery.Media
+import com.adjectivemonk2.pixels.network.model.gallery.Mp4
+import com.adjectivemonk2.pixels.network.model.gallery.Png
+import com.adjectivemonk2.pixels.network.model.gallery.Unknown
 import com.adjectivemonk2.pixels.ui.galleries.presenter.MediaItem
 import javax.inject.Inject
 

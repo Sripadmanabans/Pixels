@@ -5,9 +5,9 @@ plugins {
 archivesBaseName = "network-gallery-public"
 
 dependencies {
-  api projects.model.core.public
-  api projects.model.gallery.public
   api projects.network.core.public
+  api projects.network.model.core.public
+  api projects.network.model.gallery.public
 
   implementation libs.kotlin.coroutines.core
 }

@@ -1,14 +1,15 @@
-package com.adjectivemonk2.pixels.model.gallery
+package com.adjectivemonk2.pixels.network.model.gallery
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.datetime.Instant
 
 @JsonClass(generateAdapter = true)
 public data class Gallery(
   @Json(name = "id") val id: String,
   @Json(name = "title") val title: String,
   @Json(name = "description") val description: String?,
-  @Json(name = "datetime") val dateTime: Long,
+  @Json(name = "datetime") val dateTime: Instant,
   @Json(name = "cover") val cover: String?,
   @Json(name = "cover_width") val coverWidth: Int?,
   @Json(name = "cover_height") val coverHeight: Int?,

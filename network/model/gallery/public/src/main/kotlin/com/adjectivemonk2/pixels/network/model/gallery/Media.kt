@@ -1,12 +1,13 @@
-package com.adjectivemonk2.pixels.model.gallery
+package com.adjectivemonk2.pixels.network.model.gallery
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import dev.zacsweers.moshix.sealed.annotations.DefaultObject
 import dev.zacsweers.moshix.sealed.annotations.TypeLabel
+import kotlinx.datetime.Instant
 
 @JsonClass(generateAdapter = true, generator = "sealed:type")
-public sealed class Media
+public sealed interface Media
 
 @JsonClass(generateAdapter = true)
 @TypeLabel(label = "image/jpeg")
@@ -14,7 +15,7 @@ public data class Jpeg(
   @Json(name = "id") val id: String,
   @Json(name = "title") val title: String?,
   @Json(name = "description") val description: String?,
-  @Json(name = "datetime") val dateTime: Long,
+  @Json(name = "datetime") val dateTime: Instant,
   @Json(name = "animated") val animated: Boolean,
   @Json(name = "width") val width: Long,
   @Json(name = "height") val height: Long,
@@ -33,7 +34,7 @@ public data class Jpeg(
   @Json(name = "edited") val edited: String,
   @Json(name = "in_gallery") val inGallery: Boolean,
   @Json(name = "link") val link: String,
-) : Media()
+) : Media
 
 @JsonClass(generateAdapter = true)
 @TypeLabel(label = "image/png")
@@ -41,7 +42,7 @@ public data class Png(
   @Json(name = "id") val id: String,
   @Json(name = "title") val title: String?,
   @Json(name = "description") val description: String?,
-  @Json(name = "datetime") val dateTime: Long,
+  @Json(name = "datetime") val dateTime: Instant,
   @Json(name = "animated") val animated: Boolean,
   @Json(name = "width") val width: Long,
   @Json(name = "height") val height: Long,
@@ -60,7 +61,7 @@ public data class Png(
   @Json(name = "edited") val edited: String,
   @Json(name = "in_gallery") val inGallery: Boolean,
   @Json(name = "link") val link: String,
-) : Media()
+) : Media
 
 @JsonClass(generateAdapter = true)
 @TypeLabel(label = "image/gif")
@@ -68,7 +69,7 @@ public data class Gif(
   @Json(name = "id") val id: String,
   @Json(name = "title") val title: String?,
   @Json(name = "description") val description: String?,
-  @Json(name = "datetime") val dateTime: Long,
+  @Json(name = "datetime") val dateTime: Instant,
   @Json(name = "animated") val animated: Boolean,
   @Json(name = "width") val width: Long,
   @Json(name = "height") val height: Long,
@@ -87,7 +88,7 @@ public data class Gif(
   @Json(name = "edited") val edited: String,
   @Json(name = "in_gallery") val inGallery: Boolean,
   @Json(name = "link") val link: String,
-) : Media()
+) : Media
 
 @JsonClass(generateAdapter = true)
 @TypeLabel("video/mp4")
@@ -95,7 +96,7 @@ public data class Mp4(
   @Json(name = "id") val id: String,
   @Json(name = "title") val title: String?,
   @Json(name = "description") val description: String?,
-  @Json(name = "datetime") val dateTime: Long,
+  @Json(name = "datetime") val dateTime: Instant,
   @Json(name = "animated") val animated: Boolean,
   @Json(name = "width") val width: Long,
   @Json(name = "height") val height: Long,
@@ -119,10 +120,10 @@ public data class Mp4(
   @Json(name = "gifv") val gifv: String,
   @Json(name = "hls") val hls: String,
   @Json(name = "processing") val processing: Processing,
-) : Media()
+) : Media
 
 @DefaultObject
-public object Unknown : Media()
+public object Unknown : Media
 
 @JsonClass(generateAdapter = true)
 public data class Processing(

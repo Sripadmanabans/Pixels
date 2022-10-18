@@ -1,4 +1,4 @@
-package com.adjectivemonk2.dispatcher
+package com.adjectivemonk2.pixels.disptacher
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

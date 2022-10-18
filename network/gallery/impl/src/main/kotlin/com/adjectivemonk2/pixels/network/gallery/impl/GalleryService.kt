@@ -1,6 +1,6 @@
 package com.adjectivemonk2.pixels.network.gallery.impl
 
-import com.adjectivemonk2.pixels.model.gallery.Gallery
+import com.adjectivemonk2.pixels.network.model.gallery.Gallery
 import retrofit2.http.GET
 import retrofit2.http.Path
 

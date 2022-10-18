@@ -39,6 +39,7 @@ dependencies {
   implementation libs.dagger.runtime
   kapt libs.dagger.compiler
 
+  implementation libs.kotlin.coroutines.android
   implementation libs.kotlin.time
 
   implementation libs.sqlDelight.android
