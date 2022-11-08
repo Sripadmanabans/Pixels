@@ -1,6 +1,6 @@
 package com.adjectivemonk2.pixels.ui.galleries.presenter.impl
 
-import com.adjectivemonk2.pixels.network.model.gallery.Gallery
+import com.adjectivemonk2.pixels.model.gallery.Gallery
 import com.adjectivemonk2.pixels.ui.galleries.presenter.GalleryListItem
 import javax.inject.Inject
 
@@ -10,8 +10,8 @@ public class GalleryConverter @Inject constructor(
 ) {
 
   public fun toGalleryListItem(gallery: Gallery): GalleryListItem? {
-    val mediaItems = gallery.media?.mapNotNull { mediaConverter.toMediaItem(it) }
-    val mediaItem = mediaItems?.firstOrNull()
+    val mediaItems = gallery.media.map { mediaConverter.toMediaItem(it) }
+    val mediaItem = mediaItems.firstOrNull()
     return mediaItem?.let {
       GalleryListItem(
         galleryId = gallery.id,

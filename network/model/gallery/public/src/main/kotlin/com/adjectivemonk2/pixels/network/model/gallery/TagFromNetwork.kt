@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-public data class Tag(
+public data class TagFromNetwork(
   @Json(name = "name") val name: String,
   @Json(name = "display_name") val displayName: String,
   @Json(name = "followers") val followers: Long,

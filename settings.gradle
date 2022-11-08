@@ -23,11 +23,21 @@ rootProject.name = "Pixels"
 
 include ":app"
 
+include ":database:gallery:impl"
+include ':database:gallery:impl-wiring'
+include ":database:gallery:public"
+
 include ":database:session:impl"
 include ":database:session:impl-wiring"
 include ":database:session:public"
 
 include ":dispatcher:public"
+
+include ":logger:impl"
+include ":logger:impl-wiring"
+include ":logger:public"
+
+include ":model:gallery:public"
 
 include ":network:core:impl"
 include ":network:core:impl-wiring"
@@ -44,10 +54,6 @@ include ":network:model:gallery:public"
 include ":scope:public"
 
 include ":theme:public"
-
-include ":logger:impl"
-include ":logger:impl-wiring"
-include ":logger:public"
 
 include ":testing"
 

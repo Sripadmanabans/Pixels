@@ -9,6 +9,7 @@ dependencies {
   api projects.network.gallery.public
   api projects.scope.public
 
-  implementation libs.kotlin.coroutines.core
+  implementation projects.network.model.gallery.public
+
   implementation libs.retrofit.client
 }

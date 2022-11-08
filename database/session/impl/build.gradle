@@ -5,7 +5,6 @@ plugins {
   id "com.adjectivemonk2.anvil.lib"
   id "com.adjectivemonk2.sqldelight.lib"
 }
-
 archivesBaseName = "database-session-impl"
 
 dependencies {

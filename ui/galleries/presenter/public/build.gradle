@@ -6,7 +6,6 @@ plugins {
 archivesBaseName = "ui-galleries-presenter-public"
 
 dependencies {
-  api projects.network.model.gallery.public
   api projects.ui.presenter.public
 
   implementation libs.jetbrains.compose.runtime

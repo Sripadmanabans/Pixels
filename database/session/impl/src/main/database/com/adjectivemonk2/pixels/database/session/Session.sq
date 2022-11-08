@@ -1,10 +1,10 @@
 import kotlin.time.Duration;
 
 CREATE TABLE session (
-    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    accessToken TEXT NOT NULL,
-    refreshToken TEXT NOT NULL,
-    expiresIn INTEGER AS Duration NOT NULL
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  accessToken TEXT NOT NULL,
+  refreshToken TEXT NOT NULL,
+  expiresIn INTEGER AS Duration NOT NULL
 );
 
 insert:
