@@ -1,0 +1,11 @@
+CREATE TABLE GalleryTagFromDb (
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  galleryId TEXT NOT NULL,
+  tagId TEXT NOT NULL,
+  FOREIGN KEY (galleryId) REFERENCES GalleryFromDb (id),
+  FOREIGN KEY (tagId) REFERENCES TagFromDb (name)
+);
+
+insertGalleryTag:
+INSERT OR IGNORE INTO GalleryTagFromDb (galleryId, tagId)
+VALUES (?, ?);

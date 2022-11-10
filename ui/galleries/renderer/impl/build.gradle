@@ -8,7 +8,7 @@ android {
   namespace "com.adjectivemonk2.pixels.ui.galleries.android.impl"
 }
 
-archivesBaseName = "ui-galleries-android-impl"
+archivesBaseName = "ui-galleries-renderer-impl"
 
 dependencies {
   api projects.ui.galleries.renderer.public

@@ -5,7 +5,7 @@ import com.squareup.moshi.JsonClass
 import kotlinx.datetime.Instant
 
 @JsonClass(generateAdapter = true)
-public data class Gallery(
+public data class GalleryFromNetwork(
   @Json(name = "id") val id: String,
   @Json(name = "title") val title: String,
   @Json(name = "description") val description: String?,
@@ -34,8 +34,8 @@ public data class Gallery(
   @Json(name = "topic_id") val topicId: String?,
   @Json(name = "images_count") val imagesCount: Long?,
   @Json(name = "in_gallery") val inGallery: Boolean,
-  @Json(name = "tags") val tags: List<Tag>,
+  @Json(name = "tags") val tags: List<TagFromNetwork>,
   @Json(name = "in_most_viral") val inMostViral: Boolean,
   @Json(name = "include_album_ads") val includeAlbumAds: Boolean?,
-  @Json(name = "images") val media: List<Media>?,
+  @Json(name = "images") val media: List<MediaFromNetwork>?,
 )

@@ -2,7 +2,6 @@ package com.adjectivemonk2.pixels.ui.galleries.presenter.impl
 
 import com.adjectivemonk2.pixels.network.gallery.fake.galleryWithMedia1
 import com.adjectivemonk2.pixels.network.gallery.fake.galleryWithOutMedia
-import com.adjectivemonk2.pixels.network.gallery.fake.galleryWithUnknownMedia
 import com.adjectivemonk2.pixels.ui.galleries.presenter.GalleryListItem
 import com.google.common.truth.Truth.assertThat
 import org.junit.jupiter.api.Test
@@ -15,7 +14,7 @@ internal class GalleryConverterTest {
     val galleryConverter = GalleryConverter(mediaConverter, accountImageUrlGenerator)
     val gallery = galleryWithMedia1
     val actual = galleryConverter.toGalleryListItem(gallery)
-    val mediaItems = gallery.media!!.mapNotNull { mediaConverter.toMediaItem(it) }
+    val mediaItems = gallery.media.map { mediaConverter.toMediaItem(it) }
     val mediaItem = mediaItems.first()
     val expected = GalleryListItem(
       galleryId = gallery.id,
@@ -38,15 +37,6 @@ internal class GalleryConverterTest {
     val accountImageUrlGenerator = AccountImageUrlGenerator()
     val galleryConverter = GalleryConverter(mediaConverter, accountImageUrlGenerator)
     val gallery = galleryWithOutMedia
-    val actual = galleryConverter.toGalleryListItem(gallery)
-    assertThat(actual).isNull()
-  }
-
-  @Test fun `Gallery with unknown media`() {
-    val mediaConverter = MediaConverter()
-    val accountImageUrlGenerator = AccountImageUrlGenerator()
-    val galleryConverter = GalleryConverter(mediaConverter, accountImageUrlGenerator)
-    val gallery = galleryWithUnknownMedia
     val actual = galleryConverter.toGalleryListItem(gallery)
     assertThat(actual).isNull()
   }

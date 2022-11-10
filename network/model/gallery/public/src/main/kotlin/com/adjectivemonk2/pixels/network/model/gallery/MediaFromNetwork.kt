@@ -7,11 +7,11 @@ import dev.zacsweers.moshix.sealed.annotations.TypeLabel
 import kotlinx.datetime.Instant
 
 @JsonClass(generateAdapter = true, generator = "sealed:type")
-public sealed interface Media
+public sealed interface MediaFromNetwork
 
 @JsonClass(generateAdapter = true)
 @TypeLabel(label = "image/jpeg")
-public data class Jpeg(
+public data class JpegFromNetwork(
   @Json(name = "id") val id: String,
   @Json(name = "title") val title: String?,
   @Json(name = "description") val description: String?,
@@ -30,15 +30,15 @@ public data class Jpeg(
   @Json(name = "account_id") val accountId: String?,
   @Json(name = "is_most_viral") val isMostViral: Boolean?,
   @Json(name = "has_sound") val hasSound: Boolean,
-  @Json(name = "tags") val tags: List<Tag>,
+  @Json(name = "tags") val tags: List<TagFromNetwork>,
   @Json(name = "edited") val edited: String,
   @Json(name = "in_gallery") val inGallery: Boolean,
   @Json(name = "link") val link: String,
-) : Media
+) : MediaFromNetwork
 
 @JsonClass(generateAdapter = true)
 @TypeLabel(label = "image/png")
-public data class Png(
+public data class PngFromNetwork(
   @Json(name = "id") val id: String,
   @Json(name = "title") val title: String?,
   @Json(name = "description") val description: String?,
@@ -57,15 +57,15 @@ public data class Png(
   @Json(name = "account_id") val accountId: String?,
   @Json(name = "is_most_viral") val isMostViral: Boolean?,
   @Json(name = "has_sound") val hasSound: Boolean,
-  @Json(name = "tags") val tags: List<Tag>,
+  @Json(name = "tags") val tags: List<TagFromNetwork>,
   @Json(name = "edited") val edited: String,
   @Json(name = "in_gallery") val inGallery: Boolean,
   @Json(name = "link") val link: String,
-) : Media
+) : MediaFromNetwork
 
 @JsonClass(generateAdapter = true)
 @TypeLabel(label = "image/gif")
-public data class Gif(
+public data class GifFromNetwork(
   @Json(name = "id") val id: String,
   @Json(name = "title") val title: String?,
   @Json(name = "description") val description: String?,
@@ -84,15 +84,15 @@ public data class Gif(
   @Json(name = "account_id") val accountId: String?,
   @Json(name = "is_most_viral") val isMostViral: Boolean?,
   @Json(name = "has_sound") val hasSound: Boolean,
-  @Json(name = "tags") val tags: List<Tag>,
+  @Json(name = "tags") val tags: List<TagFromNetwork>,
   @Json(name = "edited") val edited: String,
   @Json(name = "in_gallery") val inGallery: Boolean,
   @Json(name = "link") val link: String,
-) : Media
+) : MediaFromNetwork
 
 @JsonClass(generateAdapter = true)
 @TypeLabel("video/mp4")
-public data class Mp4(
+public data class Mp4FromNetwork(
   @Json(name = "id") val id: String,
   @Json(name = "title") val title: String?,
   @Json(name = "description") val description: String?,
@@ -111,19 +111,17 @@ public data class Mp4(
   @Json(name = "account_id") val accountId: String?,
   @Json(name = "is_most_viral") val isMostViral: Boolean?,
   @Json(name = "has_sound") val hasSound: Boolean,
-  @Json(name = "tags") val tags: List<Tag>,
+  @Json(name = "tags") val tags: List<TagFromNetwork>,
   @Json(name = "edited") val edited: String,
   @Json(name = "in_gallery") val inGallery: Boolean,
   @Json(name = "link") val link: String,
   @Json(name = "mp4_size") val mp4Size: Long,
-  @Json(name = "mp4") val mp4: String,
-  @Json(name = "gifv") val gifv: String,
   @Json(name = "hls") val hls: String,
   @Json(name = "processing") val processing: Processing,
-) : Media
+) : MediaFromNetwork
 
 @DefaultObject
-public object Unknown : Media
+public object Unknown : MediaFromNetwork
 
 @JsonClass(generateAdapter = true)
 public data class Processing(

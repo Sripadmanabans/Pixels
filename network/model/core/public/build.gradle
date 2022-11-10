@@ -3,4 +3,4 @@ plugins {
   id "com.adjectivemonk2.moshi.lib"
 }
 
-archivesBaseName = "model-core-public"
+archivesBaseName = "network-model-core-public"

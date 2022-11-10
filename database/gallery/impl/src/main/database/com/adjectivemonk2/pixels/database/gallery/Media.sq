@@ -1,0 +1,30 @@
+import kotlin.Boolean;
+
+CREATE TABLE MediaFromDb (
+  id TEXT NOT NULL,
+  title TEXT,
+  description TEXT,
+  width INTEGER NOT NULL,
+  height INTEGER NOT NULL,
+  size INTEGER NOT NULL,
+  views INTEGER NOT NULL,
+  favorite INTEGER AS Boolean NOT NULL,
+  nsfw INTEGER AS Boolean,
+  isMostViral INTEGER AS Boolean,
+  edited TEXT NOT NULL,
+  link TEXT NOT NULL,
+  hasSound INTEGER AS Boolean,
+  mp4Size INTEGER,
+  hls TEXT,
+  type TEXT NOT NULL,
+  galleryId TEXT NOT NULL,
+  FOREIGN KEY (galleryId) REFERENCES GalleryFromDb (id),
+  PRIMARY KEY (id)
+);
+
+insertMedia:
+INSERT OR IGNORE INTO MediaFromDb (id, title, description, width, height, size, views, favorite, nsfw, isMostViral, edited, link, hasSound, mp4Size, hls, type, galleryId)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+selectMediaForGalleryIds:
+SELECT * FROM MediaFromDb WHERE galleryId IN (?);

@@ -1,0 +1,25 @@
+import kotlin.Boolean;
+import kotlinx.datetime.Instant;
+
+CREATE TABLE GalleryFromDb (
+  id TEXT NOT NULL,
+  title TEXT NOT NULL,
+  dateTime TEXT AS Instant NOT NULL,
+  description TEXT,
+  accountUrl TEXT NOT NULL,
+  accountId INTEGER NOT NULL,
+  views INTEGER NOT NULL,
+  ups INTEGER NOT NULL,
+  down INTEGER NOT NULL,
+  nsfw INTEGER AS Boolean NOT NULL,
+  commentCount INTEGER NOT NULL,
+  mediaCount INTEGER NOT NULL,
+  PRIMARY KEY (id)
+);
+
+insertGallery:
+INSERT OR IGNORE INTO GalleryFromDb (id, title, dateTime, description, accountUrl, accountId, views, ups, down, nsfw, commentCount, mediaCount)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+selectGalleries:
+SELECT * FROM GalleryFromDb;

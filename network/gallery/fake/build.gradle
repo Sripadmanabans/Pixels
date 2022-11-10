@@ -3,14 +3,12 @@ plugins {
   id "com.adjectivemonk2.anvil.lib"
 }
 
-archivesBaseName = "network-gallery-impl"
+archivesBaseName = "network-gallery-fake"
 
 dependencies {
   api projects.network.gallery.public
   api projects.scope.public
 
-  implementation libs.kotlin.coroutines.core
-  implementation libs.kotlin.time
   implementation libs.retrofit.client
 }
 

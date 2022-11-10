@@ -4,7 +4,6 @@ import com.adjectivemonk2.pixels.network.gallery.fake.gifMedia
 import com.adjectivemonk2.pixels.network.gallery.fake.jpegMedia
 import com.adjectivemonk2.pixels.network.gallery.fake.mp4Media
 import com.adjectivemonk2.pixels.network.gallery.fake.pngMedia
-import com.adjectivemonk2.pixels.network.model.gallery.Unknown
 import com.adjectivemonk2.pixels.ui.galleries.presenter.MediaItem
 import com.google.common.truth.Truth.assertThat
 import org.junit.jupiter.api.Test
@@ -37,11 +36,5 @@ internal class MediaConverterTest {
     val actual = converter.toMediaItem(mp4Media)
     val expected = MediaItem.Video(mp4Media.id, mp4Media.link)
     assertThat(actual).isEqualTo(expected)
-  }
-
-  @Test fun `Convert media of type unknown to null`() {
-    val converter = MediaConverter()
-    val actual = converter.toMediaItem(Unknown)
-    assertThat(actual).isNull()
   }
 }

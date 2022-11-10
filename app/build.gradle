@@ -8,6 +8,7 @@ plugins {
 dependencies {
 
   implementation projects.database.session.implWiring
+  implementation projects.database.gallery.implWiring
   implementation projects.dispatcher.public
 
   implementation projects.network.core.implWiring
@@ -66,5 +67,6 @@ sqldelight {
     sourceFolders = ["database"]
     schemaOutputDirectory = file("build/database")
     dependency project(":database:session:impl")
+    dependency project(":database:gallery:impl")
   }
 }

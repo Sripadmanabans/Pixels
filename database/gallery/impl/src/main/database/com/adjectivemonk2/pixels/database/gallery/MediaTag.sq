@@ -1,0 +1,11 @@
+CREATE TABLE MediaTagFromDb (
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  mediaId TEXT NOT NULL,
+  tagId TEXT NOT NULL,
+  FOREIGN KEY (mediaId) REFERENCES MediaFromDb (id),
+  FOREIGN KEY (tagId) REFERENCES TagFromDb (name)
+);
+
+insertMediaTag:
+INSERT OR IGNORE INTO MediaTagFromDb (mediaId, tagId)
+VALUES (?, ?);

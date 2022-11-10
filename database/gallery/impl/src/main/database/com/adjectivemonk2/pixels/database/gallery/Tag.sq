@@ -1,0 +1,24 @@
+import kotlin.Boolean;
+
+CREATE TABLE TagFromDb (
+  name TEXT NOT NULL,
+  displayName TEXT NOT NULL,
+  followers INTEGER NOT NULL,
+  totalItems INTEGER NOT NULL,
+  isPromoted INTEGER AS Boolean NOT NULL,
+  PRIMARY KEY (name)
+);
+
+insertTag:
+INSERT OR IGNORE INTO TagFromDb (name, displayName, followers, totalItems, isPromoted)
+VALUES (?, ?, ?, ?, ?);
+
+selectTagForGallery:
+SELECT * FROM TagFromDb
+LEFT JOIN GalleryTagFromDb ON GalleryTagFromDb.tagId = TagFromDb.name
+WHERE galleryId = ?;
+
+selectTagForMedia:
+SELECT * FROM TagFromDb
+LEFT JOIN MediaTagFromDb ON MediaTagFromDb.tagId = TagFromDb.name
+WHERE mediaId = ?;

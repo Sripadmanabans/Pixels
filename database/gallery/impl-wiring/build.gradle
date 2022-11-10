@@ -1,0 +1,11 @@
+plugins {
+  id "com.adjectivemonk2.jvm.lib"
+  id "com.adjectivemonk2.anvil.lib"
+}
+
+archivesBaseName = "database-gallery-impl-wiring"
+
+dependencies {
+  api projects.database.gallery.public
+  api projects.database.gallery.impl
+}

@@ -19,8 +19,9 @@ archivesBaseName = "network-core-impl"
 
 dependencies {
   api projects.network.core.public
-  api projects.network.model.core.public
   api projects.scope.public
+
+  implementation projects.network.model.core.public
 
   implementation libs.kotlin.time
   implementation libs.moshi.client
