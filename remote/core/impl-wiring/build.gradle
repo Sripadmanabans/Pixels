@@ -1,0 +1,23 @@
+plugins {
+  id "com.adjectivemonk2.android.lib"
+  id "com.adjectivemonk2.anvil.lib"
+}
+
+android {
+  namespace "com.adjectivemonk2.pixels.remote.core.impl.wiring"
+}
+
+archivesBaseName = "remote-core-impl-wiring"
+
+dependencies {
+  api projects.remote.core.public
+  api projects.remote.core.impl
+
+  implementation libs.byteUnits
+  implementation libs.logcat
+  implementation libs.retrofit.converter
+
+  testImplementation libs.junit5.jupiter.api
+  testRuntimeOnly libs.junit5.jupiter.runtime
+  testImplementation libs.truth
+}

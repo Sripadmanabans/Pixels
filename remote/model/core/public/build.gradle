@@ -1,0 +1,6 @@
+plugins {
+  id "com.adjectivemonk2.jvm.lib"
+  id "com.adjectivemonk2.moshi.lib"
+}
+
+archivesBaseName = "remote-model-core-public"

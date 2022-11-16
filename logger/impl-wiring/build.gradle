@@ -10,8 +10,5 @@ android {
 archivesBaseName = "logger-impl-wiring"
 
 dependencies {
-  api projects.logger.public
   api projects.logger.impl
-
-  api projects.scope.public
 }

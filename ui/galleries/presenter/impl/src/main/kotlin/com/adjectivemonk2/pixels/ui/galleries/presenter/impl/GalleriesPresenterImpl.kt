@@ -9,11 +9,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.adjectivemonk2.pixels.model.gallery.Gallery
-import com.adjectivemonk2.pixels.network.core.apiCatch
-import com.adjectivemonk2.pixels.network.gallery.GalleryRepository
-import com.adjectivemonk2.pixels.network.gallery.Section
-import com.adjectivemonk2.pixels.network.gallery.Sort
-import com.adjectivemonk2.pixels.network.gallery.Window
+import com.adjectivemonk2.pixels.remote.core.apiCatch
+import com.adjectivemonk2.pixels.repository.gallery.GalleryRepository
+import com.adjectivemonk2.pixels.repository.gallery.Section
+import com.adjectivemonk2.pixels.repository.gallery.Sort
+import com.adjectivemonk2.pixels.repository.gallery.Window
 import com.adjectivemonk2.pixels.scope.ActivityScope
 import com.adjectivemonk2.pixels.ui.galleries.presenter.GalleriesEvent
 import com.adjectivemonk2.pixels.ui.galleries.presenter.GalleriesPresenter
