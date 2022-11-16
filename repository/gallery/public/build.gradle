@@ -1,0 +1,11 @@
+plugins {
+  id "com.adjectivemonk2.jvm.lib"
+}
+
+archivesBaseName = "repository-gallery-public"
+
+dependencies {
+  api projects.model.gallery.public
+
+  api libs.kotlin.coroutines.core
+}

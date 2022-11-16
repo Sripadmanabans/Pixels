@@ -1,0 +1,18 @@
+plugins {
+  id "com.adjectivemonk2.android.lib"
+  id "com.adjectivemonk2.anvil.lib"
+}
+
+android {
+  namespace "com.adjectivemonk2.pixels.remote.gallery.impl.wiring"
+}
+
+archivesBaseName = "remote-gallery-impl-wiring"
+
+dependencies {
+  api projects.remote.core.public
+  api projects.remote.gallery.impl
+  api projects.scope.public
+
+  implementation libs.retrofit.client
+}

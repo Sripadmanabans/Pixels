@@ -3,11 +3,11 @@ package com.adjectivemonk2.pixels.ui.galleries.presenter.impl
 import app.cash.molecule.RecompositionClock
 import app.cash.molecule.moleculeFlow
 import app.cash.turbine.test
-import com.adjectivemonk2.pixels.network.gallery.fake.ExceptionType
-import com.adjectivemonk2.pixels.network.gallery.fake.FakeGalleryRepository
-import com.adjectivemonk2.pixels.network.gallery.fake.TestRuntimeException
-import com.adjectivemonk2.pixels.network.gallery.fake.galleryWithMedia1
-import com.adjectivemonk2.pixels.network.gallery.fake.galleryWithMedia2
+import com.adjectivemonk2.pixels.repository.gallery.fake.ExceptionType
+import com.adjectivemonk2.pixels.repository.gallery.fake.FakeGalleryRepository
+import com.adjectivemonk2.pixels.repository.gallery.fake.TestRuntimeException
+import com.adjectivemonk2.pixels.repository.gallery.fake.galleryWithMedia1
+import com.adjectivemonk2.pixels.repository.gallery.fake.galleryWithMedia2
 import com.adjectivemonk2.pixels.testing.DispatcherParameterResolver
 import com.adjectivemonk2.pixels.ui.galleries.presenter.GalleriesEvent
 import com.adjectivemonk2.pixels.ui.galleries.presenter.GalleriesScreen

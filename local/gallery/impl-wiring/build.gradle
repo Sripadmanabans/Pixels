@@ -1,0 +1,10 @@
+plugins {
+  id "com.adjectivemonk2.jvm.lib"
+  id "com.adjectivemonk2.anvil.lib"
+}
+
+archivesBaseName = "local-gallery-impl-wiring"
+
+dependencies {
+  api projects.local.gallery.impl
+}

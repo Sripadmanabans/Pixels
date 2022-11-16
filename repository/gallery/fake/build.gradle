@@ -1,0 +1,18 @@
+plugins {
+  id "com.adjectivemonk2.jvm.lib"
+}
+
+archivesBaseName = "repository-gallery-fake"
+
+dependencies {
+  api projects.model.gallery.public
+  api projects.repository.gallery.public
+}
+
+kotlin {
+  sourceSets.all {
+    languageSettings {
+      optIn("kotlin.time.ExperimentalTime")
+    }
+  }
+}

@@ -1,0 +1,31 @@
+plugins {
+  id "com.adjectivemonk2.android.lib"
+  id "com.adjectivemonk2.anvil.lib"
+}
+
+android {
+  buildFeatures {
+    buildConfig true
+  }
+
+  defaultConfig {
+    buildConfigField "String", "PIXELS_CLIENT_ID", "\"${PIXELS_CLIENT_ID}\""
+  }
+
+  namespace "com.adjectivemonk2.pixels.remote.core.impl"
+}
+
+archivesBaseName = "remote-core-impl"
+
+dependencies {
+  api projects.remote.core.public
+  api projects.scope.public
+
+  implementation projects.remote.model.core.public
+
+  api libs.okhttp.client
+  api libs.okhttp.loggingInterceptor
+  api libs.moshi.client
+
+  implementation libs.kotlin.time
+}

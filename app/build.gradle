@@ -6,30 +6,27 @@ plugins {
 }
 
 dependencies {
-
-  implementation projects.database.session.implWiring
-  implementation projects.database.gallery.implWiring
   implementation projects.dispatcher.public
 
-  implementation projects.network.core.implWiring
-  implementation projects.network.gallery.implWiring
+  implementation projects.local.session.implWiring
+  implementation projects.local.gallery.implWiring
+  implementation projects.logger.implWiring
+
+  implementation projects.remote.core.implWiring
+  implementation projects.remote.gallery.implWiring
+  implementation projects.repository.gallery.implWiring
 
   implementation projects.scope.public
 
   implementation projects.theme.public
-
-  implementation projects.logger.implWiring
 
   implementation projects.ui.galleries.presenter.implWiring
   implementation projects.ui.galleries.renderer.implWiring
 
   implementation libs.androidx.activity.compose
   implementation libs.androidx.core
-
   implementation libs.androidx.compose.material3
-
   implementation libs.androidx.compose.runtime
-
   implementation libs.androidx.compose.ui.ui
   implementation libs.androidx.compose.ui.text
   implementation libs.androidx.compose.ui.tooling
@@ -63,10 +60,10 @@ kotlin {
 
 sqldelight {
   PixelsDb {
-    packageName = "com.adjectivemonk2.pixels.database"
+    packageName = "com.adjectivemonk2.pixels.local"
     sourceFolders = ["database"]
     schemaOutputDirectory = file("build/database")
-    dependency project(":database:session:impl")
-    dependency project(":database:gallery:impl")
+    dependency project(":local:session:impl")
+    dependency project(":local:gallery:impl")
   }
 }

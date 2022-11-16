@@ -28,7 +28,7 @@ coroutines = "1.6.4"
 kotlin = "1.7.20"
 time = "0.4.0"
 
-# Network Components
+# Remote Components
 moshi = "1.14.0"
 moshix = "1.7.20-Beta-0.18.3"
 okhttp = "5.0.0-alpha.10"

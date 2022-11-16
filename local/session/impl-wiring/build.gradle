@@ -1,0 +1,10 @@
+plugins {
+  id "com.adjectivemonk2.jvm.lib"
+  id "com.adjectivemonk2.anvil.lib"
+}
+
+archivesBaseName = "local-session-impl-wiring"
+
+dependencies {
+  api projects.local.session.impl
+}

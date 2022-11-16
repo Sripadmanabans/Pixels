@@ -1,8 +1,8 @@
 package com.adjectivemonk2.pixels
 
 import android.app.Application
-import com.adjectivemonk2.pixels.database.PixelsDb
 import com.adjectivemonk2.pixels.di.ActivityComponent
+import com.adjectivemonk2.pixels.local.PixelsDb
 import com.adjectivemonk2.pixels.logger.LoggerInitializer
 import com.adjectivemonk2.pixels.scope.AppScope
 import com.adjectivemonk2.pixels.scope.SingleIn

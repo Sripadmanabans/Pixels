@@ -1,0 +1,15 @@
+plugins {
+  id "com.adjectivemonk2.jvm.lib"
+  id "com.adjectivemonk2.anvil.lib"
+}
+
+archivesBaseName = "remote-gallery-impl"
+
+dependencies {
+  api projects.remote.gallery.public
+  api projects.scope.public
+
+  implementation projects.remote.model.gallery.public
+
+  implementation libs.retrofit.client
+}

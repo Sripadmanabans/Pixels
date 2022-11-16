@@ -1,7 +1,7 @@
 package com.adjectivemonk2.pixels.ui.galleries.presenter.impl
 
-import com.adjectivemonk2.pixels.network.gallery.fake.galleryWithMedia1
-import com.adjectivemonk2.pixels.network.gallery.fake.galleryWithOutMedia
+import com.adjectivemonk2.pixels.repository.gallery.fake.galleryWithMedia1
+import com.adjectivemonk2.pixels.repository.gallery.fake.galleryWithOutMedia
 import com.adjectivemonk2.pixels.ui.galleries.presenter.GalleryListItem
 import com.google.common.truth.Truth.assertThat
 import org.junit.jupiter.api.Test

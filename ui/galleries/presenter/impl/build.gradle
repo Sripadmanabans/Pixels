@@ -11,11 +11,11 @@ dependencies {
   api projects.ui.galleries.presenter.public
 
   implementation projects.model.gallery.public
-  implementation projects.network.core.public
-  implementation projects.network.gallery.public
+  implementation projects.remote.core.public
+  implementation projects.repository.gallery.public
   implementation projects.scope.public
 
-  testImplementation projects.network.gallery.fake
+  testImplementation projects.repository.gallery.fake
   testImplementation projects.testing
 }
 

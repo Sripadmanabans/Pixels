@@ -1,0 +1,9 @@
+plugins {
+  id "com.adjectivemonk2.jvm.lib"
+}
+
+archivesBaseName = "repository-gallery-impl-wiring"
+
+dependencies {
+  api projects.repository.gallery.impl
+}

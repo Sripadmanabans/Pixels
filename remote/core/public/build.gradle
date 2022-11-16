@@ -1,0 +1,13 @@
+plugins {
+  id "com.adjectivemonk2.jvm.lib"
+}
+
+archivesBaseName = "remote-core-public"
+
+dependencies {
+  api libs.retrofit.client
+
+  api libs.kotlin.coroutines.core
+
+  implementation libs.dagger.runtime
+}
