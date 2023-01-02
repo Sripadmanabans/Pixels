@@ -30,4 +30,10 @@ android {
     freeCompilerArgs += "-progressive"
     freeCompilerArgs += "-Xexplicit-api=strict"
   }
+
+  packagingOptions {
+    resources {
+      exclude "META-INF/LICENSE*"
+    }
+  }
 }

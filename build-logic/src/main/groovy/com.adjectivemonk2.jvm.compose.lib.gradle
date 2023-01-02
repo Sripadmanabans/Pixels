@@ -5,6 +5,35 @@ plugins {
   id "com.adjectivemonk2.kotlinter"
 }
 
+compileKotlin {
+  kotlinOptions {
+    if (project.findProperty("pixels.enableComposeCompilerReports") == "true") {
+      freeCompilerArgs += [
+        "-P",
+        "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=" +
+          buildDir.absolutePath + "/compose_metrics"
+      ]
+      freeCompilerArgs += [
+        "-P",
+        "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=" +
+          buildDir.absolutePath + "/compose_metrics"
+      ]
+    }
+  }
+}
+
+def kotlinVersion = libs.versions.kotlin.get()
+def composeKotlinVersion = libs.versions.composeJetbrainsKotlin.get()
+def suppressComposeCompatibility = kotlinVersion != composeKotlinVersion
+
+if (suppressComposeCompatibility) {
+  println("Suppressing jvm library level compiler kotlin compiler check!!")
+  compose {
+    kotlinCompilerPlugin.set(dependencies.compiler.forKotlin(composeKotlinVersion))
+    kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=$kotlinVersion")
+  }
+}
+
 dependencies {
   implementation libs.jetbrains.compose.runtime
 }

@@ -3,20 +3,18 @@ package com.adjectivemonk2.pixels.testing
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestDispatcher
+import org.junit.jupiter.api.extension.AfterEachCallback
+import org.junit.jupiter.api.extension.BeforeEachCallback
 import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.api.extension.ExtensionContext.Namespace
 import org.junit.jupiter.api.extension.ExtensionContext.Store
 import org.junit.jupiter.api.extension.ParameterContext
 import org.junit.jupiter.api.extension.ParameterResolver
 
-public class DispatcherParameterResolver : ParameterResolver {
-
-  private class DispatcherProvider : Store.CloseableResource {
-    val dispatcher = StandardTestDispatcher()
-    override fun close() {
-      dispatcher.cancel()
-    }
-  }
+public class DispatcherParameterResolver :
+  ParameterResolver,
+  BeforeEachCallback,
+  AfterEachCallback {
 
   override fun supportsParameter(
     parameterContext: ParameterContext,
@@ -29,18 +27,21 @@ public class DispatcherParameterResolver : ParameterResolver {
     parameterContext: ParameterContext,
     extensionContext: ExtensionContext,
   ): Any {
-    val dispatcherProvider = extensionContext.store
-      .getOrComputeIfAbsentInline(extensionContext.uniqueId) { DispatcherProvider() }
-    return dispatcherProvider.dispatcher
+    return extensionContext.store[dispatcherKey]
+  }
+
+  override fun beforeEach(context: ExtensionContext) {
+    context.store.put(dispatcherKey, StandardTestDispatcher())
+  }
+
+  override fun afterEach(context: ExtensionContext) {
+    context.store.get(dispatcherKey, TestDispatcher::class.java)!!.cancel()
   }
 
   private val ExtensionContext.store: Store
     get() = getStore(Namespace.create(testClass, requiredTestMethod))
 
-  private inline fun <Key, reified Value> Store.getOrComputeIfAbsentInline(
-    key: Key,
-    crossinline defaultCreator: (Key) -> Value,
-  ): Value {
-    return getOrComputeIfAbsent(key, { defaultCreator(it) }, Value::class.java)
+  private companion object {
+    val dispatcherKey = requireNotNull(TestDispatcher::class.qualifiedName)
   }
 }

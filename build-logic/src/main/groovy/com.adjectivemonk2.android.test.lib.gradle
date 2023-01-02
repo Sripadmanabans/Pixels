@@ -1,6 +1,7 @@
 plugins {
   id "com.adjectivemonk2.android.lib"
-  id "de.mannodermaus.android-junit5"
+  // FIXME: Suppressing till https://github.com/Sripadmanabans/Pixels/issues/45
+  // id "de.mannodermaus.android-junit5"
 }
 
 android {
