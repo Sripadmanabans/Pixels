@@ -153,7 +153,7 @@ compose = { id = "org.jetbrains.compose", version.ref = "composeJetbrains" }
 
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 
-groovy = { id = "dev.gradleplugins.groovy-gradle-plugin", version = "1.6.7" }
+groovy = { id = "dev.gradleplugins.groovy-gradle-plugin", version = "1.6.9" }
 
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
