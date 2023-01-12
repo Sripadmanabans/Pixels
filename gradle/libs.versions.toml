@@ -23,7 +23,7 @@ dagger = "2.44.2"
 coil = "2.2.2"
 
 # Animations
-lottie = "4.2.2"
+lottie = "5.2.0"
 
 # Core Components
 coroutines = "1.6.4"
