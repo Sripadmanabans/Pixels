@@ -7,7 +7,7 @@ lifecycle = "2.6.0-alpha03"
 paging = "1.0.0-alpha17"
 
 # Compose Components
-accompanist = "0.26.2-beta"
+accompanist = "0.28.0"
 compose = "1.4.0-alpha02"
 composeKotlin = "1.7.21"
 composeAndroid = "1.4.0-alpha03"
