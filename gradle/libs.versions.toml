@@ -16,7 +16,7 @@ composeJetbrainsKotlin = "1.7.20"
 composeMaterial3 = "1.1.0-alpha04"
 
 # DI components
-anvil = "2.4.3"
+anvil = "2.4.4"
 dagger = "2.44.2"
 
 # Image Component
