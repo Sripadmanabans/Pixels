@@ -1,8 +1,6 @@
 plugins {
-  id "org.jetbrains.kotlin.jvm"
+  id "com.adjectivemonk2.jvm.lib"
   id "org.jetbrains.compose"
-  id "com.adjectivemonk2.detekt"
-  id "com.adjectivemonk2.kotlinter"
 }
 
 compileKotlin {
@@ -27,21 +25,12 @@ def composeKotlinVersion = libs.versions.composeJetbrainsKotlin.get()
 def suppressComposeCompatibility = kotlinVersion != composeKotlinVersion
 
 if (suppressComposeCompatibility) {
-  println("Suppressing jvm library level compiler kotlin compiler check!!")
+  println("Suppressing jvm library level compiler kotlin compiler check was $kotlinVersion require $composeKotlinVersion!!")
   compose {
-    kotlinCompilerPlugin.set(dependencies.compiler.forKotlin(composeKotlinVersion))
-    kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=$kotlinVersion")
+    kotlinCompilerPlugin.set(libs.androidx.compose.compiler.get().toString())
   }
 }
 
 dependencies {
   implementation libs.jetbrains.compose.runtime
-}
-
-kotlin {
-  explicitApi()
-
-  jvmToolchain {
-    languageVersion = JavaLanguageVersion.of(11)
-  }
 }

@@ -5,6 +5,10 @@ plugins {
 }
 
 android {
+  buildFeatures {
+    resValues = true
+  }
+
   namespace "com.adjectivemonk2.pixels.ui.galleries.android.impl"
 }
 
@@ -23,7 +27,7 @@ dependencies {
 }
 
 kotlin {
-  sourceSets.all {
+  sourceSets.configureEach {
     languageSettings {
       optIn("coil.annotation.ExperimentalCoilApi")
       optIn("kotlin.time.ExperimentalTime")
