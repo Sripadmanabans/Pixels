@@ -50,7 +50,7 @@ kapt {
 }
 
 kotlin {
-  sourceSets.all {
+  sourceSets.configureEach {
     languageSettings {
       optIn("kotlin.time.ExperimentalTime")
       optIn("kotlinx.coroutines.FlowPreview")
