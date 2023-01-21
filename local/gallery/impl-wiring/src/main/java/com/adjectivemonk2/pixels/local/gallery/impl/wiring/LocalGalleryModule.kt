@@ -1,7 +1,7 @@
 package com.adjectivemonk2.pixels.local.gallery.impl.wiring
 
+import com.adjectivemonk2.pixels.local.adapter.InstantColumnAdapter
 import com.adjectivemonk2.pixels.local.gallery.GalleryFromDb
-import com.adjectivemonk2.pixels.local.gallery.impl.InstantColumnAdapter
 import com.adjectivemonk2.pixels.scope.AppScope
 import com.adjectivemonk2.pixels.scope.SingleIn
 import com.squareup.anvil.annotations.ContributesTo

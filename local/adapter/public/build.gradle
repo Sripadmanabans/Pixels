@@ -2,9 +2,9 @@ plugins {
   id "com.adjectivemonk2.jvm.lib"
 }
 
-archivesBaseName = "local-session-public"
+archivesBaseName = "local-adapter-public"
 
 dependencies {
-  api libs.kotlin.coroutines.core
   api libs.kotlin.time
+  api libs.sqlDelight.runtime
 }

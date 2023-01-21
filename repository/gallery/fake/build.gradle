@@ -8,11 +8,3 @@ dependencies {
   api projects.model.gallery.public
   api projects.repository.gallery.public
 }
-
-kotlin {
-  sourceSets.configureEach {
-    languageSettings {
-      optIn("kotlin.time.ExperimentalTime")
-    }
-  }
-}
