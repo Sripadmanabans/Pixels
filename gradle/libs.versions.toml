@@ -30,12 +30,12 @@ coroutines = "1.6.4"
 kotlin = "1.8.0"
 time = "0.4.0"
 
-# Remote Components
+# Data Components
 moshi = "1.14.0"
 moshix = "0.21.0"
 okhttp = "5.0.0-alpha.11"
 retrofit = "2.9.0"
-sqldelight = "2.0.0-alpha04"
+sqldelight = "2.0.0-alpha05"
 
 # Helper Components
 byteUnits = "0.9.1"
@@ -136,6 +136,7 @@ retrofit-converter = { module = "com.squareup.retrofit2:converter-moshi", versio
 
 sqlDelight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
 sqlDelight-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
+sqlDelight-dialect = { module = "app.cash.sqldelight:sqlite-3-30-dialect", version.ref = "sqldelight" }
 sqlDelight-jvm = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqldelight" }
 sqlDelight-primitive-adapter = { module = "app.cash.sqldelight:primitive-adapters", version.ref = "sqldelight" }
 sqlDelight-runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sqldelight" }

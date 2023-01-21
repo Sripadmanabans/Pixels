@@ -30,7 +30,6 @@ kotlin {
   sourceSets.configureEach {
     languageSettings {
       optIn("coil.annotation.ExperimentalCoilApi")
-      optIn("kotlin.time.ExperimentalTime")
     }
   }
 }

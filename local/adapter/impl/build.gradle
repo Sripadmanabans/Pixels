@@ -3,9 +3,10 @@ plugins {
   id "com.adjectivemonk2.anvil.lib"
 }
 
-archivesBaseName = "local-gallery-impl-wiring"
+archivesBaseName = "local-adapter-impl"
 
 dependencies {
   api projects.local.adapter.public
-  api projects.local.gallery.impl
+
+  implementation projects.scope.public
 }

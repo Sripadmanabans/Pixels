@@ -17,17 +17,19 @@ dependencies {
 kotlin {
   sourceSets.configureEach {
     languageSettings {
-      optIn("kotlin.time.ExperimentalTime")
       optIn("kotlinx.coroutines.FlowPreview")
     }
   }
 }
 
 sqldelight {
-  PixelsDb {
-    packageName = "com.adjectivemonk2.pixels.local.session"
-    sourceFolders = ["database"]
-    schemaOutputDirectory = file("build/database")
+  databases {
+    PixelsDb {
+      packageName = "com.adjectivemonk2.pixels.local.session"
+      sourceFolders = ["database"]
+      schemaOutputDirectory = file("build/database")
+      dialect(libs.sqlDelight.dialect.get())
+    }
   }
 }
 

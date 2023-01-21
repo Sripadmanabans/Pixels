@@ -8,8 +8,9 @@ plugins {
 dependencies {
   implementation projects.dispatcher.public
 
-  implementation projects.local.session.implWiring
+  implementation projects.local.adapter.impl
   implementation projects.local.gallery.implWiring
+  implementation projects.local.session.implWiring
   implementation projects.logger.implWiring
 
   implementation projects.remote.core.implWiring
@@ -52,18 +53,20 @@ kapt {
 kotlin {
   sourceSets.configureEach {
     languageSettings {
-      optIn("kotlin.time.ExperimentalTime")
       optIn("kotlinx.coroutines.FlowPreview")
     }
   }
 }
 
 sqldelight {
-  PixelsDb {
-    packageName = "com.adjectivemonk2.pixels.local"
-    sourceFolders = ["database"]
-    schemaOutputDirectory = file("build/database")
-    dependency project(":local:session:impl")
-    dependency project(":local:gallery:impl")
+  databases {
+    PixelsDb {
+      packageName = "com.adjectivemonk2.pixels.local"
+      sourceFolders = ["database"]
+      schemaOutputDirectory = file("build/database")
+      dependency project(":local:gallery:impl")
+      dependency project(":local:session:impl")
+      dialect(libs.sqlDelight.dialect.get())
+    }
   }
 }

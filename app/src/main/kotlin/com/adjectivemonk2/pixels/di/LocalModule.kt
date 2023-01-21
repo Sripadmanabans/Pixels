@@ -21,7 +21,7 @@ public interface LocalModule {
 
   @Binds public fun pixelsSessionDb(pixelsDb: PixelsDb): PixelsSessionDb
 
-  @Binds public fun pixelsDb(pixelsDb: PixelsDb): PixelsGalleryDb
+  @Binds public fun pixelsGalleryDb(pixelsDb: PixelsDb): PixelsGalleryDb
 
   public companion object {
 

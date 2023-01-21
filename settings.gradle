@@ -25,6 +25,9 @@ include ":app"
 
 include ":dispatcher:public"
 
+include ":local:adapter:impl"
+include ":local:adapter:public"
+
 include ":local:gallery:impl"
 include ":local:gallery:impl-wiring"
 include ":local:gallery:public"
