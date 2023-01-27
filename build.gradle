@@ -17,8 +17,6 @@ buildscript {
 }
 
 plugins {
-  alias libs.plugins.ben.gradle apply true
-
   alias libs.plugins.android.application apply false
   alias libs.plugins.android.junit5 apply false
   alias libs.plugins.android.library apply false
@@ -30,12 +28,12 @@ plugins {
   alias libs.plugins.kotlin.android apply false
   alias libs.plugins.kotlin.jvm apply false
   alias libs.plugins.kotlin.kapt apply false
-  alias libs.plugins.kotlinter apply false
 
   alias libs.plugins.ksp apply false
 
   alias libs.plugins.molecule apply false
 
+  alias libs.plugins.spotless apply false
   alias libs.plugins.sqldelight apply false
   alias libs.plugins.square.anvil apply false
 }
