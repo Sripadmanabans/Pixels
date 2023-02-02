@@ -39,7 +39,7 @@ sqldelight = "2.0.0-alpha05"
 
 # Helper Components
 byteUnits = "0.9.1"
-ksp = "1.8.0-1.0.9"
+ksp = "1.8.10-1.0.9"
 logcat = "0.1"
 
 # Testing Components
