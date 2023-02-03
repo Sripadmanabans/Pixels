@@ -1,5 +1,5 @@
 plugins {
-  id "com.adjectivemonk2.jvm.lib"
+  id "com.adjectivemonk2.jvm.compose.lib"
   id "com.adjectivemonk2.anvil.lib"
 }
 

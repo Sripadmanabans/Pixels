@@ -28,6 +28,7 @@ if (suppressComposeCompatibility) {
   println("Suppressing jvm library level compiler kotlin compiler check was $kotlinVersion require $composeKotlinVersion!!")
   compose {
     kotlinCompilerPlugin.set(libs.androidx.compose.compiler.get().toString())
+    kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=$kotlinVersion")
   }
 }
 
