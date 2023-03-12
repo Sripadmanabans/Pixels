@@ -1,19 +1,19 @@
 [versions]
 # Android Components
-activity = "1.7.0-beta02"
-androidBuild = "8.1.0-alpha06"
+activity = "1.7.0-rc01"
+androidBuild = "8.1.0-alpha08"
 core = "1.9.0"
-lifecycle = "2.6.0-rc01"
+lifecycle = "2.6.0"
 paging = "1.0.0-alpha18"
 
 # Compose Components
 accompanist = "0.28.0"
 compose = "1.4.3"
 composeKotlin = "1.8.10"
-composeAndroid = "1.4.0-beta02"
-composeJetbrains = "1.3.0"
-composeJetbrainsKotlin = "1.8.0"
-composeMaterial3 = "1.1.0-alpha07"
+composeAndroid = "1.4.0-rc01"
+composeJetbrains = "1.3.1"
+composeJetbrainsKotlin = "1.8.10"
+composeMaterial3 = "1.1.0-alpha08"
 
 # DI components
 anvil = "2.4.4"
@@ -53,7 +53,7 @@ androidxRunner = "1.5.2"
 androidxTest = "1.5.0"
 espresso = "3.5.1"
 junit5 = "5.9.2"
-molecule = "0.7.1"
+molecule = "0.8.0"
 truth = "1.1.3"
 turbine = "0.12.1"
 
