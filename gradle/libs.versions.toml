@@ -20,7 +20,7 @@ anvil = "2.4.4"
 dagger = "2.45"
 
 # Image Component
-coil = "2.2.2"
+coil = "2.3.0"
 
 # Animations
 lottie = "6.0.0"
