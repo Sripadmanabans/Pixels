@@ -1,22 +1,22 @@
 [versions]
 # Android Components
 activity = "1.7.0"
-androidBuild = "8.1.0-alpha10"
-core = "1.9.0"
+androidBuild = "8.1.0-alpha11"
+core = "1.10.0"
 lifecycle = "2.6.1"
 paging = "1.0.0-alpha18"
 
 # Compose Components
-accompanist = "0.30.0"
-compose = "1.4.4"
-composeKotlin = "1.8.10"
-composeAndroid = "1.5.0-alpha01"
-composeJetbrains = "1.3.1"
-composeJetbrainsKotlin = "1.8.10"
-composeMaterial3 = "1.1.0-beta01"
+accompanist = "0.30.1"
+compose = "1.4.4-dev-k1.8.20-f6ae19e64ff"
+composeKotlin = "1.8.20"
+composeAndroid = "1.5.0-alpha02"
+composeJetbrains = "1.4.0-rc03"
+composeJetbrainsKotlin = "1.8.20"
+composeMaterial3 = "1.1.0-beta02"
 
 # DI components
-anvil = "2.4.4"
+anvil = "2.4.5"
 dagger = "2.45"
 
 # Image Component
@@ -27,19 +27,19 @@ lottie = "6.0.0"
 
 # Core Components
 coroutines = "1.6.4"
-kotlin = "1.8.10"
+kotlin = "1.8.20"
+ksp = "1.8.20-1.0.10"
 time = "0.4.0"
 
 # Data Components
 moshi = "1.14.0"
-moshix = "0.21.0"
+moshix = "0.22.0"
 okhttp = "5.0.0-alpha.11"
 retrofit = "2.9.0"
 sqldelight = "2.0.0-alpha05"
 
 # Helper Components
 byteUnits = "0.9.1"
-ksp = "1.8.10-1.0.9"
 logcat = "0.1"
 
 # Testing Components
@@ -55,7 +55,7 @@ espresso = "3.5.1"
 junit5 = "5.9.2"
 molecule = "0.8.0"
 truth = "1.1.3"
-turbine = "0.12.1"
+turbine = "0.12.3"
 
 # Code Health Components
 detekt = "1.22.0"
