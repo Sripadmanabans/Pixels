@@ -1,6 +1,6 @@
 [versions]
 # Android Components
-activity = "1.7.0"
+activity = "1.7.1"
 androidBuild = "8.1.0-alpha11"
 core = "1.10.0"
 lifecycle = "2.6.1"
