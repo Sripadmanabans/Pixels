@@ -6,8 +6,5 @@ plugins {
 
 kotlin {
   explicitApi()
-
-  jvmToolchain {
-    languageVersion = JavaLanguageVersion.of(11)
-  }
+  jvmToolchain(17)
 }
