@@ -14,9 +14,19 @@ android {
     // Connect JUnit 5 to the runner
     testInstrumentationRunnerArguments runnerBuilder: "de.mannodermaus.junit5.AndroidJUnit5Builder"
   }
+
+  testOptions {
+    unitTests {
+      returnDefaultValues = true
+      includeAndroidResources = true
+    }
+    unitTests.all { useJUnitPlatform() }
+  }
 }
 
 dependencies {
+  implementation libs.androidx.tracing
+
   androidTestImplementation libs.androidx.test.espresso.core
   androidTestRuntimeOnly libs.androidx.test.runner
 
