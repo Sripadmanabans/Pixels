@@ -41,6 +41,7 @@ sqldelight = "2.0.0-alpha05"
 # Helper Components
 byteUnits = "0.9.1"
 logcat = "0.1"
+tracing = "1.2.0-beta03"
 
 # Testing Components
 androidJunit5 = "1.3.0"
@@ -94,6 +95,7 @@ androidx-test-junit = { module = "androidx.test.ext:junit-ktx", version.ref = "a
 androidx-test-orchestrator = { module = "androidx.test:orchestrator", version.ref = "androidxOrchestrator" }
 androidx-test-rules = { module = "androidx.test:rules", version.ref = "androidxRules" }
 androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidxRunner" }
+androidx-tracing = { module = "androidx.tracing:tracing", version.ref = "tracing" }
 
 byteUnits = { module = "com.jakewharton.byteunits:byteunits", version.ref = "byteUnits" }
 
