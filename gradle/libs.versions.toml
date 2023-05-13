@@ -17,7 +17,7 @@ composeMaterial3 = "1.2.0-alpha01"
 
 # DI components
 anvil = "2.4.5"
-dagger = "2.45"
+dagger = "2.46.1"
 
 # Image Component
 coil = "2.3.0"
