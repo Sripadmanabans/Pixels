@@ -1,7 +1,7 @@
 [versions]
 # Android Components
 activity = "1.7.1"
-androidBuild = "8.2.0-alpha03"
+androidBuild = "8.2.0-alpha04"
 core = "1.10.1"
 lifecycle = "2.6.1"
 paging = "1.0.0-alpha19"
