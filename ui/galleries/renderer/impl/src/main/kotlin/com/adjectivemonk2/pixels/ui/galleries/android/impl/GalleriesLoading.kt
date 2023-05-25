@@ -46,7 +46,7 @@ private val BOX_ANIMATION_DURATION = 500.milliseconds
       .fillMaxSize()
       .wrapContentSize(),
   ) {
-    val transition = rememberInfiniteTransition()
+    val transition = rememberInfiniteTransition(label = "Loading box")
     val angle by transition.animateFloat(
       initialValue = START_ANGLE,
       targetValue = END_ANGLE,
@@ -54,6 +54,7 @@ private val BOX_ANIMATION_DURATION = 500.milliseconds
         animation = tween(BOX_ANIMATION_DURATION.toInt(DurationUnit.MILLISECONDS)),
         repeatMode = RepeatMode.Reverse,
       ),
+      label = "Loading box",
     )
 
     Spacer(
@@ -86,6 +87,7 @@ private val BOX_ANIMATION_DURATION = 500.milliseconds
         animation = tween(LINE_ANIMATION_DURATION.toInt(DurationUnit.MILLISECONDS)),
         repeatMode = RepeatMode.Restart,
       ),
+      label = "Loading rows",
     )
     Spacer(
       modifier = Modifier
@@ -106,6 +108,7 @@ private val BOX_ANIMATION_DURATION = 500.milliseconds
         animation = tween(LINE_ANIMATION_DURATION.toInt(DurationUnit.MILLISECONDS)),
         repeatMode = RepeatMode.Restart,
       ),
+      label = "Loading rows",
     )
     Spacer(
       modifier = Modifier

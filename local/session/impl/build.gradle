@@ -17,6 +17,7 @@ dependencies {
 kotlin {
   sourceSets.configureEach {
     languageSettings {
+      optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
       optIn("kotlinx.coroutines.FlowPreview")
     }
   }

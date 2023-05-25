@@ -36,8 +36,8 @@ public class GalleriesPresenterImpl @Inject constructor(
     var isLoading by remember { mutableStateOf(true) }
     var error by remember { mutableStateOf<String?>(null) }
     val stateItems = remember { mutableStateListOf<GalleryListItem>() }
-    val items by derivedStateOf { stateItems.toList() }
-    val state by derivedStateOf { GalleriesScreen(items, isLoading, error) }
+    val items by remember { derivedStateOf { stateItems.toList() } }
+    val state by remember { derivedStateOf { GalleriesScreen(items, isLoading, error) } }
     var apiKey by remember { mutableStateOf(Key()) }
     LaunchedEffect(apiKey) {
       repository.getGallery(apiKey.section, apiKey.sort, apiKey.window)
