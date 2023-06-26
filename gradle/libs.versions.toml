@@ -11,7 +11,7 @@ accompanist = "0.30.1"
 compose = "1.4.7"
 composeKotlin = "1.8.21"
 composeAndroid = "1.5.0-beta01"
-composeJetbrains = "1.4.0"
+composeJetbrains = "1.4.1"
 composeJetbrainsKotlin = "1.8.20"
 composeMaterial3 = "1.2.0-alpha02"
 
