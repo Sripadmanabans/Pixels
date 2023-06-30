@@ -54,7 +54,7 @@ androidxRunner = "1.5.2"
 androidxTest = "1.5.0"
 espresso = "3.5.1"
 junit5 = "5.9.3"
-molecule = "0.9.0"
+molecule = "0.11.0"
 truth = "1.1.5"
 turbine = "1.0.0"
 
