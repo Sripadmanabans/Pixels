@@ -1,6 +1,6 @@
 package com.adjectivemonk2.pixels.ui.galleries.presenter.impl
 
-import app.cash.molecule.RecompositionClock
+import app.cash.molecule.RecompositionMode
 import app.cash.molecule.moleculeFlow
 import app.cash.turbine.test
 import com.adjectivemonk2.pixels.repository.gallery.fake.FakeGalleryRepository
@@ -35,7 +35,7 @@ internal class GalleriesPresenterImplTest {
       val repository = FakeGalleryRepository()
       val galleryConverter = GalleryConverter(MediaConverter(), AccountImageUrlGenerator())
       val presenter = GalleriesPresenterImpl(repository, galleryConverter)
-      moleculeFlow(RecompositionClock.Immediate) { presenter.present(events) }
+      moleculeFlow(RecompositionMode.Immediate) { presenter.present(events) }
         .test {
           assertThat(awaitItem()).isEqualTo(GalleriesScreen(emptyList(), true, null))
           advanceUntilIdle()
@@ -54,7 +54,7 @@ internal class GalleriesPresenterImplTest {
       val galleryItems = galleries.mapNotNull { galleryConverter.toGalleryListItem(it) }
       val repository = FakeGalleryRepository()
       val presenter = GalleriesPresenterImpl(repository, galleryConverter)
-      moleculeFlow(RecompositionClock.Immediate) { presenter.present(events) }
+      moleculeFlow(RecompositionMode.Immediate) { presenter.present(events) }
         .test {
           assertThat(awaitItem()).isEqualTo(GalleriesScreen(emptyList(), true, null))
           advanceUntilIdle()
@@ -76,7 +76,7 @@ internal class GalleriesPresenterImplTest {
       val repository = FakeGalleryRepository()
       val galleryConverter = GalleryConverter(MediaConverter(), AccountImageUrlGenerator())
       val presenter = GalleriesPresenterImpl(repository, galleryConverter)
-      moleculeFlow(RecompositionClock.Immediate) { presenter.present(events) }
+      moleculeFlow(RecompositionMode.Immediate) { presenter.present(events) }
         .test {
           assertThat(awaitItem()).isEqualTo(GalleriesScreen(emptyList(), true, null))
           advanceUntilIdle()
@@ -93,7 +93,7 @@ internal class GalleriesPresenterImplTest {
       val repository = FakeGalleryRepository()
       val galleryConverter = GalleryConverter(MediaConverter(), AccountImageUrlGenerator())
       val presenter = GalleriesPresenterImpl(repository, galleryConverter)
-      moleculeFlow(RecompositionClock.Immediate) { presenter.present(events) }
+      moleculeFlow(RecompositionMode.Immediate) { presenter.present(events) }
         .test {
           assertThat(awaitItem()).isEqualTo(GalleriesScreen(emptyList(), true, null))
           repository.setException(TestRuntimeException())
@@ -109,7 +109,7 @@ internal class GalleriesPresenterImplTest {
       val galleryConverter = GalleryConverter(MediaConverter(), AccountImageUrlGenerator())
       val galleryItems = galleries.mapNotNull { galleryConverter.toGalleryListItem(it) }
       val presenter = GalleriesPresenterImpl(repository, galleryConverter)
-      moleculeFlow(RecompositionClock.Immediate) { presenter.present(events) }
+      moleculeFlow(RecompositionMode.Immediate) { presenter.present(events) }
         .test {
           assertThat(awaitItem()).isEqualTo(GalleriesScreen(emptyList(), true, null))
           advanceUntilIdle()

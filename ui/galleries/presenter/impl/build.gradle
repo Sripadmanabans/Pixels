@@ -2,7 +2,6 @@ plugins {
   id "com.adjectivemonk2.jvm.compose.lib"
   id "com.adjectivemonk2.jvm.test.lib"
   id "com.adjectivemonk2.anvil.lib"
-  id "app.cash.molecule"
 }
 
 archivesBaseName = "ui-galleries-presenter-impl"
@@ -17,6 +16,7 @@ dependencies {
 
   testImplementation projects.repository.gallery.fake
   testImplementation projects.testing
+  testImplementation libs.molecule.runtime
 }
 
 kotlin {
