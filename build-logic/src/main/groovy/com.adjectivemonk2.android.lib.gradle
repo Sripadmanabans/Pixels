@@ -32,6 +32,7 @@ android {
 
   packagingOptions {
     resources {
+      exclude "META-INF/com.google.dagger_dagger.version"
       exclude "META-INF/LICENSE*"
     }
   }
