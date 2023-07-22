@@ -62,7 +62,7 @@ sqldelight {
   databases {
     PixelsDb {
       packageName = "com.adjectivemonk2.pixels.local"
-      sourceFolders = ["database"]
+      srcDirs("src/main/database")
       schemaOutputDirectory = file("build/database")
       dependency project(":local:gallery:impl")
       dependency project(":local:session:impl")
