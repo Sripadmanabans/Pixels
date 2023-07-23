@@ -25,7 +25,7 @@ sqldelight {
   databases {
     PixelsDb {
       packageName = "com.adjectivemonk2.pixels.local.gallery"
-      sourceFolders = ["database"]
+      srcDirs("src/main/database")
       schemaOutputDirectory = file("build/database")
       dialect(libs.sqlDelight.dialect.get())
     }
