@@ -19,7 +19,6 @@ jobs:
     runs-on: macos-latest
     timeout-minutes: 15
     steps:
-      # These setup steps should be common across all jobs in this workflow.
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -35,20 +34,65 @@ jobs:
         with:
           arguments: |
             assemble --stacktrace --scan
-          cache-read-only: false
+          cache-read-only: true
+
+      - name: Finding build scan comment
+        uses: peter-evans/find-comment@v2
+        id: build_scan_comment
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body-includes: Build Scan
 
       - name: Add build scan URL as PR comment
-        uses: actions/github-script@v6
-        if: failure()
+        uses: peter-evans/create-or-update-comment@v3
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '❌ ${{ github.workflow }} failed: ${{ steps.gradle.outputs.build-scan-url }}'
-            })
+          body: |
+            Build Scan report: ${{ steps.gradle.outputs.build-scan-url }}
+          edit-mode: replace
+          comment-id: ${{ steps.build_scan_comment.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  diffing:
+    name: Diffing
+    needs: assemble
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Download base
+        uses: actions/cache@v3
+        with:
+          path: diffuse-source-file
+          key: diffuse-${{ github.event.pull_request.base.sha }}
+
+      - name: Diffing apk
+        id: diffuse
+        uses: usefulness/diffuse-action@v1
+        with:
+          old-file-path: diffuse-source-file
+          new-file-path: app/build/outputs/apk/release/app-release.apk
+
+      - name: Finding comment
+        uses: peter-evans/find-comment@v2
+        id: find_comment
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body-includes: Diffuse output
+
+      - name: Creating diff comment
+        uses: peter-evans/create-or-update-comment@v3
+        if: ${{ steps.diffuse.outputs.diff-raw != null || steps.find_comment.outputs.comment-id != null }}
+        with:
+          body: |
+            Diffuse output: 
+
+            ${{ steps.diffuse.outputs.diff-gh-comment }}
+            
+            File path: `${{ steps.diffuse.outputs.diff-file }}`
+          edit-mode: replace
+          comment-id: ${{ steps.find_comment.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
   # Runs all check tasks in parallel.
   check:
@@ -81,7 +125,7 @@ jobs:
         with:
           arguments: |
             ${{ matrix.gradle-task }} --stacktrace
-          cache-read-only: false
+          cache-read-only: true
 
       # Report as Github Pull Request Check.
       - name: Publish Test Report
@@ -114,27 +158,6 @@ jobs:
 
       - name: Gradle cache
         uses: gradle/gradle-build-action@v2
-
-      - name: AVD cache
-        uses: actions/cache@v3
-        id: avd-cache
-        with:
-          path: |
-            ~/.android/avd/*
-            ~/.android/adb*
-          key: avd-${{ matrix.api-level }}
-
-      - name: Create AVD and generate snapshot for caching
-        if: steps.avd-cache.outputs.cache-hit != 'true'
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: ${{ matrix.api-level }}
-          target: ${{ matrix.target }}
-          arch: ${{ matrix.arch }}
-          force-avd-creation: false
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: false
-          script: echo "Generated AVD snapshot for caching."
 
       ## Actual task.
       - name: Instrumentation Tests
