@@ -1,7 +1,9 @@
-name: CI
+name: CD
 
 on:
-  pull_request:
+  push:
+    branches:
+      - develop
 
 concurrency:
   group: ${{ github.head_ref || github.ref }}
@@ -37,18 +39,27 @@ jobs:
             assemble --stacktrace --scan
           cache-read-only: false
 
-      - name: Add build scan URL as PR comment
-        uses: actions/github-script@v6
-        if: failure()
+      - name: Upload base
+        if: success()
+        uses: actions/cache@v2
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '❌ ${{ github.workflow }} failed: ${{ steps.gradle.outputs.build-scan-url }}'
-            })
+          path: |
+            diffuse-source-file
+          key: diffuse-${{ github.sha }}
+
+      - name: Storing the apk for diffing
+        if: success()
+        run: cp /app/build/outputs/apk/release/app-release.apk diffuse-source-file
+        shell: bash
+
+      - name: Uploading artifacts
+        if: success()
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifacts
+          path: |
+            app/build/**/*.apk
+            app/build/**/mapping.txt
 
   # Runs all check tasks in parallel.
   check:
