@@ -34,7 +34,7 @@ jobs:
         id: gradle
         with:
           arguments: |
-            assemble --stacktrace --scan
+            bundle --stacktrace --scan
           cache-read-only: true
 
       - name: Add build scan URL as PR comment

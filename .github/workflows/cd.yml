@@ -36,29 +36,16 @@ jobs:
         id: gradle
         with:
           arguments: |
-            assemble --stacktrace --scan
+            bundle --stacktrace --scan
           cache-read-only: false
-
-      - name: Upload base
-        if: success()
-        uses: actions/cache@v3
-        with:
-          path: |
-            diffuse-source-file
-          key: diffuse-${{ github.sha }}
-
-      - name: Storing the apk for diffing
-        if: success()
-        run: cp app/build/outputs/apk/release/app-release.apk diffuse-source-file
-        shell: bash
 
       - name: Uploading artifacts
         if: success()
         uses: actions/upload-artifact@v3
         with:
-          name: artifacts
+          name: bundle-${{ github.sha }}
           path: |
-            app/build/**/*.apk
+            app/build/**/app-release.aab
             app/build/**/mapping.txt
 
   # Runs all check tasks in parallel.
@@ -125,27 +112,6 @@ jobs:
 
       - name: Gradle cache
         uses: gradle/gradle-build-action@v2
-
-      - name: AVD cache
-        uses: actions/cache@v3
-        id: avd-cache
-        with:
-          path: |
-            ~/.android/avd/*
-            ~/.android/adb*
-          key: avd-${{ matrix.api-level }}
-
-      - name: Create AVD and generate snapshot for caching
-        if: steps.avd-cache.outputs.cache-hit != 'true'
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: ${{ matrix.api-level }}
-          target: ${{ matrix.target }}
-          arch: ${{ matrix.arch }}
-          force-avd-creation: false
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: false
-          script: echo "Generated AVD snapshot for caching."
 
       ## Actual task.
       - name: Instrumentation Tests
