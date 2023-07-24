@@ -14,8 +14,8 @@ env:
   ORG_GRADLE_PROJECT_PIXELS_CLIENT_ID: ${{ secrets.ORG_GRADLE_PROJECT_PIXELS_CLIENT_ID }}
 
 jobs:
-  assemble:
-    name: Assemble
+  build:
+    name: Build
     runs-on: macos-latest
     timeout-minutes: 15
     steps:
@@ -29,7 +29,7 @@ jobs:
           distribution: 'zulu'
           java-version: 20
 
-      - name: Assemble with gradle — make sure everything builds
+      - name: Bundle with gradle — make sure everything builds
         uses: gradle/gradle-build-action@v2
         id: gradle
         with:
@@ -53,7 +53,7 @@ jobs:
   # Runs all check tasks in parallel.
   check:
     name: Check
-    needs: assemble
+    needs: build
     runs-on: macos-latest
     timeout-minutes: 10
     strategy:
@@ -92,7 +92,7 @@ jobs:
 
   instrumentation-tests:
     name: Instrumentation tests
-    needs: assemble
+    needs: build
     runs-on: macos-latest
     timeout-minutes: 30
     strategy:
