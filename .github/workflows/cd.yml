@@ -92,7 +92,7 @@ jobs:
         with:
           arguments: |
             ${{ matrix.gradle-task }} --stacktrace
-          cache-read-only: false
+          cache-read-only: true
 
       # Report as Github Pull Request Check.
       - name: Publish Test Report
