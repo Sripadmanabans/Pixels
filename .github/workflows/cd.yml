@@ -21,7 +21,6 @@ jobs:
     runs-on: macos-latest
     timeout-minutes: 15
     steps:
-      # These setup steps should be common across all jobs in this workflow.
       - name: Checkout code
         uses: actions/checkout@v3
 

@@ -19,7 +19,6 @@ jobs:
     runs-on: macos-latest
     timeout-minutes: 15
     steps:
-      # These setup steps should be common across all jobs in this workflow.
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -37,18 +36,82 @@ jobs:
             bundle --stacktrace --scan
           cache-read-only: true
 
-      - name: Add build scan URL as PR comment
-        uses: actions/github-script@v6
-        if: failure()
+      - name: Finding build scan comment
+        uses: peter-evans/find-comment@v2
+        id: build_scan_comment
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '❌ ${{ github.workflow }} failed: ${{ steps.gradle.outputs.build-scan-url }}'
-            })
+          issue-number: ${{ github.event.pull_request.number }}
+          body-includes: Build Scan
+
+      - name: Add build scan URL as PR comment
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          body: |
+            Build Scan report: ${{ steps.gradle.outputs.build-scan-url }}
+          edit-mode: replace
+          comment-id: ${{ steps.build_scan_comment.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload build for diffuse
+        if: success()
+        uses: actions/upload-artifact@v3
+        with:
+          name: bundle-${{ github.event.pull_request.head.sha }}
+          path: |
+            app/build/**/app-release.aab
+
+  diffing:
+    name: Diffing
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Download base
+        uses: actions/download-artifact@v3
+        with:
+          name: bundle-${{ github.event.pull_request.base.sha }}
+          path: diffuse-source-file
+
+      - name: Download current
+        uses: actions/download-artifact@v3
+        with:
+          name: bundle-${{ github.event.pull_request.head.sha }}
+          path: diffuse-new-file
+
+      - name: Diffing apk
+        id: diffuse
+        uses: usefulness/diffuse-action@v1
+        with:
+          old-file-path: diffuse-source-file/app-release.aab
+          new-file-path: diffuse-new-file/app-release.aab
+
+      - name: Finding comment
+        uses: peter-evans/find-comment@v2
+        id: find_comment
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body-includes: Diffuse output
+
+      - name: Creating diff comment
+        uses: peter-evans/create-or-update-comment@v3
+        if: ${{ steps.diffuse.outputs.diff-raw != null || steps.find_comment.outputs.comment-id != null }}
+        with:
+          body: |
+            Diffuse output: 
+
+            ${{ steps.diffuse.outputs.diff-gh-comment }}
+            
+            File path: `${{ steps.diffuse.outputs.diff-file }}`
+          edit-mode: replace
+          comment-id: ${{ steps.find_comment.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Delete intermediate artifact
+        uses: geekyeggo/delete-artifact@v2
+        with:
+          name: bundle-${{ github.event.pull_request.head.sha }}
 
   # Runs all check tasks in parallel.
   check:
