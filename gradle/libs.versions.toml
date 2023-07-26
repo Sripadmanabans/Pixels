@@ -30,7 +30,7 @@ moshi = "1.15.0"
 moshix = "0.24.0"
 okhttp = "5.0.0-alpha.11"
 retrofit = "2.9.0"
-sqldelight = "2.0.0-rc02"
+sqldelight = "2.0.0"
 
 # Helper Components
 byteUnits = "0.9.1"
