@@ -2,7 +2,7 @@
 # Android Components
 activity = "1.8.0-alpha06"
 androidBuild = "8.2.0-alpha13"
-core = "1.12.0-alpha05"
+core = "1.12.0-beta01"
 
 # Compose Components
 compose = "1.5.0"
