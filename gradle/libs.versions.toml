@@ -50,7 +50,7 @@ truth = "1.1.5"
 turbine = "1.0.0"
 
 # Code Health Components
-detekt = "1.23.0"
+detekt = "1.23.1"
 ktlint = "0.50.0"
 leakCanary = "2.12"
 spotless = "6.20.0"
