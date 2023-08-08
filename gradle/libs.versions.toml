@@ -1,28 +1,28 @@
 [versions]
 # Android Components
 activity = "1.8.0-alpha06"
-androidBuild = "8.2.0-alpha13"
-core = "1.12.0-alpha05"
+androidBuild = "8.2.0-alpha15"
+core = "1.12.0-beta01"
 
 # Compose Components
 compose = "1.5.0"
 composeKotlin = "1.9.0"
-composeAndroid = "1.6.0-alpha01"
-composeJetbrains = "1.5.0-dev1114"
+composeAndroid = "1.6.0-alpha02"
+composeJetbrains = "1.5.0-beta01"
 composeJetbrainsKotlin = "1.9.0"
-composeMaterial3 = "1.2.0-alpha03"
+composeMaterial3 = "1.2.0-alpha04"
 
 # DI components
-anvil = "2.4.6"
+anvil = "2.4.7"
 dagger = "2.47"
 
 # Image Component
 coil = "2.4.0"
 
 # Core Components
-coroutines = "1.7.2"
+coroutines = "1.7.3"
 kotlin = "1.9.0"
-ksp = "1.9.0-1.0.12"
+ksp = "1.9.0-1.0.13"
 time = "0.4.0"
 
 # Data Components
@@ -30,7 +30,7 @@ moshi = "1.15.0"
 moshix = "0.24.0"
 okhttp = "5.0.0-alpha.11"
 retrofit = "2.9.0"
-sqldelight = "2.0.0-rc02"
+sqldelight = "2.0.0"
 
 # Helper Components
 byteUnits = "0.9.1"
@@ -50,7 +50,7 @@ truth = "1.1.5"
 turbine = "1.0.0"
 
 # Code Health Components
-detekt = "1.23.0"
+detekt = "1.23.1"
 ktlint = "0.50.0"
 leakCanary = "2.12"
 spotless = "6.20.0"

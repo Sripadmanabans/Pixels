@@ -16,12 +16,10 @@ public class GalleriesRendererImpl @Inject constructor() : GalleriesRenderer {
     onEvent: (event: GalleriesEvent) -> Unit,
   ) {
     Surface {
+      val error = state.error
       when {
         state.isLoading -> GalleriesLoading()
-        state.error != null -> {
-          GalleriesError(message = checkNotNull(state.error), onEvent = onEvent)
-        }
-
+        error != null -> GalleriesError(message = error, onEvent = onEvent)
         state.galleryListItems.isEmpty() -> GalleriesEmpty()
         else -> GalleriesInfo(items = state.galleryListItems)
       }

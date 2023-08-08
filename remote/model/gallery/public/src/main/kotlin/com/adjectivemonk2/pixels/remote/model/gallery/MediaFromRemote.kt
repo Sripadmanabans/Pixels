@@ -121,7 +121,7 @@ public data class Mp4FromRemote(
 ) : MediaFromRemote
 
 @DefaultObject
-public object Unknown : MediaFromRemote
+public data object Unknown : MediaFromRemote
 
 @JsonClass(generateAdapter = true)
 public data class Processing(
