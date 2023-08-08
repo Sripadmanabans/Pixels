@@ -70,9 +70,7 @@ public class GalleriesPresenterImpl @Inject constructor(
     LaunchedEffect(Unit) {
       events.collectLatest { event ->
         when (event) {
-          GalleriesEvent.Retry -> {
-            apiKey = apiKey.copy(id = apiKey.id + 1)
-          }
+          GalleriesEvent.Retry -> apiKey = apiKey.copy(id = apiKey.id + 1)
         }
       }
     }
@@ -80,7 +78,7 @@ public class GalleriesPresenterImpl @Inject constructor(
   }
 
   private sealed class GalleriesState {
-    object Loading : GalleriesState()
+    data object Loading : GalleriesState()
     data class Data(val data: List<Gallery>) : GalleriesState()
     data class Error(val message: String) : GalleriesState()
   }
