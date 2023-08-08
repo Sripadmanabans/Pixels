@@ -28,7 +28,7 @@ time = "0.4.0"
 # Data Components
 moshi = "1.15.0"
 moshix = "0.24.0"
-okhttp = "5.0.0-alpha.11"
+okhttp = "5.0.0-SNAPSHOT"
 retrofit = "2.9.0"
 sqldelight = "2.0.0"
 
