@@ -45,7 +45,7 @@ androidxOrchestrator = "1.5.0-alpha01"
 androidxRunner = "1.6.0-alpha03"
 espresso = "3.6.0-alpha01"
 junit5 = "5.10.0"
-molecule = "1.1.0"
+molecule = "1.2.0"
 truth = "1.1.5"
 turbine = "1.0.0"
 
