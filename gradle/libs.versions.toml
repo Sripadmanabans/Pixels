@@ -10,7 +10,7 @@ composeKotlin = "1.9.0"
 composeAndroid = "1.6.0-alpha02"
 composeJetbrains = "1.5.0-beta01"
 composeJetbrainsKotlin = "1.9.0"
-composeMaterial3 = "1.2.0-alpha04"
+composeMaterial3 = "1.2.0-alpha05"
 
 # DI components
 anvil = "2.4.7"
