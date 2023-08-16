@@ -74,6 +74,7 @@ android {
       exclude "META-INF/com.google.dagger_dagger.version"
       exclude "META-INF/LGPL2.1"
       exclude "META-INF/LICENSE*"
+      exclude "META-INF/versions/9/previous-compilation-data.bin"
     }
   }
 

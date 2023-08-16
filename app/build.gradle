@@ -15,6 +15,7 @@ dependencies {
 
   implementation projects.remote.core.implWiring
   implementation projects.remote.gallery.implWiring
+  implementation projects.remote.model.gallery.implWiring
   implementation projects.repository.gallery.implWiring
 
   implementation projects.scope.public
@@ -39,7 +40,9 @@ dependencies {
   kapt libs.dagger.compiler
 
   implementation libs.kotlin.coroutines.android
+  implementation libs.kotlin.serialization
   implementation libs.kotlin.time
+  implementation libs.ktor.core
 
   implementation libs.sqlDelight.android
 

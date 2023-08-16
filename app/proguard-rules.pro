@@ -31,11 +31,7 @@
 -dontwarn org.openjsse.javax.net.ssl.SSLParameters
 -dontwarn org.openjsse.javax.net.ssl.SSLSocket
 -dontwarn org.openjsse.net.ssl.OpenJSSE
-
-# Can be removed once https://github.com/square/retrofit/issues/3751 is fixed.
-# Keep generic signature of Call, Response (R8 full mode strips signatures from non-kept items).
--keep,allowobfuscation,allowshrinking interface retrofit2.Call
--keep,allowobfuscation,allowshrinking class retrofit2.Response
+-dontwarn org.slf4j.impl.StaticLoggerBinder
 
 # With R8 full mode generic signatures are stripped for classes that are not
 # kept. Suspend functions are wrapped in continuations where the type argument

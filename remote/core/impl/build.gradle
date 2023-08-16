@@ -4,14 +4,6 @@ plugins {
 }
 
 android {
-  buildFeatures {
-    buildConfig true
-  }
-
-  defaultConfig {
-    buildConfigField "String", "PIXELS_CLIENT_ID", "\"${PIXELS_CLIENT_ID}\""
-  }
-
   namespace "com.adjectivemonk2.pixels.remote.core.impl"
 }
 
@@ -23,9 +15,6 @@ dependencies {
 
   implementation projects.remote.model.core.public
 
-  api libs.okhttp.client
-  api libs.okhttp.loggingInterceptor
-  api libs.moshi.client
-
+  implementation libs.kotlin.serialization
   implementation libs.kotlin.time
 }

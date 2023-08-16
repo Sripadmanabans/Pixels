@@ -7,9 +7,10 @@ archivesBaseName = "remote-gallery-impl"
 
 dependencies {
   api projects.remote.gallery.public
+  api projects.remote.model.core.public
   api projects.scope.public
 
   implementation projects.remote.model.gallery.public
 
-  implementation libs.retrofit.client
+  implementation libs.ktor.core
 }

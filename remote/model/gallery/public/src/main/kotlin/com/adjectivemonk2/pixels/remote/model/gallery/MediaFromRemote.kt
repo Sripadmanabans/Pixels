@@ -1,129 +1,135 @@
+@file:UseSerializers(InstantSerializerAdapter::class)
+
 package com.adjectivemonk2.pixels.remote.model.gallery
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
-import dev.zacsweers.moshix.sealed.annotations.DefaultObject
-import dev.zacsweers.moshix.sealed.annotations.TypeLabel
+import com.adjectivemonk2.pixels.remote.model.core.InstantSerializerAdapter
 import kotlinx.datetime.Instant
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.UseSerializers
+import kotlinx.serialization.json.JsonClassDiscriminator
 
-@JsonClass(generateAdapter = true, generator = "sealed:type")
+@OptIn(ExperimentalSerializationApi::class)
+@Serializable
+@JsonClassDiscriminator("type")
 public sealed interface MediaFromRemote
 
-@JsonClass(generateAdapter = true)
-@TypeLabel(label = "image/jpeg")
+@Serializable
+@SerialName("image/jpeg")
 public data class JpegFromRemote(
-  @Json(name = "id") val id: String,
-  @Json(name = "title") val title: String?,
-  @Json(name = "description") val description: String?,
-  @Json(name = "datetime") val dateTime: Instant,
-  @Json(name = "animated") val animated: Boolean,
-  @Json(name = "width") val width: Long,
-  @Json(name = "height") val height: Long,
-  @Json(name = "size") val size: Long,
-  @Json(name = "views") val views: Long,
-  @Json(name = "bandwidth") val bandwidth: Long,
-  @Json(name = "vote") val vote: String?,
-  @Json(name = "favorite") val favorite: Boolean,
-  @Json(name = "nsfw") val nsfw: Boolean?,
-  @Json(name = "section") val section: String?,
-  @Json(name = "account_url") val accountUrl: String?,
-  @Json(name = "account_id") val accountId: String?,
-  @Json(name = "is_most_viral") val isMostViral: Boolean?,
-  @Json(name = "has_sound") val hasSound: Boolean,
-  @Json(name = "tags") val tags: List<TagFromRemote>,
-  @Json(name = "edited") val edited: String,
-  @Json(name = "in_gallery") val inGallery: Boolean,
-  @Json(name = "link") val link: String,
+  @SerialName("id") val id: String,
+  @SerialName("title") val title: String?,
+  @SerialName("description") val description: String?,
+  @SerialName("datetime") val dateTime: Instant,
+  @SerialName("animated") val animated: Boolean,
+  @SerialName("width") val width: Long,
+  @SerialName("height") val height: Long,
+  @SerialName("size") val size: Long,
+  @SerialName("views") val views: Long,
+  @SerialName("bandwidth") val bandwidth: Long,
+  @SerialName("vote") val vote: String?,
+  @SerialName("favorite") val favorite: Boolean,
+  @SerialName("nsfw") val nsfw: Boolean?,
+  @SerialName("section") val section: String?,
+  @SerialName("account_url") val accountUrl: String?,
+  @SerialName("account_id") val accountId: String?,
+  @SerialName("is_most_viral") val isMostViral: Boolean?,
+  @SerialName("has_sound") val hasSound: Boolean,
+  @SerialName("tags") val tags: List<TagFromRemote>,
+  @SerialName("edited") val edited: String,
+  @SerialName("in_gallery") val inGallery: Boolean,
+  @SerialName("link") val link: String,
 ) : MediaFromRemote
 
-@JsonClass(generateAdapter = true)
-@TypeLabel(label = "image/png")
+@Serializable
+@SerialName("image/png")
 public data class PngFromRemote(
-  @Json(name = "id") val id: String,
-  @Json(name = "title") val title: String?,
-  @Json(name = "description") val description: String?,
-  @Json(name = "datetime") val dateTime: Instant,
-  @Json(name = "animated") val animated: Boolean,
-  @Json(name = "width") val width: Long,
-  @Json(name = "height") val height: Long,
-  @Json(name = "size") val size: Long,
-  @Json(name = "views") val views: Long,
-  @Json(name = "bandwidth") val bandwidth: Long,
-  @Json(name = "vote") val vote: String?,
-  @Json(name = "favorite") val favorite: Boolean,
-  @Json(name = "nsfw") val nsfw: Boolean?,
-  @Json(name = "section") val section: String?,
-  @Json(name = "account_url") val accountUrl: String?,
-  @Json(name = "account_id") val accountId: String?,
-  @Json(name = "is_most_viral") val isMostViral: Boolean?,
-  @Json(name = "has_sound") val hasSound: Boolean,
-  @Json(name = "tags") val tags: List<TagFromRemote>,
-  @Json(name = "edited") val edited: String,
-  @Json(name = "in_gallery") val inGallery: Boolean,
-  @Json(name = "link") val link: String,
+  @SerialName("id") val id: String,
+  @SerialName("title") val title: String?,
+  @SerialName("description") val description: String?,
+  @SerialName("datetime") val dateTime: Instant,
+  @SerialName("animated") val animated: Boolean,
+  @SerialName("width") val width: Long,
+  @SerialName("height") val height: Long,
+  @SerialName("size") val size: Long,
+  @SerialName("views") val views: Long,
+  @SerialName("bandwidth") val bandwidth: Long,
+  @SerialName("vote") val vote: String?,
+  @SerialName("favorite") val favorite: Boolean,
+  @SerialName("nsfw") val nsfw: Boolean?,
+  @SerialName("section") val section: String?,
+  @SerialName("account_url") val accountUrl: String?,
+  @SerialName("account_id") val accountId: String?,
+  @SerialName("is_most_viral") val isMostViral: Boolean?,
+  @SerialName("has_sound") val hasSound: Boolean,
+  @SerialName("tags") val tags: List<TagFromRemote>,
+  @SerialName("edited") val edited: String,
+  @SerialName("in_gallery") val inGallery: Boolean,
+  @SerialName("link") val link: String,
 ) : MediaFromRemote
 
-@JsonClass(generateAdapter = true)
-@TypeLabel(label = "image/gif")
+@Serializable
+@SerialName("image/gif")
 public data class GifFromRemote(
-  @Json(name = "id") val id: String,
-  @Json(name = "title") val title: String?,
-  @Json(name = "description") val description: String?,
-  @Json(name = "datetime") val dateTime: Instant,
-  @Json(name = "animated") val animated: Boolean,
-  @Json(name = "width") val width: Long,
-  @Json(name = "height") val height: Long,
-  @Json(name = "size") val size: Long,
-  @Json(name = "views") val views: Long,
-  @Json(name = "bandwidth") val bandwidth: Long,
-  @Json(name = "vote") val vote: String?,
-  @Json(name = "favorite") val favorite: Boolean,
-  @Json(name = "nsfw") val nsfw: Boolean?,
-  @Json(name = "section") val section: String?,
-  @Json(name = "account_url") val accountUrl: String?,
-  @Json(name = "account_id") val accountId: String?,
-  @Json(name = "is_most_viral") val isMostViral: Boolean?,
-  @Json(name = "has_sound") val hasSound: Boolean,
-  @Json(name = "tags") val tags: List<TagFromRemote>,
-  @Json(name = "edited") val edited: String,
-  @Json(name = "in_gallery") val inGallery: Boolean,
-  @Json(name = "link") val link: String,
+  @SerialName("id") val id: String,
+  @SerialName("title") val title: String?,
+  @SerialName("description") val description: String?,
+  @SerialName("datetime") val dateTime: Instant,
+  @SerialName("animated") val animated: Boolean,
+  @SerialName("width") val width: Long,
+  @SerialName("height") val height: Long,
+  @SerialName("size") val size: Long,
+  @SerialName("views") val views: Long,
+  @SerialName("bandwidth") val bandwidth: Long,
+  @SerialName("vote") val vote: String?,
+  @SerialName("favorite") val favorite: Boolean,
+  @SerialName("nsfw") val nsfw: Boolean?,
+  @SerialName("section") val section: String?,
+  @SerialName("account_url") val accountUrl: String?,
+  @SerialName("account_id") val accountId: String?,
+  @SerialName("is_most_viral") val isMostViral: Boolean?,
+  @SerialName("has_sound") val hasSound: Boolean,
+  @SerialName("tags") val tags: List<TagFromRemote>,
+  @SerialName("edited") val edited: String,
+  @SerialName("in_gallery") val inGallery: Boolean,
+  @SerialName("link") val link: String,
 ) : MediaFromRemote
 
-@JsonClass(generateAdapter = true)
-@TypeLabel("video/mp4")
+@Serializable
+@SerialName("video/mp4")
 public data class Mp4FromRemote(
-  @Json(name = "id") val id: String,
-  @Json(name = "title") val title: String?,
-  @Json(name = "description") val description: String?,
-  @Json(name = "datetime") val dateTime: Instant,
-  @Json(name = "animated") val animated: Boolean,
-  @Json(name = "width") val width: Long,
-  @Json(name = "height") val height: Long,
-  @Json(name = "size") val size: Long,
-  @Json(name = "views") val views: Long,
-  @Json(name = "bandwidth") val bandwidth: Long,
-  @Json(name = "vote") val vote: String?,
-  @Json(name = "favorite") val favorite: Boolean,
-  @Json(name = "nsfw") val nsfw: Boolean?,
-  @Json(name = "section") val section: String?,
-  @Json(name = "account_url") val accountUrl: String?,
-  @Json(name = "account_id") val accountId: String?,
-  @Json(name = "is_most_viral") val isMostViral: Boolean?,
-  @Json(name = "has_sound") val hasSound: Boolean,
-  @Json(name = "tags") val tags: List<TagFromRemote>,
-  @Json(name = "edited") val edited: String,
-  @Json(name = "in_gallery") val inGallery: Boolean,
-  @Json(name = "link") val link: String,
-  @Json(name = "mp4_size") val mp4Size: Long,
-  @Json(name = "hls") val hls: String,
-  @Json(name = "processing") val processing: Processing,
+  @SerialName("id") val id: String,
+  @SerialName("title") val title: String?,
+  @SerialName("description") val description: String?,
+  @SerialName("datetime") val dateTime: Instant,
+  @SerialName("animated") val animated: Boolean,
+  @SerialName("width") val width: Long,
+  @SerialName("height") val height: Long,
+  @SerialName("size") val size: Long,
+  @SerialName("views") val views: Long,
+  @SerialName("bandwidth") val bandwidth: Long,
+  @SerialName("vote") val vote: String?,
+  @SerialName("favorite") val favorite: Boolean,
+  @SerialName("nsfw") val nsfw: Boolean?,
+  @SerialName("section") val section: String?,
+  @SerialName("account_url") val accountUrl: String?,
+  @SerialName("account_id") val accountId: String?,
+  @SerialName("is_most_viral") val isMostViral: Boolean?,
+  @SerialName("has_sound") val hasSound: Boolean,
+  @SerialName("tags") val tags: List<TagFromRemote>,
+  @SerialName("edited") val edited: String,
+  @SerialName("in_gallery") val inGallery: Boolean,
+  @SerialName("link") val link: String,
+  @SerialName("mp4_size") val mp4Size: Long,
+  @SerialName("hls") val hls: String,
+  @SerialName("processing") val processing: Processing,
 ) : MediaFromRemote
 
-@DefaultObject
+@Serializable
 public data object Unknown : MediaFromRemote
 
-@JsonClass(generateAdapter = true)
+@Serializable
 public data class Processing(
-  @Json(name = "status") val status: String,
+  @SerialName("status") val status: String,
 )

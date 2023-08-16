@@ -1,0 +1,12 @@
+plugins {
+  id "com.adjectivemonk2.jvm.lib"
+  id "com.adjectivemonk2.serialization.lib"
+  id "com.adjectivemonk2.anvil.lib"
+}
+
+archivesBaseName = "remote-model-gallery-impl-wiring"
+
+dependencies {
+  api projects.remote.model.gallery.public
+  api projects.scope.public
+}

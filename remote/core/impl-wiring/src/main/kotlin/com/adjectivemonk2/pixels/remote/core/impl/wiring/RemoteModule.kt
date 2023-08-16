@@ -1,49 +1,87 @@
 package com.adjectivemonk2.pixels.remote.core.impl.wiring
 
-import com.adjectivemonk2.pixels.remote.core.ApiRetrofit
-import com.adjectivemonk2.pixels.remote.core.impl.adapter.InstantAdapter
-import com.adjectivemonk2.pixels.remote.core.impl.converter.DataConverterFactory
+import android.app.Application
+import android.util.Log
 import com.adjectivemonk2.pixels.scope.AppScope
 import com.adjectivemonk2.pixels.scope.SingleIn
 import com.squareup.anvil.annotations.ContributesTo
-import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
-import okhttp3.HttpUrl
-import okhttp3.OkHttpClient
-import retrofit2.Converter
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.cio.CIO
+import io.ktor.client.plugins.cache.HttpCache
+import io.ktor.client.plugins.cache.storage.FileStorage
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
+import io.ktor.client.plugins.logging.Logging
+import io.ktor.client.request.header
+import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.modules.SerializersModule
+import kotlinx.serialization.modules.plus
+import java.io.File
 
 @Module
 @ContributesTo(AppScope::class)
 public object RemoteModule {
 
   @Provides
-  public fun moshi(instantAdapter: InstantAdapter): Moshi {
-    return Moshi.Builder().add(instantAdapter).build()
+  @SingleIn(AppScope::class)
+  public fun cacheDir(application: Application): File {
+    return File(application.cacheDir, HTTP)
   }
 
-  @Provides
-  public fun moshiConverterFactory(moshi: Moshi): Converter.Factory {
-    return MoshiConverterFactory.create(moshi)
-  }
-
+  @OptIn(ExperimentalSerializationApi::class)
   @Provides
   @SingleIn(AppScope::class)
-  @ApiRetrofit
-  public fun retrofit(
-    okHttpClient: OkHttpClient,
-    baseUrl: HttpUrl,
-    dataConverter: DataConverterFactory,
-    moshiConverter: Converter.Factory,
-  ): Retrofit {
-    return Retrofit.Builder().run {
-      client(okHttpClient)
-      baseUrl(baseUrl)
-      addConverterFactory(dataConverter)
-      addConverterFactory(moshiConverter)
-      build()
+  public fun client(
+    cacheDir: File,
+    serializersModules: Set<@JvmSuppressWildcards SerializersModule>,
+  ): HttpClient {
+    return HttpClient(CIO) {
+      install(HttpCache) {
+        publicStorage(FileStorage(cacheDir))
+      }
+
+      install(Logging) {
+        logger = object : Logger {
+          override fun log(message: String) {
+            Log.v("HTTP Client", message)
+          }
+        }
+        level = LogLevel.ALL
+
+      }
+
+      install(ContentNegotiation) {
+        json(
+          Json {
+            ignoreUnknownKeys = true
+            explicitNulls = false
+            serializersModule = serializersModules.fold(serializersModule) { acc, module ->
+              acc + module
+            }
+          },
+        )
+      }
+
+      defaultRequest {
+        url("https://api.imgur.com/3/")
+        header("Authorization", "Client-ID $clientId")
+      }
     }
   }
+
+  private val clientId by lazy(LazyThreadSafetyMode.NONE) {
+    val pixelClientId = BuildConfig.PIXELS_CLIENT_ID
+    check(pixelClientId.isNotBlank()) {
+      "We need to provide a value for PIXEL_CLIENT_ID in gradle"
+    }
+    pixelClientId
+  }
+
+  private const val HTTP = "http"
 }

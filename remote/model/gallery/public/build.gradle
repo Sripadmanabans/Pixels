@@ -1,10 +1,10 @@
 plugins {
   id "com.adjectivemonk2.jvm.lib"
-  id "com.adjectivemonk2.moshi.lib"
+  id "com.adjectivemonk2.serialization.lib"
 }
 
 archivesBaseName = "remote-model-gallery-public"
 
 dependencies {
-  api libs.kotlin.time
+  api projects.remote.model.core.public
 }
