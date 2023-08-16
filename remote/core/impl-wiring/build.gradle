@@ -4,6 +4,14 @@ plugins {
 }
 
 android {
+  buildFeatures {
+    buildConfig true
+  }
+
+  defaultConfig {
+    buildConfigField "String", "PIXELS_CLIENT_ID", "\"${PIXELS_CLIENT_ID}\""
+  }
+
   namespace "com.adjectivemonk2.pixels.remote.core.impl.wiring"
 }
 
@@ -13,9 +21,10 @@ dependencies {
   api projects.remote.core.public
   api projects.remote.core.impl
 
-  implementation libs.byteUnits
-  implementation libs.logcat
-  implementation libs.retrofit.converter
+  implementation libs.ktor.client
+  implementation libs.ktor.content
+  implementation libs.ktor.json
+  implementation libs.ktor.logging
 
   testImplementation libs.junit5.jupiter.api
   testRuntimeOnly libs.junit5.jupiter.runtime

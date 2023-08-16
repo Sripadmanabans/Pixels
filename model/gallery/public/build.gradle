@@ -1,6 +1,6 @@
 plugins {
   id "com.adjectivemonk2.jvm.lib"
-  id "com.adjectivemonk2.moshi.lib"
+  id "com.adjectivemonk2.serialization.lib"
 }
 
 archivesBaseName = "model-gallery-public"

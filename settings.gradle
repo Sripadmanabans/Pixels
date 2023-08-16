@@ -67,6 +67,7 @@ include ":remote:gallery:impl-wiring"
 include ":remote:gallery:public"
 
 include ":remote:model:core:public"
+include ":remote:model:gallery:impl-wiring"
 include ":remote:model:gallery:public"
 
 include ":repository:gallery:fake"

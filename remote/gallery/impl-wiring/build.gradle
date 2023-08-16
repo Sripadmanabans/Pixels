@@ -13,6 +13,4 @@ dependencies {
   api projects.remote.core.public
   api projects.remote.gallery.impl
   api projects.scope.public
-
-  implementation libs.retrofit.client
 }
