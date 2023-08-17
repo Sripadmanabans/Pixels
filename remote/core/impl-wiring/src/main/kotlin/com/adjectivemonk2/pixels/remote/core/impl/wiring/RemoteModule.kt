@@ -1,7 +1,6 @@
 package com.adjectivemonk2.pixels.remote.core.impl.wiring
 
 import android.app.Application
-import android.util.Log
 import com.adjectivemonk2.pixels.scope.AppScope
 import com.adjectivemonk2.pixels.scope.SingleIn
 import com.squareup.anvil.annotations.ContributesTo
@@ -23,6 +22,7 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.plus
 import java.io.File
+import co.touchlab.kermit.Logger.Companion as KermitLogger
 
 @Module
 @ContributesTo(AppScope::class)
@@ -48,12 +48,15 @@ public object RemoteModule {
 
       install(Logging) {
         logger = object : Logger {
+          private val _logger by lazy(LazyThreadSafetyMode.NONE) {
+            KermitLogger.withTag("HTTP")
+          }
+
           override fun log(message: String) {
-            Log.v("HTTP Client", message)
+            _logger.v { message }
           }
         }
-        level = LogLevel.ALL
-
+        level = LogLevel.BODY
       }
 
       install(ContentNegotiation) {

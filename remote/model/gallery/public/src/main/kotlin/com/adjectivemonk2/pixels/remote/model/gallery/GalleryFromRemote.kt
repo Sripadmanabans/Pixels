@@ -35,7 +35,7 @@ public data class GalleryFromRemote(
   @SerialName("comment_count") val commentCount: Long,
   @SerialName("favorite_count") val favoriteCount: Long,
   @SerialName("topic") val topic: String?,
-  @SerialName("topic_id") val topicId: String?,
+  @SerialName("topic_id") val topicId: Int?,
   @SerialName("images_count") val imagesCount: Long?,
   @SerialName("in_gallery") val inGallery: Boolean,
   @SerialName("tags") val tags: List<TagFromRemote>,
