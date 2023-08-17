@@ -9,5 +9,5 @@ android {
 archivesBaseName = "logger-public"
 
 dependencies {
-  api libs.logcat
+  api libs.kermit
 }

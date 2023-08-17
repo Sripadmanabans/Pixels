@@ -2,16 +2,18 @@ package com.adjectivemonk2.pixels.logger
 
 import android.app.Application
 import android.content.pm.ApplicationInfo
-import logcat.LogcatLogger
+import co.touchlab.kermit.LogWriter
+import co.touchlab.kermit.Logger
 
 public object LoggerInitializer {
 
   public fun installOnDebuggableApp(
     application: Application,
-    logcatLogger: LogcatLogger,
+    logcatLoggerFactory: () -> LogWriter,
   ) {
-    if (!LogcatLogger.isInstalled && application.isDebuggableApp) {
-      LogcatLogger.install(logcatLogger)
+    if (application.isDebuggableApp) {
+      Logger.setTag("Pixels")
+      Logger.setLogWriters(logcatLoggerFactory())
     }
   }
 
