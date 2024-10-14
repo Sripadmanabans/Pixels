@@ -1,7 +1,7 @@
 [versions]
 # Android Components
 activity = "1.8.0-alpha06"
-androidBuild = "8.2.0-alpha16"
+androidBuild = "8.7.1"
 core = "1.12.0-rc01"
 
 # Compose Components
